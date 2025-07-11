@@ -83,6 +83,7 @@ in
         "Mod+K"       = { hotkey-overlay.title ="Focus window or workspace up";   action = focus-window-or-workspace-up; };
         "Mod+Ctrl+J"  = { hotkey-overlay.title ="Move window or workspace down";  action = move-window-down-or-to-workspace-down; };
         "Mod+Ctrl+K"  = { hotkey-overlay.title ="Move window or workspace up";    action = move-window-up-or-to-workspace-up; };
+        "Mod+O"       = { hotkey-overlay.title ="Toggle overview";                action = toggle-overview; };
 	  };
 
     spawn-at-startup = [
@@ -110,10 +111,49 @@ in
         { app-id = ''^darktable$''; }
       ];
       }
+      {
+        matches = [ { app-id = "om.saivert.pwvucontrol"; } ];
+        open-floating = true;
+        default-window-height.fixed = 250;
+        default-floating-position = {
+          relative-to = "top-right";
+          x = 20.0;
+          y = 10.0;
+        };
+      }
+      {
+        matches = [ { app-id = "blueberry.py"; } ];
+        open-floating = true;
+        default-window-height.proportion = 0.4;
+        default-floating-position = {
+          relative-to = "top-right";
+          x = 20.0;
+          y = 10.0;
+        };
+      }
     ];
 
     layout = {
-      
+      focus-ring = {
+        enable = true;
+        width = 3;
+        active.gradient = {
+          from = "#b7bdf8";
+          to = "#c6a0f6";
+          angle = 0;
+          "in'" = "srgb";
+          relative-to = "workspace-view";
+        };
+      };
+      shadow = {
+        enable = true;
+        color = "#00000071";
+      };
+      tab-indicator = {
+        enable = true;
+        width=5.0;
+        gap=4.0;
+      };
     };
   };
 
@@ -138,24 +178,235 @@ in
       background-color = "#363a4f"; # Cappuccin surface 0
       default-timeout=7500;
       ignore-timeout=1;
-
     };
   };
 
+  systemd.user.services.nm-applet = {
+    Unit = {
+      Description = "Network manager applet";
+    };
+    Service = {
+      ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator";
+    };
+  }
+
+  # Going to add more stuff to waybar:
+  # Battery, custom-media maybe?
+  # Probably not workspaces
+  # Power profiles daemon
+  # Maybe try to fix so I can have separate borders for left module and for niri/window
+  # bottom bar? not sure what i would have there but big screen 
+  #temperature maybe
   programs.waybar = {
     enable = true;
     systemd = {
       enable = true;
       target = "niri.service";
     };
-  };
 
-  systemd.user.services.nm-applet = {
-	    Unit = {
-	      Description = "Network manager applet";
-	    };
-	    Service = {
-	      ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator";
-	    };
-	  };
+    settings.mainBar = {
+      height = 40;
+      spacing = 20;
+
+      layer = "top";
+      modules-left = [
+        "tray"
+        "niri/window"
+      ];
+      # modules-center = [
+      #   "niri/window"
+      # ];
+      modules-right = [
+        "pulseaudio" "pulseaudio/slider"
+        "network"
+        "bluetooth"
+        "clock"
+      ];
+      "niri/window" = {
+        icon = true;
+        icon-size = 24;
+        rewrite = {
+          "(.*) (:?— Mozilla (Firefox|Thunderbird)|- Quod Libet)" = "$1"; # remove some titles
+          "• Discord \\| ([^|]*) \\| (.*)" = "$2 ⟩ $1"; # discord formats things as Discord | Channel | Server
+          "• Discord \\| ([^|]*)" = "$1"; # sometimes there's no server to show
+          # pinged versions
+          "\\((\\d+)\\) Discord \\| ([^|]*) \\| (.*)" = "$3 ⟩ $2 ($1)";
+          "\\((\\d+)\\) Discord \\| ([^|]*)" = "$2 ($1)";
+        };
+      };
+
+      pulseaudio = {
+          format = "{icon}";
+          format-alt = "{volume} {icon}";
+          format-alt-click = "click-right";
+          format-muted = "🔇";
+          format-icons = {
+              default = ["" "" ""];
+          };
+          scroll-step = 10;
+          on-click = "pwvucontrol";
+          tooltip = false;
+      };
+      network = {
+        format = "{icon}";
+        format-alt = "{ipaddr}/{cidr} {icon}";
+        format-alt-click = "click-right";
+        format-icons = {
+            wifi = [" "];
+            ethernet = ["󰛳"];
+        };
+        on-click = "alacritty -e nmtui";
+        tooltip = false;
+      };
+      bluetooth = {
+        on-click = "blueberry";
+        format = "";
+      };
+      clock = {
+          format = "{:%a %d %b %H:%M}";
+          tooltip = false;
+      };
+      battery = {
+          format = "{capacity}% {icon}";
+          format-alt = "{time} {icon}";
+          format-icons = ["" "" "" "" ""];
+          format-charging = "{capacity}% 󰂅";
+          interval = 30;
+          states = {
+              warning = 25;
+              critical = 1;
+          };
+          tooltip = false;
+      };
+      tray = {
+          icon-size = 24;
+          spacing = 10;
+      };
+    };
+    style = ''
+      @define-color   pink     #f5bde6;
+      @define-color   mauve    #c6a0f6;
+      @define-color   lavender #b7bdf8;
+
+      @define-color   text     #cad3f5;
+      @define-color   subtext1 #b8c0e0;
+      @define-color   subtext0 #a5adcb;
+
+      @define-color   overlay0 #6e738d;
+      @define-color   overlay1 #8087a2;
+      @define-color   overlay2 #939ab7;
+
+      @define-color   surface0 #363a4f;
+      @define-color   surface1 #494d64;
+      @define-color   surface2 #5b6078;
+
+      @define-color   base     #24273a;
+      @define-color   mantle   #1e2030;
+      @define-color   crust    #181926;
+
+      * {
+          font-size:18px;
+          font-family: "Hack Nerd Font";
+      }
+
+      window#waybar {
+        background-color: rgba(0,0,0,0);
+        color: @text;
+      }
+
+      window#waybar.hidden {
+        opacity: 0.2;
+      }
+
+      /* for tray */
+      menu {
+          background-color: rgba(123, 162, 170, 0.8);
+          color: rgba(35, 31, 32, 1);
+      }
+      menu :disabled {
+          color: rgba(95, 91, 92, 1);
+      }
+
+      .modules-left {
+          padding-left: 10px;
+          padding-right: 10px;
+          margin:10 0 0 10;
+          border-radius:10px;
+          background: alpha(@mantle,.6);
+          box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+          border: 3px solid @mauve;
+      }
+
+      /*
+      .modules-center {
+          padding-left: 10px;
+          padding-right: 10px;
+          margin:10 0 0 0;
+          border-radius:10px;
+          background: alpha(@mantle,.6);
+          box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+          border: 3px solid @mauve;
+      }
+      */
+
+      .modules-right {
+          padding-left: 10px;
+          padding-right: 10px;
+          margin:10 10 0 0;
+          border-radius:10px;
+          background: alpha(@mantle,.6);
+          box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+          border: 3px solid @mauve;
+      }
+
+      #pulseaudio-slider {
+          min-width: 100px;
+      }
+
+      /* don't show the grabbable thing in the slider */
+      #pulseaudio-slider slider {
+          min-height: 0px;
+          min-width: 0px;
+          opacity: 0;
+          background-image: none;
+          border: none;
+          box-shadow: none;
+      }
+
+      #pulseaudio-slider trough {
+          min-height: 15px;
+          min-width: 10px;
+          border-radius: 5px;
+          background-color: @crust;
+      }
+      #pulseaudio-slider highlight {
+          min-width: 10px;
+          border-radius: 5px;
+          background-color: rgba(247, 246, 246, 1);
+      }
+
+      * {
+          border:        none;
+          border-radius: 0;
+          box-shadow:    none;
+          text-shadow:   none;
+          transition-duration: 0s;
+      }
+
+      /* not in use right now
+      #battery {
+          padding-right: 10px;
+      }
+
+      #battery.warning {
+         color:       rgba(255, 210, 4, 1);
+      }
+
+      #battery.critical {
+          color:      rgba(238, 46, 36, 1);
+      }
+      */
+
+    '';
+    };
 }
