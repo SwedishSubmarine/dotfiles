@@ -103,7 +103,7 @@ element-text {
     // Base:
     bg1:    #24273A;
     // Not sure what this is for
-    bg2:    #FFFFFF;
+    bg2:    #B7BDF8;
     // Mauve - 10% darker HSV
     bg3:    #B18FDB;
     // Mocha text - Slightly brighter
