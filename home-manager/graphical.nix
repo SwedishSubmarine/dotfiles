@@ -112,10 +112,10 @@ in
       border-radius = 10;
       border-size =  2;
       margin = "30";
-      width = 600;
-      # font = " "  ;
-      # borderColor = " "  ; 
-      # backgroundColor = " " ; 
+      width = 500;
+      font = "Hack Nerd Font"  ;
+      border-color = "#b7bdf8"; 
+      background-color = "#363a4f"; 
     };
   };
 
