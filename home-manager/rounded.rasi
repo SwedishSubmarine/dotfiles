@@ -2,7 +2,8 @@
 /* Author: Newman Sanchez (https://github.com/newmanls) */
 
 * {
-    font:   "Roboto 12";
+    font:   "MonaspiceRn Nerd Font 12";
+    // font:  "Hack 12";
 
     background-color:   transparent;
     text-color:         @fg0;
@@ -96,12 +97,21 @@ element-text {
 }
 
 * {
-    bg0:    #212121F2;
-    bg1:    #2A2A2A;
-    bg2:    #3D3D3D80;
-    bg3:    #AB47BCF2;
-    fg0:    #E6E6E6;
+    // Using catppuccin macchiato as base
+    // Mantle:
+    bg0:    #1E2030;
+    // Base:
+    bg1:    #24273A;
+    // Not sure what this is for
+    bg2:    #FFFFFF;
+    // Mauve - 10% darker HSV
+    bg3:    #B18FDB;
+    // Mocha text - Slightly brighter
+    fg0:    #CDD6F4;
+    // Not sure what this is for
     fg1:    #FFFFFF;
-    fg2:    #969696;
-    fg3:    #3D3D3D;
+    // Subtext 1:
+    fg2:    #B8C0E0;
+    // Overlay 0:
+    fg3:    #8087A2;
 }
