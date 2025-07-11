@@ -114,8 +114,8 @@ in
       margin = "30";
       width = 500;
       font = "Hack Nerd Font"  ;
-      border-color = "#b7bdf8"; 
-      background-color = "#363a4f"; 
+      border-color = "#b7bdf8"; # Catppuccin lavender
+      background-color = "#363a4f"; # Cappuccin surface 0
     };
   };
 
