@@ -16,6 +16,7 @@
       wezterm
       vesktop
       darktable
+      tidal-hifi
 
       fontconfig
       nerd-fonts.monaspace
@@ -28,6 +29,8 @@
       libnotify
       rofi-wayland
       networkmanagerapplet
+      pwvucontrol 
+      blueberry
 
       ghc
     ];
