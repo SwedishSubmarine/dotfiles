@@ -60,7 +60,7 @@
         window:set_left_status(wezterm.format {
           { Attribute = { Intensity = 'Bold' } },
           { Foreground = { Color = '#c6a0f6' } },
-          { Text = 'Hiiii ^-^ ' },
+          { Text = ' Hiiii ^-^ ' },
           { Foreground = { Color = '#6e738d' } },
           { Text = '||' },
         })

@@ -95,6 +95,26 @@ in
     
     prefer-no-csd = true;
 
+    window-rules = [
+      {
+        draw-border-with-background = false;
+        geometry-corner-radius = 
+          let rad = 10.0;
+          in { bottom-left = rad; bottom-right = rad; top-right = rad; top-left = rad; };
+        clip-to-geometry=true;
+      }
+      {
+      excludes = [
+        { title = '' - YouTube — Mozilla Firefox$''; }
+        { title = '' - Twitch — Mozilla Firefox$''; }
+        { app-id = ''^darktable$''; }
+      ];
+      }
+    ];
+
+    layout = {
+      
+    };
   };
 
   programs.rofi = {
@@ -116,6 +136,9 @@ in
       font = "Hack Nerd Font"  ;
       border-color = "#b7bdf8"; # Catppuccin lavender
       background-color = "#363a4f"; # Cappuccin surface 0
+      default-timeout=7500;
+      ignore-timeout=1;
+
     };
   };
 
