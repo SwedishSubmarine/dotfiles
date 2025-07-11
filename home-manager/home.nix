@@ -16,7 +16,7 @@
       wezterm
       vesktop
       darktable
-      tidal-hifi
+      signal-desktop
 
       fontconfig
       nerd-fonts.monaspace
