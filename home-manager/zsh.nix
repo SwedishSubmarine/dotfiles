@@ -1,0 +1,90 @@
+{  config, pkgs, ... }:
+{
+  programs.zsh = {
+    enable = true;
+    package = pkgs.zsh;
+    dotDir = "dotfiles/home-manager/zsh";
+    history = {
+      path = "$ZDOTDIR/.zsh_history";
+      save = 100000000000;
+      size = 100000000000;
+      extended = true;
+      share = true;
+    };
+    shellAliases = {
+      ls  = "${pkgs.eza}/bin/eza --icons --color -A";
+      lsl = "${pkgs.eza}/bin/eza --icons --color -Al --git-repos --git";
+      lst = "${pkgs.eza}/bin/eza --icons --color -A --tree --level=3";
+    };
+    # Previously plugins (PP 🐈)
+    syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
+    historySubstringSearch.enable = true;
+    initContent = ''
+      # Various options (Some of these dont exist within home-manager)
+      setopt AUTO_CD
+      setopt AUTO_MENU
+      setopt globdots
+      setopt transientrprompt
+      setopt prompt_subst
+
+      # Prompt
+      PROMPT=$'%B%F{13}Emjauly%b@%m%f → %F{14}%8~%f \n%B%#%b '
+
+      # Completion stuff
+      zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
+      zstyle ':completion:*' completions 1
+      zstyle ':completion:*' file-sort name
+      zstyle ':completion:*' format 'Completing %d'
+      zstyle ':completion:*' glob 1
+      zstyle ':completion:*' group-name ""
+      zstyle ':completion:*' ignore-parents parent pwd
+      zstyle ':completion:*' list-colors ""
+      zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
+      zstyle ':completion:*' matcher-list "" 'r:|[._-]=** r:|=** l:|=*' 'm:{[:lower:]}={[:upper:]}' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+      zstyle ':completion:*' max-errors 3
+      zstyle ':completion:*' menu select=5
+      zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+      zstyle ':completion:*' special-dirs true
+      zstyle ':completion:*' substitute 1
+      zstyle ':completion:*' use-compctl false
+      zstyle :compinstall filename '$ZDOTDIR/.zshrc'
+      
+      autoload -Uz compinit
+      compinit -d "$ZDOTDIR/zcompdump"
+
+      # Vim mode 
+      KEYTIMEOUT=1
+      MODE_INDICATOR_VIINS='%F{0}%K{#94e59a} INSERT %k%f'
+      MODE_INDICATOR_VICMD='%F{0}%K{#7db6ff} NORMAL %k%f'
+      MODE_INDICATOR_REPLACE='%F{0}%K{#ff84a7} REPLACE %k%f'
+      MODE_INDICATOR_SEARCH='%F{0}%K{13} SEARCH %k%f'
+      MODE_INDICATOR_VISUAL='%F{0}%K{#d2a4fe} VISUAL %k%k'
+      MODE_INDICATOR_VLINE='%F{0}<%F{4}V-LINE%F{12}>%f'
+
+      # History substring search vi mode
+      bindkey -M vicmd 'k' history-substring-search-up
+      bindkey -M vicmd 'j' history-substring-search-down
+
+      # Normal substring search behavior
+      bindkey '^[[A' history-substring-search-up
+      bindkey '^[[B' history-substring-search-down
+
+      eval "$(zoxide init --cmd cd zsh)"
+    '';
+
+    plugins = [
+    # zsh-git-prompt
+      {
+        name = "zsh-vim-mode";
+        file = "zsh-vim-mode.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "softmoth";
+          repo = "zsh-vim-mode";
+          rev = "1f9953b7d6f2f0a8d2cb8e8977baa48278a31eab";
+          sha256 = "sha256-a+6EWMRY1c1HQpNtJf5InCzU7/RphZjimLdXIXbO6cQ=";
+        };
+      }
+    ];
+  };
+}
