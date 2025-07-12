@@ -32,6 +32,7 @@
       rofi-wayland
       networkmanagerapplet
       pwvucontrol 
+      brightnessctl
       blueberry
 
       ghc

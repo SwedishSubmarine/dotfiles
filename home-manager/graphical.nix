@@ -104,6 +104,9 @@ in
         "Mod+Ctrl+J"  = { hotkey-overlay.title = "Move window or workspace down";  action = move-window-down-or-to-workspace-down; };
         "Mod+Ctrl+K"  = { hotkey-overlay.title = "Move window or workspace up";    action = move-window-up-or-to-workspace-up; };
         "Mod+O"       = { hotkey-overlay.title = "Toggle overview";                action = toggle-overview; };
+
+        # Function row
+        "XF86MonBrightnessDown".action.spawn = ["brightnessctl" "s" "10%-"];
 	  };
 
     spawn-at-startup = [
@@ -118,6 +121,7 @@ in
 
     window-rules = [
       {
+        default-column-width.proportion = 0.5;
         draw-border-with-background = false;
         geometry-corner-radius = 
           let rad = 10.0;
@@ -156,7 +160,7 @@ in
         matches = [ { app-id = "Alacritty"; } ];
         open-floating = true;
         default-window-height.proportion = 0.3;
-        default-column-width.proportion = 0.25;
+        default-column-width.proportion = 0.4;
         focus-ring = {
           width = 2;
           active.color = "#b7bdf8";
@@ -170,7 +174,6 @@ in
       {
         matches = [ { app-id = "org.wezfurlong.wezterm"; } ];
         default-window-height.proportion = 1.0;
-        default-column-width.proportion = 0.5;
       }
     ];
 
@@ -259,6 +262,8 @@ in
       #   "niri/window"
       # ];
       modules-right = [
+        "backlight"
+        "backlight/slider"
         "pulseaudio" "pulseaudio/slider"
         "network"
         "bluetooth"
@@ -276,18 +281,24 @@ in
           "\\((\\d+)\\) Discord \\| ([^|]*)" = "$2 ($1)";
         };
       };
-
+      backlight = {
+        format = "󰛨 ";
+        format-alt = "{percent}% 󱧣 ";
+        format-alt-click = "click-right";
+        tooltip = false;
+        #change padding
+      };
       pulseaudio = {
-          format = "{icon}";
-          format-alt = "{volume} {icon}";
-          format-alt-click = "click-right";
-          format-muted = "🔇";
-          format-icons = {
-              default = ["" "" ""];
-          };
-          scroll-step = 10;
-          on-click = "pwvucontrol";
-          tooltip = false;
+        format = "{icon}";
+        format-alt = "{volume} {icon}";
+        format-alt-click = "click-right";
+        format-muted = "🔇";
+        format-icons = {
+            default = ["" " " " "];
+        };
+        scroll-step = 10;
+        on-click = "pwvucontrol";
+        tooltip = false;
       };
       network = {
         format = "{icon}";
@@ -406,8 +417,14 @@ in
           border: 3px solid @mauve;
       }
 
+      #pulseaudio {
+        padding-right: 0px;
+      }
+
       #pulseaudio-slider {
           min-width: 100px;
+          padding-left: 0px;
+          padding-right: 0px;
       }
 
       /* don't show the grabbable thing in the slider */
@@ -432,6 +449,37 @@ in
           background-color: rgba(247, 246, 246, 1);
       }
 
+      #backlight {
+        padding-right: 0px;
+      }
+
+      #backlight-slider {
+          padding-left: 0px;
+          padding-right: 0px;
+          min-width: 100px;
+      }
+
+      /* don't show the grabbable thing in the slider */
+      #backlight-slider slider {
+          min-height: 0px;
+          min-width: 0px;
+          opacity: 0;
+          background-image: none;
+          border: none;
+          box-shadow: none;
+      }
+
+      #backlight-slider trough {
+          min-height: 15px;
+          min-width: 10px;
+          border-radius: 5px;
+          background-color: @crust;
+      }
+      #backlight-slider highlight {
+          min-width: 10px;
+          border-radius: 5px;
+          background-color: rgba(247, 246, 246, 1);
+      }
       * {
           border:        none;
           border-radius: 0;
