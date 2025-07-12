@@ -224,8 +224,8 @@ in
 
       layer = "top";
       modules-left = [
-        "battery"
         "tray"
+        "battery"
         "niri/window"
       ];
       # modules-center = [
@@ -417,11 +417,11 @@ in
       }
 
       #battery.warning {
-         color:       rgba(255, 210, 4, 1);
+         color:       @peach; 
       }
 
       #battery.critical {
-          color:      rgba(238, 46, 36, 1);
+          color:      @red;
       }
       
 
