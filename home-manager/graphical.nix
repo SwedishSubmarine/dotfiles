@@ -36,7 +36,7 @@ in
         xkb = {
           layout = "se";
           variant = "nodeadkeys";
-          options = "caps:escape";
+          options = "caps:swapescape";
         };
         repeat-rate = 50;
       };
@@ -93,11 +93,13 @@ in
         "Mod+V"       = { hotkey-overlay.title = "Toggle floating windows";   action = toggle-window-floating;  } ; 
         "Mod+Shift+V" = { hotkey-overlay.title = "Switch tiling/window focus";action = switch-focus-between-floating-and-tiling; } ; 
         # "       "     = { hotkey-overlay.title = "                 "; action =                      ; };
-        "Mod+J"       = { hotkey-overlay.title ="Focus window or workspace down"; action = focus-window-or-workspace-down; };
-        "Mod+K"       = { hotkey-overlay.title ="Focus window or workspace up";   action = focus-window-or-workspace-up; };
-        "Mod+Ctrl+J"  = { hotkey-overlay.title ="Move window or workspace down";  action = move-window-down-or-to-workspace-down; };
-        "Mod+Ctrl+K"  = { hotkey-overlay.title ="Move window or workspace up";    action = move-window-up-or-to-workspace-up; };
-        "Mod+O"       = { hotkey-overlay.title ="Toggle overview";                action = toggle-overview; };
+        "Mod+J"       = { hotkey-overlay.title = "Focus window or workspace down"; action = focus-window-or-workspace-down; };
+        "Mod+K"       = { hotkey-overlay.title = "Focus window or workspace up";   action = focus-window-or-workspace-up; };
+        "Mod+Shift+J" = { hotkey-overlay.title = "Focus workspace down";           action = focus-workspace-down; };
+        "Mod+Shift+K" = { hotkey-overlay.title = "Focus workspace up";             action = focus-workspace-up; };
+        "Mod+Ctrl+J"  = { hotkey-overlay.title = "Move window or workspace down";  action = move-window-down-or-to-workspace-down; };
+        "Mod+Ctrl+K"  = { hotkey-overlay.title = "Move window or workspace up";    action = move-window-up-or-to-workspace-up; };
+        "Mod+O"       = { hotkey-overlay.title = "Toggle overview";                action = toggle-overview; };
 	  };
 
     spawn-at-startup = [
