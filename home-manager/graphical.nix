@@ -1,6 +1,10 @@
 {  config, pkgs, ... }:
 let 
   XWAYLAND_DISPLAY = ":3";
+  tidal-icon = builtins.fetchurl {
+    url = "https://icon-library.com/images/tidal-icon-png/tidal-icon-png-23.jpg";
+    sha256 = "sha256:1v9dwqzp1n0cwpmxl95qmpnjpc1dhpws6binl1ix8inrqrdafphq"; 
+  };
 in
 {
   xdg = {
@@ -13,11 +17,12 @@ in
         pkgs.xdg-desktop-portal-gtk
       ];
     };
+    dataFile."xdg-desktop-portal/icons/tidal.png".source = tidal-icon;
     desktopEntries = {
       tidal = {
         name = "Tidal";
         exec = "chromium --ozone-platform-hint=wayland --app=https://listen.tidal.com";
-        icon = ./icon/tidal.png;
+        icon = "/home/emily/.local/share/xdg-desktop-portal/icons/tidal.png"; 
       };
     };
   };
