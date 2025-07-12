@@ -302,6 +302,10 @@ in
       @define-color   pink     #f5bde6;
       @define-color   mauve    #c6a0f6;
       @define-color   lavender #b7bdf8;
+      @define-color   red      #ed8796;
+      @define-color   maroon   #ee99a0;
+      @define-color   peach    #f5a97f;
+      @define-color   yellow   #eed49f;
 
       @define-color   text     #cad3f5;
       @define-color   subtext1 #b8c0e0;
