@@ -224,6 +224,7 @@ in
 
       layer = "top";
       modules-left = [
+        "battery"
         "tray"
         "niri/window"
       ];
@@ -407,7 +408,6 @@ in
           transition-duration: 0s;
       }
 
-      /* not in use right now
       #battery {
           padding-right: 10px;
       }
@@ -419,7 +419,7 @@ in
       #battery.critical {
           color:      rgba(238, 46, 36, 1);
       }
-      */
+      
 
     '';
     };
