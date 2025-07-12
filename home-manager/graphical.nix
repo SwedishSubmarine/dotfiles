@@ -17,7 +17,7 @@ in
       tidal = {
         name = "Tidal";
         exec = "chromium --ozone-platform-hint=wayland --app=https://listen.tidal.com";
-        # icon = ./icon/tidal.png;
+        icon = ./icon/tidal.png;
       };
     };
   };
