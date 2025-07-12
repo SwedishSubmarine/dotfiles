@@ -270,7 +270,7 @@ in
             wifi = [" "];
             ethernet = ["󰛳"];
         };
-        on-click = "alacritty -e nmtui";
+        on-click = "wezterm start nmtui";
         tooltip = false;
       };
       bluetooth = {
@@ -337,11 +337,12 @@ in
         opacity: 0.2;
       }
 
-      /* for tray */
       menu {
-          background-color: rgba(123, 162, 170, 0.8);
-          color: rgba(35, 31, 32, 1);
+          background-color: alpha(@mantle,.8);
+          color: @text;
+          border: 2px solid @mauve
       }
+
       menu :disabled {
           color: rgba(95, 91, 92, 1);
       }
@@ -349,7 +350,7 @@ in
       .modules-left {
           padding-left: 10px;
           padding-right: 10px;
-          margin:10 0 0 10;
+          margin:10px 0px 0px 10px;
           border-radius:10px;
           background: alpha(@mantle,.6);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
@@ -360,7 +361,7 @@ in
       .modules-center {
           padding-left: 10px;
           padding-right: 10px;
-          margin:10 0 0 0;
+          margin:10px 0px 0px 0px;
           border-radius:10px;
           background: alpha(@mantle,.6);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
@@ -371,7 +372,7 @@ in
       .modules-right {
           padding-left: 10px;
           padding-right: 10px;
-          margin:10 10 0 0;
+          margin:10px 10px 0px 0px;
           border-radius:10px;
           background: alpha(@mantle,.6);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
