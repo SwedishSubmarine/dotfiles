@@ -14,6 +14,7 @@
       chromium
       firefox
       wl-clipboard
+      alacritty
       wezterm
       vesktop
       darktable

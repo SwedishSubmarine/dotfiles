@@ -93,6 +93,10 @@ in
         "Mod+V"       = { hotkey-overlay.title = "Toggle floating windows";   action = toggle-window-floating;  } ; 
         "Mod+Shift+V" = { hotkey-overlay.title = "Switch tiling/window focus";action = switch-focus-between-floating-and-tiling; } ; 
         # "       "     = { hotkey-overlay.title = "                 "; action =                      ; };
+        "Mod+Shift+H"  = { hotkey-overlay.title = "Consume or expel left";     action = consume-or-expel-window-left; };
+        "Mod+Shift+L"  = { hotkey-overlay.title = "Consume or expel right";    action = consume-or-expel-window-right; };
+
+        # Workspaces
         "Mod+J"       = { hotkey-overlay.title = "Focus window or workspace down"; action = focus-window-or-workspace-down; };
         "Mod+K"       = { hotkey-overlay.title = "Focus window or workspace up";   action = focus-window-or-workspace-up; };
         "Mod+Shift+J" = { hotkey-overlay.title = "Focus workspace down";           action = focus-workspace-down; };
@@ -130,7 +134,7 @@ in
       {
         matches = [ { app-id = "om.saivert.pwvucontrol"; } ];
         open-floating = true;
-        default-window-height.fixed = 250;
+        default-window-height.proportion = 0.4;
         default-floating-position = {
           relative-to = "top-right";
           x = 20.0;
@@ -146,6 +150,27 @@ in
           x = 20.0;
           y = 10.0;
         };
+      }
+      {
+        # Sorry alacritty nerds but i dont use this terminal
+        matches = [ { app-id = "Alacritty"; } ];
+        open-floating = true;
+        default-window-height.proportion = 0.3;
+        default-column-width.proportion = 0.25;
+        focus-ring = {
+          width = 2;
+          active.color = "#b7bdf8";
+        };
+        default-floating-position = {
+          relative-to = "top-right";
+          x = 20.0;
+          y = 10.0;
+        };
+      }
+      {
+        matches = [ { app-id = "org.wezfurlong.wezterm"; } ];
+        default-window-height.proportion = 1.0;
+        default-column-width.proportion = 0.5;
       }
     ];
 
@@ -272,7 +297,7 @@ in
             wifi = [" "];
             ethernet = ["󰛳"];
         };
-        on-click = "wezterm start nmtui";
+        on-click = "alacritty -e nmtui";
         tooltip = false;
       };
       bluetooth = {
