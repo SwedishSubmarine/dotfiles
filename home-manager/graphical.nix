@@ -8,6 +8,16 @@ let
 in
 {
   xdg = {
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+        "text/html" = "firefox.desktop";
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+        "x-scheme-handler/about" = "firefox.desktop";
+        "x-scheme-handler/unknown" = "firefox.desktop";
+      };
+    };
     portal = {
       enable = true;
       config.common.default = "*";
@@ -23,6 +33,10 @@ in
         name = "Tidal";
         exec = "chromium --ozone-platform-hint=wayland --app=https://listen.tidal.com";
         icon = "/home/emily/.local/share/xdg-desktop-portal/icons/tidal.png"; 
+      };
+      firefox = {
+        name = "Firefox";
+        exec = "${pkgs.firefox}/bin/firefox";
       };
     };
   };
@@ -107,6 +121,9 @@ in
 
         # Function row
         "XF86MonBrightnessDown".action.spawn = ["brightnessctl" "s" "10%-"];
+        "XF86MonBrightnessUp".action.spawn = ["brightnessctl" "s" "10%+"];
+        "XF86LaunchA".action = toggle-overview; 
+        "XF86Search".action.spawn = ["sh" "${./web-search.sh}"];
 	  };
 
     spawn-at-startup = [
@@ -283,7 +300,7 @@ in
       };
       backlight = {
         format = "󰛨 ";
-        format-alt = "{percent}% 󱧣 ";
+        format-alt = "󱧣 {percent}%";
         format-alt-click = "click-right";
         tooltip = false;
         #change padding
