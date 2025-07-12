@@ -33,6 +33,7 @@
       networkmanagerapplet
       pwvucontrol 
       brightnessctl
+      playerctl
       blueberry
 
       ghc

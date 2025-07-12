@@ -122,8 +122,18 @@ in
         # Function row
         "XF86MonBrightnessDown".action.spawn = ["brightnessctl" "s" "10%-"];
         "XF86MonBrightnessUp".action.spawn = ["brightnessctl" "s" "10%+"];
+
         "XF86LaunchA".action = toggle-overview; 
         "XF86Search".action.spawn = ["sh" "${./web-search.sh}"];
+
+        "XF86AudioPrev".action.spawn = ["playerctl" "previous"];
+        "XF86AudioPlay".action.spawn = ["playerctl" "play-pause"];
+        "XF86AudioNext".action.spawn = ["playerctl" "next"];
+
+        "XF86AudioMute".action.spawn = ["pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"];
+        "XF86AudioLowerVolume".action.spawn = ["pactl" "set-sink-volume" "@DEFAULT_SINK@" "-5%"];
+        "XF86AudioRaiseVolume".action.spawn = ["pactl" "set-sink-volume" "@DEFAULT_SINK@" "+5%"];
+        
 	  };
 
     spawn-at-startup = [
