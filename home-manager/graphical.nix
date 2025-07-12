@@ -3,14 +3,23 @@ let
   XWAYLAND_DISPLAY = ":3";
 in
 {
-  xdg.portal = {
-    enable = true;
-    config.common.default = "*";
-    extraPortals = [
-      pkgs.xdg-desktop-portal-gnome
-      pkgs.xdg-desktop-portal-wlr
-      pkgs.xdg-desktop-portal-gtk
-    ];
+  xdg = {
+    portal = {
+      enable = true;
+      config.common.default = "*";
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gnome
+        pkgs.xdg-desktop-portal-wlr
+        pkgs.xdg-desktop-portal-gtk
+      ];
+    };
+    desktopEntries = {
+      tidal = {
+        name = "Tidal";
+        exec = "chromium --ozone-platform-hint=wayland --app=https://listen.tidal.com";
+        # icon = ./icon/tidal.png;
+      };
+    };
   };
 
   programs.niri.settings = {
@@ -188,7 +197,7 @@ in
     Service = {
       ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet --indicator";
     };
-  }
+  };
 
   # Going to add more stuff to waybar:
   # Battery, custom-media maybe?

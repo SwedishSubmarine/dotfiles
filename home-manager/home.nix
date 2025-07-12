@@ -11,6 +11,7 @@
       zoxide
       fastfetch
 
+      chromium
       firefox
       wl-clipboard
       wezterm
