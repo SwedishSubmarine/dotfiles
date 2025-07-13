@@ -26,15 +26,12 @@
 
       layer = "top";
       modules-left = [
-        # "custom/power"
-        # "tray"
-        # "battery"
         "group/left"
         "niri/window"
       ];
-      # modules-center = [
-      #   "niri/window"
-      # ];
+      modules-center = [
+        "mpris"
+      ];
       modules-right = [
         "backlight"
         "backlight/slider"
@@ -54,6 +51,7 @@
       "niri/window" = {
         icon = true;
         icon-size = 24;
+        max-length = 40;
         rewrite = {
           "(.*) (:?— Mozilla (Firefox|Thunderbird)|- Quod Libet)" = "$1"; # remove some titles
           "• Discord \\| ([^|]*) \\| (.*)" = "$2 ⟩ $1"; # discord formats things as Discord | Channel | Server
@@ -121,8 +119,26 @@
         tooltip = false;
         on-click = "rofi -show power-menu -show-icons -modi power-menu:${./rofi/rofi-power-menu}";
       };
+
+      mpris = {
+        title-len = 30;
+        interval = 1;
+        album-len = 0;
+        max-len = 50;
+        max-empty-time = 60;
+        format = "{player_icon} {artist} - {title}";
+        format-paused = " {artist} - {title}";
+        player-icons = {
+          default= " ";
+        };
+        status-icons = {
+          paused = "";
+        };
+      };
     };
     style = ''
+      @define-color   rose     #f4dbd6;
+      @define-color   flamingo #f0c6c6;
       @define-color   pink     #f5bde6;
       @define-color   mauve    #c6a0f6;
       @define-color   lavender #b7bdf8;
@@ -130,6 +146,11 @@
       @define-color   maroon   #ee99a0;
       @define-color   peach    #f5a97f;
       @define-color   yellow   #eed49f;
+      @define-color   blue     #8aadf4;
+      @define-color   sapphire #7dc4e4;
+      @define-color   sky      #91d7e3;
+      @define-color   teal     #8bd5ca;
+      @define-color   green    #a6da95;
 
       @define-color   text     #cad3f5;
       @define-color   subtext1 #b8c0e0;
@@ -189,7 +210,6 @@
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border-radius:10px;
           border: 3px solid @mauve;
-
       }
 
       /*
@@ -204,6 +224,17 @@
       }
       */
 
+      #mpris {
+          padding-left: 10px;
+          padding-right: 10px;
+          margin:10px 0px 0px 0px;
+          border-radius:10px;
+          background: alpha(@mantle,.6);
+          box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+          border: 3px solid @mauve;
+          color: @teal;
+      }
+
       .modules-right {
           padding-left: 10px;
           padding-right: 10px;
@@ -217,6 +248,7 @@
       #pulseaudio {
         padding-left: 10px;
         padding-right: 5px;
+        color: @yellow;
       }
 
       #pulseaudio-slider {
@@ -250,6 +282,7 @@
       #backlight {
         padding-left: 10px;
         padding-right: 10px;
+        color: @yellow;
       }
 
       #backlight-slider {
@@ -314,16 +347,19 @@
       #network {
           padding-left: 20px;
           padding-right: 10px;
+          color: @sky;
       }
 
       #bluetooth {
           padding-left: 10px;
           padding-right: 10px;
+          color: @blue;
       }
 
       #clock {
           padding-left: 10px;
           padding-right: 0px;
+          color: @text;
       }
     '';
   };
