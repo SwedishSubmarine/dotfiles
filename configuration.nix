@@ -72,7 +72,6 @@
     git
     binutils
     coreutils
-    power-profiles-daemon
   ];
 
   services.desktopManager.plasma6.enable = true;

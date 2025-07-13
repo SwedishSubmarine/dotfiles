@@ -103,7 +103,7 @@
       keys = { 
         {
           key = 't',
-          mods = mod.SUPER,
+          mods = mod.ALT,
           action = act.SpawnTab "CurrentPaneDomain",
         },
         {

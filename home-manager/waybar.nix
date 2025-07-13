@@ -10,10 +10,8 @@
   };
 
   # Going to add more stuff to waybar:
-  # custom-media maybe?
   # Probably not workspaces
   # Power profiles daemon
-  # Maybe try to fix so I can have separate borders for left module and for niri/window
   programs.waybar = {
     enable = true;
     systemd = {
@@ -38,6 +36,7 @@
         "pulseaudio" "pulseaudio/slider"
         "network"
         "bluetooth"
+        "power-profiles-daemon"
         "clock"
       ];
       "group/left" = {
@@ -53,13 +52,20 @@
         icon-size = 24;
         max-length = 40;
         rewrite = {
-          "(.*) (:?— Mozilla (Firefox|Thunderbird)|- Quod Libet)" = "$1"; # remove some titles
-          "• Discord \\| ([^|]*) \\| (.*)" = "$2 ⟩ $1"; # discord formats things as Discord | Channel | Server
-          "• Discord \\| ([^|]*)" = "$1"; # sometimes there's no server to show
+          "(.*) (:?— Mozilla (Firefox|Thunderbird)|- Quod Libet)" = " $1"; # remove some titles
+          "(Mozilla Firefox)" = " $1";
+          "(Discord \\| .*)" = "  $1";
+          "• Discord \\| ([^|]*) \\| (.*)" = "  $2 ⟩ $1"; # discord formats things as Discord | Channel | Server
+          "• Discord \\| ([^|]*)" = "  $1"; # sometimes there's no server to show
           # pinged versions
-          "\\((\\d+)\\) Discord \\| ([^|]*) \\| (.*)" = "$3 ⟩ $2 ($1)";
-          "\\((\\d+)\\) Discord \\| ([^|]*)" = "$2 ($1)";
+          "\\((\\d+)\\) Discord \\| ([^|]*) \\| (.*)"  ="  $3 ⟩ $2 ($1)";
+          "\\((\\d+)\\) Discord \\| ([^|]*)" = "  $2 ($1)";
+          "(.* TIDAL)" = " $1 ";
         };
+      };
+      "power-profiles-daemon" = {
+        format = "{icon}";
+        tooltip = false;
       };
       backlight = {
         format = "󰛨 ";
@@ -119,7 +125,6 @@
         tooltip = false;
         on-click = "rofi -show power-menu -show-icons -modi power-menu:${./rofi/rofi-power-menu}";
       };
-
       mpris = {
         title-len = 30;
         interval = 1;
@@ -134,6 +139,10 @@
         status-icons = {
           paused = "";
         };
+      };
+      "power-profiles-daemon:" = {
+        format = "{icon}";
+        tooltip = false;
       };
     };
     style = ''
@@ -173,14 +182,6 @@
           font-family: "Hack Nerd Font";
       }
 
-      window#waybar {
-        background-color: rgba(0,0,0,0);
-        color: @text;
-      }
-
-      window#waybar.hidden {
-        opacity: 0.2;
-      }
 
       menu {
           background-color: alpha(@mantle,.8);
@@ -212,6 +213,18 @@
           border: 3px solid @mauve;
       }
 
+      window#waybar.empty #window {
+        opacity: 0;
+      }
+
+      window#waybar {
+        background-color: rgba(0,0,0,0);
+        color: @text;
+      }
+
+      window#waybar.hidden {
+        opacity: 0.2;
+      }
       /*
       .modules-center {
           padding-left: 10px;
@@ -321,7 +334,7 @@
       }
 
       #tray {
-          padding-left: 10px;
+          padding-left: 5px;
           padding-right: 10px;
       }
 
@@ -341,7 +354,7 @@
       #custom-power {
           color:      @mauve;
           padding-left: 0px;
-          padding-right: 10px;
+          padding-right: 0px;
       }
 
       #network {
