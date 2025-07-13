@@ -31,12 +31,16 @@ in
     desktopEntries = {
       tidal = {
         name = "Tidal";
-        exec = "chromium --ozone-platform-hint=wayland --app=https://listen.tidal.com";
+        exec = "${pkgs.chromium}/bin/chromium --ozone-platform-hint=wayland --app=https://listen.tidal.com";
         icon = "/home/emily/.local/share/xdg-desktop-portal/icons/tidal.png"; 
       };
       firefox = {
         name = "Firefox";
         exec = "${pkgs.firefox}/bin/firefox";
+      };
+      vesktop = {
+        name = "Vesktop";
+        exec = "${pkgs.vesktop}/bin/vesktop --ozone-platform-hint=wayland";
       };
     };
   };
@@ -73,7 +77,7 @@ in
 	
         # Launchers
 	      "Mod+Space"   = { hotkey-overlay.title = "rofi launcher";     action = spawn "rofi" "-modes" "drun" "-show" "drun"; };
-	      "Mod+E"       = { hotkey-overlay.title = "niri msg";          action = spawn "sh" "${./niri-action.sh}"; };
+	      "Mod+E"       = { hotkey-overlay.title = "niri msg";          action = spawn "sh" "${./rofi/niri-action.sh}"; };
 
         # Utility and help
 	      "Mod+Comma"   = { hotkey-overlay.title = "Show these hotkeys";    action = show-hotkey-overlay; };
@@ -124,7 +128,7 @@ in
         "XF86MonBrightnessUp".action.spawn = ["brightnessctl" "s" "10%+"];
 
         "XF86LaunchA".action = toggle-overview; 
-        "XF86Search".action.spawn = ["sh" "${./web-search.sh}"];
+        "XF86Search".action.spawn = ["sh" "${./rofi/web-search.sh}"];
 
         "XF86AudioPrev".action.spawn = ["playerctl" "previous"];
         "XF86AudioPlay".action.spawn = ["playerctl" "play-pause"];
@@ -230,7 +234,7 @@ in
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
-    theme = "${./rounded.rasi}";
+    theme = "${./rofi/rounded.rasi}";
     extraConfig = {
       matching = "fuzzy";
     };
