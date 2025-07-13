@@ -27,6 +27,7 @@
       nerd-fonts.roboto-mono
 
       xwayland-satellite
+      swaybg
       waypaper
       libnotify
       rofi-wayland
