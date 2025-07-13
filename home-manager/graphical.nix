@@ -81,7 +81,8 @@ in
 
         # Utility and help
 	      "Mod+Comma"   = { hotkey-overlay.title = "Show these hotkeys";    action = show-hotkey-overlay; };
-	      "Mod+Escape"  = { hotkey-overlay.title = "Quit niri";             action = quit; };
+        # Credit for this power-menu script https://github.com/jluttine/rofi-power-menu
+	      "Mod+Escape"  = { hotkey-overlay.title = "Quit niri";             action = spawn "rofi" "-show" "power-menu" "-show-icons" "-modi" "power-menu:${./rofi/rofi-power-menu}"; };
 	      "Mod+Q"       = { hotkey-overlay.title = "Close window";          action = close-window; };
         # "Mod+Shift+3" = { hotkey-overlay.title = "Screenshot screen";     action = screenshot-screen { write-to-disk = false; }; };
 	      "Mod+Shift+4" = { hotkey-overlay.title = "Screenshot region";     action = screenshot; };
@@ -265,12 +266,10 @@ in
   };
 
   # Going to add more stuff to waybar:
-  # Battery, custom-media maybe?
+  # custom-media maybe?
   # Probably not workspaces
   # Power profiles daemon
   # Maybe try to fix so I can have separate borders for left module and for niri/window
-  # bottom bar? not sure what i would have there but big screen 
-  #temperature maybe
   programs.waybar = {
     enable = true;
     systemd = {
@@ -284,6 +283,7 @@ in
 
       layer = "top";
       modules-left = [
+        "custom/power"
         "tray"
         "battery"
         "niri/window"
@@ -346,24 +346,29 @@ in
         format = "";
       };
       clock = {
-          format = "{:%a %d %b %H:%M}";
-          tooltip = false;
+        format = "{:%a %d %b %H:%M}";
+        tooltip = false;
       };
       battery = {
-          format = "{capacity}% {icon}";
-          format-alt = "{time} {icon}";
-          format-icons = ["" "" "" "" ""];
-          format-charging = "{capacity}% 󰂅";
-          interval = 30;
-          states = {
-              warning = 25;
-              critical = 1;
-          };
-          tooltip = false;
+        format = "{capacity}% {icon}";
+        format-alt = "{time} {icon}";
+        format-icons = ["" "" "" "" ""];
+        format-charging = "{capacity}% 󰂅";
+        interval = 30;
+        states = {
+            warning = 25;
+            critical = 1;
+        };
+        tooltip = false;
       };
       tray = {
-          icon-size = 24;
-          spacing = 10;
+        icon-size = 24;
+        spacing = 10;
+      };
+      "custom/power" = {
+        format = "⏻ ";
+        tooltip = false;
+        on-click = "rofi -show power-menu -show-icons -modi power-menu:${./rofi/rofi-power-menu}";
       };
     };
     style = ''
@@ -530,7 +535,9 @@ in
           color:      @red;
       }
       
-
+      #custom-power {
+          color:      @red;
+      }
     '';
     };
 }
