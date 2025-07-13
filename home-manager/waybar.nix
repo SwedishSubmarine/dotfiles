@@ -23,13 +23,13 @@
 
     settings.mainBar = {
       height = 40;
-      spacing = 20;
 
       layer = "top";
       modules-left = [
-        "custom/power"
-        "tray"
-        "battery"
+        # "custom/power"
+        # "tray"
+        # "battery"
+        "group/left"
         "niri/window"
       ];
       # modules-center = [
@@ -43,6 +43,14 @@
         "bluetooth"
         "clock"
       ];
+      "group/left" = {
+        orientation = "horizontal";
+        modules = [
+          "custom/power"
+          "tray"
+          "battery"
+        ];
+      };
       "niri/window" = {
         icon = true;
         icon-size = 24;
@@ -68,7 +76,7 @@
         format-alt-click = "click-right";
         format-muted = "🔇";
         format-icons = {
-            default = ["" " " " "];
+            default = [" " " " " "];
         };
         scroll-step = 10;
         on-click = "pwvucontrol";
@@ -107,7 +115,6 @@
       };
       tray = {
         icon-size = 24;
-        spacing = 10;
       };
       "custom/power" = {
         format = "⏻ ";
@@ -164,14 +171,25 @@
           color: rgba(95, 91, 92, 1);
       }
 
-      .modules-left {
+      #left {
           padding-left: 10px;
           padding-right: 10px;
           margin:10px 0px 0px 10px;
-          border-radius:10px;
           background: alpha(@mantle,.6);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+          border-radius:10px;
           border: 3px solid @mauve;
+      }
+
+      #window {
+          padding-left: 10px;
+          padding-right: 10px;
+          margin:10px 0px 0px 10px;
+          background: alpha(@mantle,.6);
+          box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
+          border-radius:10px;
+          border: 3px solid @mauve;
+
       }
 
       /*
@@ -197,7 +215,8 @@
       }
 
       #pulseaudio {
-        padding-right: 0px;
+        padding-left: 10px;
+        padding-right: 5px;
       }
 
       #pulseaudio-slider {
@@ -229,7 +248,8 @@
       }
 
       #backlight {
-        padding-right: 0px;
+        padding-left: 10px;
+        padding-right: 10px;
       }
 
       #backlight-slider {
@@ -267,7 +287,13 @@
           transition-duration: 0s;
       }
 
+      #tray {
+          padding-left: 10px;
+          padding-right: 10px;
+      }
+
       #battery {
+          padding-left: 10px;
           padding-right: 10px;
       }
 
@@ -280,7 +306,24 @@
       }
       
       #custom-power {
-          color:      @red;
+          color:      @mauve;
+          padding-left: 0px;
+          padding-right: 10px;
+      }
+
+      #network {
+          padding-left: 20px;
+          padding-right: 10px;
+      }
+
+      #bluetooth {
+          padding-left: 10px;
+          padding-right: 10px;
+      }
+
+      #clock {
+          padding-left: 10px;
+          padding-right: 0px;
       }
     '';
   };
