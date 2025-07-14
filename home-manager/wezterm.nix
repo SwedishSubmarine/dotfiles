@@ -30,7 +30,7 @@
         bottom = 4,
       }
 
-      config.window_background_opacity = 0.85
+      config.window_background_opacity = 0.95
       
       config.inactive_pane_hsb = {
         saturation = 1,
@@ -40,17 +40,18 @@
       
       config.colors = {
         tab_bar = { 
-          background = '#24273a',
+          background = "rgba(36, 39, 58, 0.9)",
           active_tab = { 
-            bg_color = '#24273a',
+            bg_color = "rgba(36, 39, 58, 0.9)",
             fg_color = '#c6a0f6',
           },
           inactive_tab = {
             bg_color = '#1e2030',
+            bg_color = "rgba(30, 32, 48, 0.9)",
             fg_color = '#6e738d',
           },
           new_tab = {
-            bg_color = '#24273a',
+            bg_color = "rgba(36, 39, 58, 0.9)",
             fg_color = '#24273a',
           },
         },

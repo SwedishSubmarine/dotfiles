@@ -185,7 +185,7 @@
 
 
       menu {
-          background-color: alpha(@mantle,.8);
+          background-color: alpha(@mantle,.6);
           color: @text;
           border: 2px solid @mauve
       }
@@ -198,7 +198,7 @@
           padding-left: 10px;
           padding-right: 10px;
           margin:10px 0px 0px 10px;
-          background: alpha(@mantle,.6);
+          background: alpha(@mantle,.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border-radius:10px;
           border: 3px solid @mauve;
@@ -208,7 +208,7 @@
           padding-left: 10px;
           padding-right: 10px;
           margin:10px 0px 0px 10px;
-          background: alpha(@mantle,.6);
+          background: alpha(@mantle,.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border-radius:10px;
           border: 3px solid @mauve;
@@ -232,7 +232,7 @@
           padding-right: 10px;
           margin:10px 0px 0px 0px;
           border-radius:10px;
-          background: alpha(@mantle,.6);
+          background: alpha(@mantle,.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border: 3px solid @mauve;
       }
@@ -243,7 +243,7 @@
           padding-right: 10px;
           margin:10px 0px 0px 0px;
           border-radius:10px;
-          background: alpha(@mantle,.6);
+          background: alpha(@mantle,.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border: 3px solid @mauve;
           color: @teal;
@@ -254,7 +254,7 @@
           padding-right: 10px;
           margin:10px 10px 0px 0px;
           border-radius:10px;
-          background: alpha(@mantle,.6);
+          background: alpha(@mantle,.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border: 3px solid @mauve;
       }
