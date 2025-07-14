@@ -279,6 +279,7 @@
           background-image: none;
           border: none;
           box-shadow: none;
+          color: @text;
       }
 
       #pulseaudio-slider trough {
@@ -303,6 +304,7 @@
           padding-left: 0px;
           padding-right: 0px;
           min-width: 100px;
+          color: @text;
       }
 
       /* don't show the grabbable thing in the slider */
