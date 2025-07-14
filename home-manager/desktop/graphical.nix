@@ -2,7 +2,6 @@
 let 
   XWAYLAND_DISPLAY = ":3";
 in
-
 # Window manager
 {
   programs.niri.settings = {
@@ -204,29 +203,14 @@ in
     };
   };
 
-  # Notification Daemon
-  services.mako = {
-    enable = true;
-    settings = {
-      border-radius = 10;
-      border-size =  2;
-      margin = "30";
-      width = 500;
-      font = "Hack Nerd Font"  ;
-      border-color = "#b7bdf8"; # Catppuccin lavender
-      background-color = "#363a4f"; # Cappuccin surface 0
-      default-timeout=7500;
-      ignore-timeout=1;
-    };
-  };
-
+  # Random desktop wallpaper service
   systemd.user.services.wallpaper = {
     Unit = {
       Description = "Random Desktop Wallpaper";
     };
     Service = {
       Type = "oneshot";
-      ExecStart = "${./random-script.sh}";
+      ExecStart = "${./wallpapers/random-script.sh}";
     };
     Install.WantedBy = [ "default.target" ];
   };

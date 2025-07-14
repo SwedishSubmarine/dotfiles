@@ -45,10 +45,11 @@
     ./neovim.nix
     ./zsh.nix
     ./wezterm.nix
-    ./graphical.nix
-    ./xdg.nix
-    ./waybar.nix
     ./git.nix
+    ./desktop/xdg.nix
+    ./desktop/graphical.nix
+    ./desktop/waybar.nix
+    ./desktop/mako.nix
   ];
 }
 
