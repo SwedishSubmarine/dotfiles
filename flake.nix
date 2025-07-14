@@ -18,9 +18,13 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    catppuccin = {
+      url = "github:catppuccin/nix";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-apple-silicon, niri, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nixos-apple-silicon, niri, catppuccin, ... }@inputs: {
     nixosConfigurations.Adamantite = 
       let 
         asahi-firmware = builtins.fetchGit {
@@ -35,12 +39,18 @@
           modules = [
             nixos-apple-silicon.nixosModules.apple-silicon-support
           	(import ./configuration.nix {inherit asahi-firmware; })
-            home-manager.nixosModules.home-manager
+            catppuccin.nixosModules.catppuccin
             niri.nixosModules.niri
+            home-manager.nixosModules.home-manager
 	          {
 	            home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.emily = ./home-manager/home.nix;
+              home-manager.users.emily = { 
+                imports = [
+                  ./home-manager/home.nix
+                  catppuccin.homeModules.catppuccin
+                ];
+              };
               home-manager.backupFileExtension = ".bak";
 	          }
           ];
