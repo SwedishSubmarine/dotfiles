@@ -43,7 +43,9 @@ in
       # Credit for this power-menu script https://github.com/jluttine/rofi-power-menu
       "Mod+Escape"  = { hotkey-overlay.title = "Quit niri";             action = spawn "rofi" "-show" "power-menu" "-show-icons" "-modi" "power-menu:${./rofi/rofi-power-menu}"; };
       "Mod+Q"       = { hotkey-overlay.title = "Close window";          action = close-window; };
-      # "Mod+Shift+3" = { hotkey-overlay.title = "Screenshot screen";     action = screenshot-screen { write-to-disk = false; }; };
+      
+      # Screenshots, screenshot-screen is bronken so doing this until it's fixed
+      "Mod+Shift+3" = { hotkey-overlay.title = "Screenshot screen";     action = spawn ["niri" "msg" "action" "screenshot-screen"]; };
       "Mod+Shift+4" = { hotkey-overlay.title = "Screenshot region";     action = screenshot; };
       "Mod+Shift+5" = { hotkey-overlay.title = "Screenshot window";     action = screenshot-window { write-to-disk = false; }; };
       "XF86AudioMicMute" = { hotkey-overlay.title = "Change wallpaper"; action = spawn "systemctl" "--user" "start" "wallpaper.service"; };
@@ -111,6 +113,13 @@ in
     
     prefer-no-csd = true;
 
+    layer-rules = [ 
+      {
+        matches = [ { namespace = ''^swww-daemon$''; } ];
+        place-within-backdrop = true;
+      }
+    ];
+
     window-rules = [
       {
         default-column-width.proportion = 0.5;
@@ -167,9 +176,20 @@ in
         matches = [ { app-id = "org.wezfurlong.wezterm"; } ];
         default-window-height.proportion = 1.0;
       }
+      {
+        matches = [ { app-id = "vesktop"; } ];
+        opacity = 0.965;
+      }
     ];
 
+    overview = {
+      workspace-shadow.enable = false;
+      zoom = 0.5;
+    };
+
     layout = {
+      empty-workspace-above-first = true;
+      background-color = "transparent";
       focus-ring = {
         enable = true;
         width = 3;
