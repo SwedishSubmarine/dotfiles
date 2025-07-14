@@ -29,7 +29,7 @@
       setopt prompt_subst
 
       # Prompt
-      PROMPT=$'%B%F{13}Emjauly%b@%m%f → %F{14}%8~%f \n%B%#%b '
+      # PROMPT=$'%B%F{13}Emjauly%b@%m%f → %F{14}%8~%f \n%B%#%b '
 
       # Completion stuff
       zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
@@ -70,6 +70,34 @@
       bindkey '^[[A' history-substring-search-up
       bindkey '^[[B' history-substring-search-down
 
+      ZSH_GIT_PROMPT_SHOW_UPSTREAM="no"
+      ZSH_GIT_PROMPT_SHOW_TRACKING_COUNTS=0
+      ZSH_GIT_PROMPT_SHOW_LOCAL_COUNTS=0
+
+      ZSH_THEME_GIT_PROMPT_PREFIX="["
+      ZSH_THEME_GIT_PROMPT_SUFFIX="]"
+      ZSH_THEME_GIT_PROMPT_SEPARATOR=""
+      ZSH_THEME_GIT_PROMPT_DETACHED=""
+      ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[cyan]%}"
+      ZSH_THEME_GIT_PROMPT_UPSTREAM_SYMBOL=""
+      ZSH_THEME_GIT_PROMPT_UPSTREAM_PREFIX=""
+      ZSH_THEME_GIT_PROMPT_UPSTREAM_SUFFIX=""
+      ZSH_THEME_GIT_PROMPT_BEHIND="|%{$fg_bold[red]%}"
+      ZSH_THEME_GIT_PROMPT_AHEAD="|%{$fg_bold[red]%}"
+      ZSH_THEME_GIT_PROMPT_UNMERGED=""
+      ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[red]%}"
+      ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[green]%}"
+      ZSH_THEME_GIT_PROMPT_UNTRACKED="|%{$fg_bold[blue]%}..."
+      ZSH_THEME_GIT_PROMPT_STASHED=""
+      ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+      #Prompt
+      VIM_MODE_INITIAL_KEYMAP=viins
+      PROMPT='%B%F{13}Emjauly%b@%m%f → %F{14}%8~%f'
+      PROMPT+='
+      $(gitprompt)'
+      PROMPT+='%B%#%b '
+
       eval "$(zoxide init --cmd cd zsh)"
     '';
 
@@ -83,6 +111,16 @@
           repo = "zsh-vim-mode";
           rev = "1f9953b7d6f2f0a8d2cb8e8977baa48278a31eab";
           sha256 = "sha256-a+6EWMRY1c1HQpNtJf5InCzU7/RphZjimLdXIXbO6cQ=";
+        };
+      }
+      {
+        name = "git-prompt-zsh";
+        file = "git-prompt.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "woefe";
+          repo = "git-prompt.zsh";
+          rev = "0193adeb09fbc51fac738081a4718a3cf8427ff8";
+          sha256 = "sha256-Q7Dp6Xgt5gvkWZL+htDmGYk9RTglOWrrbl6Wf6q/qjY=";
         };
       }
     ];
