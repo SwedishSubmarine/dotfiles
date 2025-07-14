@@ -2,6 +2,8 @@
 let 
   XWAYLAND_DISPLAY = ":3";
 in
+
+# Window manager
 {
   programs.niri.settings = {
     debug.render-drm-device = "/dev/dri/renderD128";
@@ -45,6 +47,7 @@ in
       # "Mod+Shift+3" = { hotkey-overlay.title = "Screenshot screen";     action = screenshot-screen { write-to-disk = false; }; };
       "Mod+Shift+4" = { hotkey-overlay.title = "Screenshot region";     action = screenshot; };
       "Mod+Shift+5" = { hotkey-overlay.title = "Screenshot window";     action = screenshot-window { write-to-disk = false; }; };
+      "XF86AudioMicMute" = { hotkey-overlay.title = "Change wallpaper"; action = spawn "systemctl" "--user" "start" "wallpaper.service"; };
 
       # Window and column size
       "Mod+TouchpadScrollRight" = { hotkey-overlay.title = "Expand window"; action = set-window-width "+10"; };
@@ -103,6 +106,7 @@ in
 	      # { command = [ "${x-wayland-clipboard-daemon}" ]; }
 	      { command = [ "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; } # needed for screen-sharing to work
 	      { command = [ "systemctl" "--user" "start" "background" "nm-applet" ]; }
+        { command = [ "swww-daemon" ]; }
 	    ];
       environment.DISPLAY = XWAYLAND_DISPLAY;
     
@@ -190,6 +194,7 @@ in
     };
   };
 
+  # Launcher
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
@@ -199,6 +204,7 @@ in
     };
   };
 
+  # Notification Daemon
   services.mako = {
     enable = true;
     settings = {
@@ -212,5 +218,24 @@ in
       default-timeout=7500;
       ignore-timeout=1;
     };
+  };
+
+  systemd.user.services.wallpaper = {
+    Unit = {
+      Description = "Random Desktop Wallpaper";
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${./random-script.sh}";
+    };
+    Install.WantedBy = [ "default.target" ];
+  };
+
+  systemd.user.timers.wallpaper = {
+    Timer = {
+      Unit = "wallpaper";
+      OnUnitActiveSec = "1h";
+    };
+    Install.WantedBy = [ "timers.target" ];
   };
 }
