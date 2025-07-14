@@ -46,6 +46,7 @@
     ./zsh.nix
     ./wezterm.nix
     ./graphical.nix
+    ./xdg.nix
     ./waybar.nix
     ./git.nix
   ];
