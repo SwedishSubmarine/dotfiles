@@ -10,6 +10,9 @@
       eza
       zoxide
       fastfetch
+      imagemagick
+      swww
+      cava
 
       chromium
       firefox
@@ -27,7 +30,6 @@
       nerd-fonts.roboto-mono
 
       xwayland-satellite
-      swww
       libnotify
       rofi-wayland
       networkmanagerapplet
@@ -37,7 +39,6 @@
       blueberry
 
       ghc
-      cava
     ];
   };
 

@@ -40,24 +40,23 @@
       
       config.colors = {
         tab_bar = { 
-          background = "rgba(36, 39, 58, 0.9)",
+          background = "rgba(36, 39, 58, 0.95)",
           active_tab = { 
-            bg_color = "rgba(36, 39, 58, 0.9)",
+            bg_color = "rgba(36, 39, 58, 0.95)",
             fg_color = '#c6a0f6',
           },
           inactive_tab = {
             bg_color = '#1e2030',
-            bg_color = "rgba(30, 32, 48, 0.9)",
+            bg_color = "rgba(30, 32, 48, 0.95)",
             fg_color = '#6e738d',
           },
           new_tab = {
-            bg_color = "rgba(36, 39, 58, 0.9)",
+            bg_color = "rgba(36, 39, 58, 0.95)",
             fg_color = '#24273a',
           },
         },
         split = '#303446',
       }
-      
       
       wezterm.on('update-status', function(window, pane)
         window:set_left_status(wezterm.format {
