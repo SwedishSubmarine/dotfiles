@@ -65,6 +65,11 @@
       };
       "power-profiles-daemon" = {
         format = "{icon}";
+        format-icons = {
+          default = " ";
+          balanced = " ";
+          power-saver = " ";
+        };
         tooltip = false;
       };
       backlight = {
@@ -139,10 +144,6 @@
         status-icons = {
           paused = "";
         };
-      };
-      "power-profiles-daemon:" = {
-        format = "{icon}";
-        tooltip = false;
       };
     };
     style = ''
@@ -371,8 +372,21 @@
 
       #clock {
           padding-left: 10px;
-          padding-right: 0px;
+          padding-right: 10px;
           color: @text;
+      }
+
+      #power-profiles-daemon {
+          padding-left: 10px;
+          padding-right: 0px;
+      }
+
+      #power-profiles-daemon.balanced {
+          color: @yellow;
+      }
+
+      #power-profiles-daemon.power-saver {
+          color: @green;
       }
     '';
   };
