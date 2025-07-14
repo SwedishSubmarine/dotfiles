@@ -53,6 +53,7 @@
     vim.keymap.set('n', '<CR>t', ':pop<cr>')
     ---------------------------------------------------------------------------
     -- Colorscheme
+    vim.g.transparent_groups = vim.list_extend(vim.g.transparent_groups or {}, { "ExtraGroup" })
     local colorscheme = 'catppuccin-macchiato'
     
     local is_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
@@ -219,6 +220,7 @@
       plenary-nvim
       telescope-nvim
       vimtex
+      transparent-nvim
     ];
   };
 }
