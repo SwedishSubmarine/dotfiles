@@ -27,8 +27,7 @@
       nerd-fonts.roboto-mono
 
       xwayland-satellite
-      swaybg
-      waypaper
+      swww
       libnotify
       rofi-wayland
       networkmanagerapplet
@@ -38,6 +37,7 @@
       blueberry
 
       ghc
+      cava
     ];
   };
 
