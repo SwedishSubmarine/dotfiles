@@ -13,6 +13,7 @@
       imagemagick
       swww
       cava
+      bottom
 
       chromium
       firefox
@@ -39,6 +40,7 @@
       blueberry
 
       ghc
+      mdbook
     ];
   };
 
