@@ -15,6 +15,8 @@
       cava
       bottom
       wev
+      bat
+      fzf
 
       chromium
       firefox
@@ -25,6 +27,9 @@
       vesktop
       darktable
       signal-desktop
+      obs-studio
+      zathura
+      mpv
 
       fontconfig
       nerd-fonts.monaspace

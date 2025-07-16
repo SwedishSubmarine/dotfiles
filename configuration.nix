@@ -1,5 +1,5 @@
 { asahi-firmware, ... }:
-{ config, lib, pkgs, niri, ... }:
+{ config, lib, pkgs, niri, inputs, ... }:
 {
   imports =
     [ 
@@ -37,9 +37,9 @@
     };
   };
 
+  catppuccin.flavor = "macchiato";
   catppuccin.sddm = { 
     enable = true;
-    flavor = "macchiato";
     accentColor = "mauve";
     background = "${./home-manager/desktop/wallpapers/wallpaper-theme-converter-25.png}";
     font = "MonaspiceRn Nerd Font";

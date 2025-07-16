@@ -5,9 +5,10 @@ in
 # Window manager
 {
   catppuccin = {
-    cache.enable = true;
-    flavor = "macchiatto";
+    flavor = "macchiato";
+    accent = "mauve";
 
+    bat.enable = true;
     bottom.enable = true;
     chromium.enable = true;
     fzf.enable = true;
