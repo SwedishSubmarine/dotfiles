@@ -50,11 +50,6 @@
     ];
   };
 
-  catppuccin = {
-    flavor = "macchiatto";
-    accent = "mauve";
-  };
-
   imports = [
     ./terminal-core/neovim.nix
     ./terminal-core/zsh.nix
@@ -64,6 +59,7 @@
     ./desktop-core/graphical.nix
     ./desktop-core/swaylock.nix
     ./desktop-core/waybar.nix
+    ./programs/default.nix
   ];
 }
 
