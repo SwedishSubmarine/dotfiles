@@ -41,7 +41,7 @@
   catppuccin.sddm = { 
     enable = true;
     accentColor = "mauve";
-    background = "${./home-manager/desktop/wallpapers/wallpaper-theme-converter-25.png}";
+    background = "${./wallpapers/wallpaper-theme-converter-25.png}";
     font = "MonaspiceRn Nerd Font";
     fontSize = "12";
   };

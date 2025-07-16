@@ -7,15 +7,14 @@ in
   catppuccin = {
     flavor = "macchiato";
     accent = "mauve";
-
-    bat.enable = true;
-    bottom.enable = true;
-    chromium.enable = true;
-    fzf.enable = true;
-    mpv.enable = true;
-    obs.enable = true;
-    zathura.enable = true;
   };
+    # bat.enable = true;
+    # bottom.enable = true;
+    # chromium.enable = true;
+    # fzf.enable = true;
+    # mpv.enable = true;
+    # obs.enable = true;
+    # zathura.enable = true;
 
   programs.niri.settings = {
     debug.render-drm-device = "/dev/dri/renderD128";
@@ -248,7 +247,7 @@ in
     };
     Service = {
       Type = "oneshot";
-      ExecStart = "${./wallpapers/random-script.sh}";
+      ExecStart = "${../../wallpapers/random-script.sh}";
     };
     Install.WantedBy = [ "default.target" ];
   };

@@ -15,7 +15,6 @@
       cava
       bottom
       wev
-      bat
       fzf
 
       chromium
@@ -52,15 +51,15 @@
   };
 
   imports = [
-    ./neovim.nix
-    ./zsh.nix
-    ./wezterm.nix
-    ./git.nix
-    ./desktop/xdg.nix
-    ./desktop/graphical.nix
-    ./desktop/waybar.nix
-    ./desktop/mako.nix
-    ./desktop/swaylock.nix
+    ./terminal-core/neovim.nix
+    ./terminal-core/zsh.nix
+    ./terminal-core/wezterm.nix
+    ./terminal-core/git.nix
+    ./desktop-core/xdg.nix
+    ./desktop-core/graphical.nix
+    ./desktop-core/waybar.nix
+    ./desktop-core/mako.nix
+    ./desktop-core/swaylock.nix
   ];
 }
 
