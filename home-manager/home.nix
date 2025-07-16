@@ -14,6 +14,7 @@
       swww
       cava
       bottom
+      wev
 
       chromium
       firefox
