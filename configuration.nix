@@ -37,6 +37,15 @@
     };
   };
 
+  catppuccin.sddm = { 
+    enable = true;
+    flavor = "macchiato";
+    accentColor = "mauve";
+    background = "${./home-manager/desktop/wallpapers/wallpaper-theme-converter-25.png}";
+    font = "MonaspiceRn Nerd Font";
+    fontSize = "12";
+  };
+
   # Specify path to peripheral firmware files.
   # Private git-repo
   hardware.asahi.peripheralFirmwareDirectory = asahi-firmware;
