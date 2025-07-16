@@ -47,7 +47,7 @@
               home-manager.useUserPackages = true;
               home-manager.users.emily = { 
                 imports = [
-                  ./home-manager/home.nix
+                  ./home-manager/default.nix
                   catppuccin.homeModules.catppuccin
                 ];
               };

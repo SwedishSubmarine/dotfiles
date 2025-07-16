@@ -3,7 +3,7 @@
   programs.zsh = {
     enable = true;
     package = pkgs.zsh;
-    dotDir = "dotfiles/home-manager/terminal/zsh";
+    dotDir = "dotfiles/home-manager/terminal-core/zsh";
     history = {
       path = "$ZDOTDIR/.zsh_history";
       save = 100000000000;

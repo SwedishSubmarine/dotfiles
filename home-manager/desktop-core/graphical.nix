@@ -4,10 +4,6 @@ let
 in
 # Window manager
 {
-  catppuccin = {
-    flavor = "macchiato";
-    accent = "mauve";
-  };
     # bat.enable = true;
     # bottom.enable = true;
     # chromium.enable = true;
