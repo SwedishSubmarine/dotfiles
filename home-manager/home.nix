@@ -17,6 +17,7 @@
 
       chromium
       firefox
+      thunderbird
       wl-clipboard
       alacritty
       wezterm
