@@ -92,6 +92,7 @@ in
 
       "XF86LaunchA".action = toggle-overview; 
       "XF86Search".action.spawn = ["sh" "${./rofi/web-search.sh}"];
+      "XF86Sleep".action.spawn = ["sh" "-c" "niri msg action do-screen-transition && swaylock"];
 
       "XF86AudioPrev".action.spawn = ["playerctl" "previous"];
       "XF86AudioPlay".action.spawn = ["playerctl" "play-pause"];
@@ -101,6 +102,10 @@ in
       "XF86AudioLowerVolume".action.spawn = ["pactl" "set-sink-volume" "@DEFAULT_SINK@" "-5%"];
       "XF86AudioRaiseVolume".action.spawn = ["pactl" "set-sink-volume" "@DEFAULT_SINK@" "+5%"];
 	  };
+
+    switch-events = with config.lib.niri.actions; {
+      "lid-close" = { action = spawn "sh" "-c" "niri msg action do-screen-transition && swaylock"; };
+    };
 
     spawn-at-startup = [
 	      { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" XWAYLAND_DISPLAY ]; }
