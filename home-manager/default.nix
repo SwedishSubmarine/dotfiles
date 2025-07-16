@@ -62,9 +62,8 @@
     ./terminal-core/git.nix
     ./desktop-core/xdg.nix
     ./desktop-core/graphical.nix
-    ./desktop-core/waybar.nix
-    ./desktop-core/mako.nix
     ./desktop-core/swaylock.nix
+    ./desktop-core/waybar.nix
   ];
 }
 

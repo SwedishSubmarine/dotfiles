@@ -4,6 +4,10 @@ let
 in
 # Window manager
 {
+  imports = [
+    ./rofi/rofi.nix
+    ./mako.nix
+  ];
     # bat.enable = true;
     # bottom.enable = true;
     # chromium.enable = true;
@@ -223,16 +227,6 @@ in
         width=5.0;
         gap=4.0;
       };
-    };
-  };
-
-  # Launcher
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland;
-    theme = "${./rofi/rounded.rasi}";
-    extraConfig = {
-      matching = "fuzzy";
     };
   };
 
