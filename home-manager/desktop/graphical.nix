@@ -4,6 +4,18 @@ let
 in
 # Window manager
 {
+  catppuccin = {
+    cache.enable = true;
+    flavor = "macchiatto";
+
+    bottom.enable = true;
+    chromium.enable = true;
+    fzf.enable = true;
+    mpv.enable = true;
+    obs.enable = true;
+    zathura.enable = true;
+  };
+
   programs.niri.settings = {
     debug.render-drm-device = "/dev/dri/renderD128";
 
