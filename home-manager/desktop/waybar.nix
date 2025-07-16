@@ -1,5 +1,4 @@
-{   config, pkgs, ... }:
-{
+{   config, pkgs, ... }: {
   systemd.user.services.nm-applet = {
     Unit = {
       Description = "Network manager applet";
@@ -139,11 +138,14 @@
         format = "{player_icon} {artist} - {title}";
         format-paused = " {artist} - {title}";
         player-icons = {
-          default= " ";
+          default = " ";
         };
         status-icons = {
           paused = "";
         };
+        ignored-players = [
+          "firefox"
+        ];
       };
     };
     style = ''
