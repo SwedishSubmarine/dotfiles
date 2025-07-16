@@ -3,12 +3,26 @@
   xdg = {
     mimeApps = {
       enable = true;
+      associations.added = {
+        "x-scheme-handler/mailto" = "userapp-Thunderbird-NYEK92.desktop";
+        "x-scheme-handler/mid" = "userapp-Thunderbird-NYEK92.desktop";
+        "x-scheme-handler/webcal" = "userapp-Thunderbird-JY1I92.desktop";
+        "x-scheme-handler/webcals" = "userapp-Thunderbird-JY1I92.desktop";
+      };
       defaultApplications = {
         "text/html" = "firefox.desktop";
         "x-scheme-handler/http" = "firefox.desktop";
         "x-scheme-handler/https" = "firefox.desktop";
         "x-scheme-handler/about" = "firefox.desktop";
         "x-scheme-handler/unknown" = "firefox.desktop";
+
+        "x-scheme-handler/mailto" = "userapp-Thunderbird-NYEK92.desktop";
+        "message/rfc822" = "userapp-Thunderbird-NYEK92.desktop";
+        "x-scheme-handler/mid" = "userapp-Thunderbird-NYEK92.desktop";
+        "x-scheme-handler/webcal" = "userapp-Thunderbird-JY1I92.desktop";
+        "text/calendar" = "userapp-Thunderbird-JY1I92.desktop";
+        "application/x-extension-ics" = "userapp-Thunderbird-JY1I92.desktop";
+        "x-scheme-handler/webcals" = "userapp-Thunderbird-JY1I92.desktop";
       };
     };
     portal = {
