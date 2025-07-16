@@ -54,6 +54,7 @@
     ./desktop/graphical.nix
     ./desktop/waybar.nix
     ./desktop/mako.nix
+    ./desktop/swaylock.nix
   ];
 }
 
