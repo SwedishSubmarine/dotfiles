@@ -1,10 +1,15 @@
 { config, pkgs, ... }:
 {
   catppuccin = {
-    flavor = "macchiatto";
+    flavor = "macchiato";
     accent = "mauve";
   };
 
   imports = [
     ./bat.nix
+    ./bottom.nix
+    ./obs-studio.nix
+    ./eza.nix
+    ./fastfetch.nix
   ];
+}

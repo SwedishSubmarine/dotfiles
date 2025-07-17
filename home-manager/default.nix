@@ -7,13 +7,10 @@
 
     packages = with pkgs; [
       wget
-      eza
       zoxide
-      fastfetch
       imagemagick
       swww
       cava
-      bottom
       wev
       fzf
 
@@ -26,9 +23,7 @@
       vesktop
       darktable
       signal-desktop
-      obs-studio
       zathura
-      mpv
 
       fontconfig
       nerd-fonts.monaspace
