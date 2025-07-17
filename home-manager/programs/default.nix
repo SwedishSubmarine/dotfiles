@@ -11,5 +11,6 @@
     ./obs-studio.nix
     ./eza.nix
     ./fastfetch.nix
+    ./vscode.nix
   ];
 }

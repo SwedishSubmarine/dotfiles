@@ -77,6 +77,7 @@
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.systemPackages = with pkgs; [
     git
     binutils
