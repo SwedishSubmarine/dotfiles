@@ -11,6 +11,10 @@
       swww
       cava
       wev
+      yt-dlp
+      ffmpeg
+      resvg
+      _7zz
 
       chromium
       firefox
@@ -21,7 +25,7 @@
       vesktop
       darktable
       signal-desktop
-      zathura
+      poppler
 
       fontconfig
       nerd-fonts.monaspace

@@ -16,5 +16,7 @@
     ./fzf.nix
     ./yazi.nix
     ./fd.nix
+    ./mpv.nix
+    ./zathura.nix
   ];
 }
