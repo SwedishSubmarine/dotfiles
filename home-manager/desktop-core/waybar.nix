@@ -60,6 +60,7 @@
           "\\((\\d+)\\) Discord \\| ([^|]*) \\| (.*)"  ="  $3 ⟩ $2 ($1)";
           "\\((\\d+)\\) Discord \\| ([^|]*)" = "  $2 ($1)";
           "(.* TIDAL)" = " $1 ";
+          " " = "";
         };
       };
       "power-profiles-daemon" = {
@@ -198,7 +199,7 @@
       #left {
           padding-left: 10px;
           padding-right: 10px;
-          margin:10px 0px 0px 10px;
+          margin:10px 0px 0px 12px;
           background: alpha(@mantle,.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border-radius:10px;
@@ -208,7 +209,7 @@
       #window {
           padding-left: 10px;
           padding-right: 10px;
-          margin:10px 0px 0px 10px;
+          margin:10px 0px 0px 5px;
           background: alpha(@mantle,.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border-radius:10px;
@@ -242,7 +243,7 @@
       #mpris {
           padding-left: 10px;
           padding-right: 10px;
-          margin:10px 0px 0px 0px;
+          margin:10px 5px 0px 5px;
           border-radius:10px;
           background: alpha(@mantle,.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
@@ -253,7 +254,7 @@
       .modules-right {
           padding-left: 10px;
           padding-right: 10px;
-          margin:10px 10px 0px 0px;
+          margin:10px 12px 0px 0px;
           border-radius:10px;
           background: alpha(@mantle,.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
