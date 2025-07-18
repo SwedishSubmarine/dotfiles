@@ -29,21 +29,25 @@
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
 
+  services.power-profiles-daemon.enable = true;
   services.displayManager = {
     defaultSession = "niri";
     sddm = {
       enable = true;
       wayland.enable = true;
+      theme = "catppuccin-macchiato";
+      package = pkgs.kdePackages.sddm;
     };
   };
 
-  catppuccin.flavor = "macchiato";
   catppuccin.sddm = { 
     enable = true;
     accentColor = "mauve";
+    flavor = "macchiato";
     background = "${./wallpapers/wallpaper-theme-converter-25.png}";
     font = "MonaspiceRn Nerd Font";
     fontSize = "12";
+    assertQt6Sddm = true;
   };
 
   # Specify path to peripheral firmware files.
@@ -83,8 +87,6 @@
     binutils
     coreutils
   ];
-
-  services.desktopManager.plasma6.enable = true;
 
   # programs.gnupg.agent = {
   #   enable = true;
