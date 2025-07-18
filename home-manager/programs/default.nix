@@ -14,5 +14,7 @@
     ./vscode.nix
     ./zoxide.nix
     ./fzf.nix
+    ./yazi.nix
+    ./fd.nix
   ];
 }

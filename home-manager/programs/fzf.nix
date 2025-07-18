@@ -3,7 +3,7 @@
   programs.fzf = {
     enable = true;
     enableZshIntegration = true;
-    defaultCommand = "fzf -i";
+    defaultCommand = "fd --type f";
     colors = {
       "bg+" = "#363A4F";
       bg = "#24273A";

@@ -1,5 +1,5 @@
 { asahi-firmware, ... }:
-{ config, lib, pkgs, niri, inputs, ... }:
+{ config, lib, pkgs, niri, yazi, inputs, ... }:
 {
   imports =
     [ 
@@ -25,7 +25,7 @@
   };
 
   nixpkgs.config.allowUnfree = true; 
-  nixpkgs.overlays = [ niri.overlays.niri ];
+  nixpkgs.overlays = [ niri.overlays.niri yazi.overlays.default ];
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
 

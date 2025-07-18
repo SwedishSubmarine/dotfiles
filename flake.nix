@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05"; 
+    nixpkgs-unstable.url = "github:NixOs/nixpkgs/nixos-unstable";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.05";
@@ -22,9 +23,11 @@
     catppuccin = {
       url = "github:catppuccin/nix";
     };
+
+    yazi.url = "github:sxyazi/yazi";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixos-apple-silicon, niri, catppuccin, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-apple-silicon, niri, catppuccin, yazi, ... }@inputs: {
     nixosConfigurations.Adamantite = 
       let 
         asahi-firmware = builtins.fetchGit {
