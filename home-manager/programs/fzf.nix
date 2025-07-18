@@ -4,6 +4,9 @@
     enable = true;
     enableZshIntegration = true;
     defaultCommand = "fd --type f";
+    defaultOptions = [
+      "--border"
+    ];
     colors = {
       "bg+" = "#363A4F";
       bg = "#24273A";
