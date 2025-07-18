@@ -12,5 +12,7 @@
     ./eza.nix
     ./fastfetch.nix
     ./vscode.nix
+    ./zoxide.nix
+    ./fzf.nix
   ];
 }

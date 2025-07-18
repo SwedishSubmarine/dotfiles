@@ -7,12 +7,10 @@
 
     packages = with pkgs; [
       wget
-      zoxide
       imagemagick
       swww
       cava
       wev
-      fzf
 
       chromium
       firefox
@@ -35,7 +33,7 @@
       libnotify
       rofi-wayland
       networkmanagerapplet
-      pwvucontrol 
+      pavucontrol
       brightnessctl
       playerctl
       blueberry
