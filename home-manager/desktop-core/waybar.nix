@@ -185,7 +185,6 @@
           font-family: "Hack Nerd Font";
       }
 
-
       menu {
           background-color: alpha(@mantle,.6);
           color: @text;
@@ -344,7 +343,7 @@
       }
 
       #battery {
-          padding-left: 10px;
+          padding-left: 0px;
           padding-right: 10px;
       }
 
