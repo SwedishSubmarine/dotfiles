@@ -86,8 +86,8 @@
         format-icons = {
             default = [" " " " " "];
         };
-        scroll-step = 10;
-        on-click = "pwvucontrol";
+        scroll-step = 1;
+        on-click = "pavucontrol";
         tooltip = false;
       };
       network = {

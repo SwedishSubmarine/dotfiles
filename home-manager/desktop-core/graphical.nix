@@ -102,9 +102,9 @@ in
       "XF86AudioPlay".action.spawn = ["playerctl" "play-pause"];
       "XF86AudioNext".action.spawn = ["playerctl" "next"];
 
-      "XF86AudioMute".action.spawn = ["pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"];
-      "XF86AudioLowerVolume".action.spawn = ["pactl" "set-sink-volume" "@DEFAULT_SINK@" "-5%"];
-      "XF86AudioRaiseVolume".action.spawn = ["pactl" "set-sink-volume" "@DEFAULT_SINK@" "+5%"];
+      "XF86AudioMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"];
+      "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_SINK@" "5%-"];
+      "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_SINK@" "5%+"];
 	  };
 
     switch-events = with config.lib.niri.actions; {
@@ -146,7 +146,7 @@ in
       ];
       }
       {
-        matches = [ { app-id = "om.saivert.pwvucontrol"; } ];
+        matches = [ { app-id = "org.pulseaudio.pavucontrol"; } ];
         open-floating = true;
         default-window-height.proportion = 0.4;
         default-floating-position = {
