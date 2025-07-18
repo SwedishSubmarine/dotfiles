@@ -47,6 +47,10 @@
         name = "Vesktop";
         exec = "${pkgs.vesktop}/bin/vesktop --ozone-platform-hint=wayland";
       };
+      vscode = {
+        name = "VSCode";
+        exec = "${pkgs.vscode}/bin/code --ozone-platform-hint=wayland";
+      };
     };
   };
 }

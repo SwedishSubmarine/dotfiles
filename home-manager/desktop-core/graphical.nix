@@ -8,14 +8,6 @@ in
     ./rofi/rofi.nix
     ./mako.nix
   ];
-    # bat.enable = true;
-    # bottom.enable = true;
-    # chromium.enable = true;
-    # fzf.enable = true;
-    # mpv.enable = true;
-    # obs.enable = true;
-    # zathura.enable = true;
-
   programs.niri.settings = {
     debug.render-drm-device = "/dev/dri/renderD128";
 
@@ -196,6 +188,10 @@ in
       {
         matches = [ { app-id = "vesktop"; } ];
         opacity = 0.965;
+      }
+      {
+        matches = [ { app-id = "code"; } ];
+        opacity = 0.95;
       }
     ];
 
