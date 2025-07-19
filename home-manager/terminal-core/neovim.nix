@@ -3,13 +3,16 @@
   programs.neovim = {
     enable=true;
     defaultEditor = true;
+    extraConfig = ''
+      autocmd FileType markdown setlocal textwidth=80 wrapmargin=0 linebreak formatoptions+=t
+    '';
     extraLuaConfig = ''
     ---------------------------------------------------------------------------
     -- Default options 
 
     vim.opt.clipboard = 'unnamedplus'  -- system clipboard
     vim.opt.cot = {'menu', 'noselect'} -- might remove, complete menu
-    
+
     -- Tab configuration
     vim.opt.expandtab = true -- make tabs spaces
     vim.opt.tabstop = 2      -- visual spaces per TAB
@@ -29,21 +32,25 @@
     vim.opt.ignorecase = true     -- ignore case
     vim.opt.smartcase = true      -- case sensitive on uppercase 
     vim.opt.hlsearch = false
+
+    -- Default wrap settings
+    vim.opt.textwidth = 0
+    vim.opt.wrapmargin = 0
+    vim.opt.wrap = true
+    vim.opt.linebreak = true
+
     ---------------------------------------------------------------------------
     -- Keybindings
 
-
     local opts = { noremap = true, silent = true }
-
-    -- Key mappings for window navigation with wrap
-    vim.keymap.set('n', '<C-h>', function() navigate_wrap('h') end, opts)
-    vim.keymap.set('n', '<C-l>', function() navigate_wrap('l') end, opts)
-    vim.keymap.set('n', '<C-k>', function() navigate_wrap('k') end, opts)
-    vim.keymap.set('n', '<C-j>', function() navigate_wrap('j') end, opts)
     
     -- Other kepmappings
     vim.keymap.set('n', 'x', '"_x') -- Make dw send to blackhole and not act as cut
-    
+    vim.keymap.set('n', 'j', 'gj')
+    vim.keymap.set('n', 'k', 'gk') -- I almost always want this
+    vim.keymap.set('n', 'gj', 'j')
+    vim.keymap.set('n', 'gk', 'k')
+
     -- Fuzzyfind 
     vim.keymap.set('n', '<CR>f', ':Telescope find_files<CR>')
     
@@ -198,6 +205,7 @@
           number_only = true, -- Peek only when the command is only a number instead of when it starts with a number
           centered_peeking = true, -- Peeked line will be centered relative to window
         }
+
     '';
 
     plugins = with pkgs.vimPlugins; [
