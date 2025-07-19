@@ -1,4 +1,4 @@
-{  config, pkgs, ... }:
+{  config, pkgs, lib, ... }:
 {
   programs.zsh = {
     enable = true;
@@ -21,16 +21,29 @@
     autosuggestion.enable = true;
     historySubstringSearch.enable = true;
     initContent = ''
-      # Various options (Some of these dont exist within home-manager)
+      # Various options 
       setopt AUTO_CD
       setopt AUTO_MENU
       setopt globdots
       setopt transientrprompt
       setopt prompt_subst
+      
+      function startup_fetch(){
+        local columns=$(tput cols)
+        local lines=$(tput lines)
+        
+        local min_column=84
+        local min_lines=24
+
+        if (( columns >= min_columns && lines >= min_lines )); then
+          command -v fastfetch &> /dev/null && fastfetch
+        fi
+      }
+
+      startup_fetch
 
       # Prompt
       # PROMPT=$'%B%F{13}Emjauly%b@%m%f → %F{14}%8~%f \n%B%#%b '
-
       # Completion stuff
       zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
       zstyle ':completion:*' completions 1
