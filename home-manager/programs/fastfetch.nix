@@ -9,6 +9,11 @@
         type = "auto";
         source = "nixos";
       };
+      display = {
+        color = {
+          title = "#c6a0f6";
+        };
+      };
       modules = [
         {
           type = "Title";
@@ -16,7 +21,7 @@
         }
         {
           type = "title";
-          format = "{6}{7}{8}";
+          format = "{6}{##c6a0f6}@{8}";
         }
         "separator"
         "os"
