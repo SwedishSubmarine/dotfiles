@@ -28,12 +28,14 @@
     };
     portal = {
       enable = true;
-      config.common.default = "*";
       extraPortals = [
         pkgs.xdg-desktop-portal-gnome
-        pkgs.xdg-desktop-portal-wlr
         pkgs.xdg-desktop-portal-gtk
       ];
+      config.common = {
+        default = [ "gnome" ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+      };
     };
     desktopEntries = {
       tidal = {

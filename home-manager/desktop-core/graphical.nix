@@ -90,6 +90,11 @@ in
       "Mod+Ctrl+K"  = { hotkey-overlay.title = "Move window or workspace up";    action = move-window-up-or-to-workspace-up; };
       "Mod+O"       = { hotkey-overlay.title = "Toggle overview";                action = toggle-overview; };
 
+      # Dynamic screen cast
+      "Mod+M"       = { hotkey-overlay.title = "Dynamic cast window";            action = set-dynamic-cast-window; };
+      "Mod+Shift+M" = { hotkey-overlay.title = "Dynamic cast monitor";           action = set-dynamic-cast-monitor; };
+      "Mod+Shift+C" = { hotkey-overlay.title = "Clear dynamic cast target";      action = clear-dynamic-cast-target; };
+
       # Function row
       "XF86MonBrightnessDown".action.spawn = ["brightnessctl" "s" "10%-"];
       "XF86MonBrightnessUp".action.spawn = ["brightnessctl" "s" "10%+"];
@@ -126,6 +131,10 @@ in
       {
         matches = [ { namespace = ''^swww-daemon$''; } ];
         place-within-backdrop = true;
+      }
+      {
+        matches = [ { namespace = "^notifications$"; } ];
+        block-out-from = "screencast";
       }
     ];
 
