@@ -41,22 +41,37 @@
       tidal = {
         name = "Tidal";
         exec = "${pkgs.chromium}/bin/chromium --ozone-platform-hint=wayland --app=https://listen.tidal.com";
+        icon = "${pkgs.papirus-icon-theme}/share/icons/Papirus/tidal/48x48/apps/tidal.svg";
       };
       firefox = {
         name = "Firefox";
         exec = "${pkgs.firefox}/bin/firefox";
+        icon = "firefox";
       };
       vesktop = {
         name = "Vesktop";
         exec = "${pkgs.vesktop}/bin/vesktop --ozone-platform-hint=wayland";
+        icon = "vesktop";
       };
       vscode = {
         name = "VSCode";
         exec = "${pkgs.vscode}/bin/code --ozone-platform-hint=wayland";
+        icon = "vscode";
       };
       zathura = {
         name = "Zathura";
         exec = "${pkgs.zathura}/bin/zathura";
+        icon = "zathura";
+      };
+      calendar = {
+        name = "Calendar";
+        exec = "${pkgs.thunderbird}/bin/thunderbird -calendar";
+        icon = "thunderbird";
+      };
+      thunderbird = {
+        name = "Thunderbird";
+        exec = "${pkgs.thunderbird}/bin/thunderbird";
+        icon = "thunderbird";
       };
     };
   };

@@ -51,14 +51,14 @@
         icon-size = 24;
         max-length = 40;
         rewrite = {
-          "(.*) (?:— Mozilla (Firefox|Thunderbird)|- Quod Libet)" = " $1"; # remove some titles
-          "(Mozilla Firefox)" = " $1";
-          "(Discord \\| .*)" = "  $1";
-          "• Discord \\| ([^|]*) \\| (.*)" = "  $2 ⟩ $1"; # discord formats things as Discord | Channel | Server
-          "• Discord \\| ([^|]*)" = "  $1"; # sometimes there's no server to show
+          "(.*) (?:— Mozilla (Firefox|Thunderbird)|- Quod Libet)" = "$1"; # remove some titles
+          "(Mozilla Firefox)" = "$1";
+          "(Discord \\| .*)" = "$1";
+          "• Discord \\| ([^|]*) \\| (.*)" = "$2 ⟩ $1"; # discord formats things as Discord | Channel | Server
+          "• Discord \\| ([^|]*)" = "$1"; # sometimes there's no server to show
           # pinged versions
-          "\\((\\d+)\\) Discord \\| ([^|]*) \\| (.*)"  ="  $3 ⟩ $2 ($1)";
-          "\\((\\d+)\\) Discord \\| ([^|]*)" = "  $2 ($1)";
+          "\\((\\d+)\\) Discord \\| ([^|]*) \\| (.*)"  ="$3 ⟩ $2 ($1)";
+          "\\((\\d+)\\) Discord \\| ([^|]*)" = "$2 ($1)";
           "(.* TIDAL)" = " $1 ";
           " " = "";
         };
