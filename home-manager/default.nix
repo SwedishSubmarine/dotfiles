@@ -33,6 +33,8 @@
       nerd-fonts.fira-code
       nerd-fonts.roboto-mono
 
+      gnome-keyring
+
       xwayland-satellite
       libnotify
       rofi-wayland
