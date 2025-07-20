@@ -191,6 +191,23 @@ in
         };
       }
       {
+        matches = [ { app-id = "thunderbird"; } ];
+        default-window-height.proportion = 1.0;
+        default-column-width.proportion = 1.0;
+      }
+      {
+        matches = [ { app-id = "thunderbird"; title = "Edit Item"; } ];
+        open-floating = true;
+        default-window-height.proportion = 0.5;
+        default-column-width.proportion = 0.3;
+      }
+      {
+        matches = [ { app-id = "thunderbird"; title = "Write.*"; } ];
+        open-floating = true;
+        default-window-height.proportion = 0.9;
+        default-column-width.proportion = 0.9;
+      }
+      {
         matches = [ { app-id = "org.wezfurlong.wezterm"; } ];
         default-window-height.proportion = 1.0;
       }
