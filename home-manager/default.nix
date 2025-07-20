@@ -28,6 +28,7 @@
       poppler
 
       fontconfig
+      papirus-icon-theme
       nerd-fonts.monaspace
       nerd-fonts.hack
       nerd-fonts.fira-code
