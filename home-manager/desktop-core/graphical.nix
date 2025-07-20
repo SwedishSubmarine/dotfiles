@@ -39,8 +39,9 @@ in
       "Mod+Shift+I" = { hotkey-overlay.title = "Run firefox";   action = spawn "firefox"; };
 
       # Launchers
-      "Mod+Space"   = { hotkey-overlay.title = "rofi launcher";     action = spawn "rofi" "-modes" "drun" "-show" "drun"; };
+      "Mod+Space"   = { hotkey-overlay.title = "rofi launcher";     action = spawn "rofi" "-modes" "drun" "-show" "drun" "-icon-theme" ''"Papirus"'' "-show-icons"; };
       "Mod+E"       = { hotkey-overlay.title = "niri msg";          action = spawn "sh" "${./rofi/niri-action.sh}"; };
+      "Alt+Tab"     = { hotkey-overlay.title = "rofi window";       action = spawn "rofi" "-show" "window" "-icon-theme" ''"Papirus"'' "-show-icons"; };
 
       # Utility and help
       "Mod+Comma"   = { hotkey-overlay.title = "Show these hotkeys";    action = show-hotkey-overlay; };
