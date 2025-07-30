@@ -16,6 +16,12 @@
     enable = true;
     settings.General.EnableNetworkConfiguration = true;
   };
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      3000
+    ];
+  };
 
   # Standards
   time.timeZone = "Europe/Stockholm";
@@ -82,6 +88,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.pathsToLink = [ "/share/zsh" ];
   environment.systemPackages = with pkgs; [
     git
     binutils
