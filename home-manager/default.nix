@@ -38,7 +38,6 @@
 
       xwayland-satellite
       libnotify
-      rofi-wayland
       networkmanagerapplet
       pavucontrol
       brightnessctl
