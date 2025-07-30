@@ -2,12 +2,13 @@
 let 
   XWAYLAND_DISPLAY = ":3";
 in
-# Window manager
 {
   imports = [
     ./rofi/rofi.nix
     ./mako.nix
   ];
+
+  # Window manager
   programs.niri.settings = {
     debug.render-drm-device = "/dev/dri/renderD128";
 
