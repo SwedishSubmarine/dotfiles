@@ -20,6 +20,10 @@
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
     historySubstringSearch.enable = true;
+    completionInit = ''
+      autoload -Uz compinit && compinit
+      compinit -d "$ZDOTDIR/zcompdump"
+    '';
     initContent = ''
       # Various options 
       setopt AUTO_CD
@@ -44,6 +48,25 @@
 
       # Prompt
       # PROMPT=$'%B%F{13}Emjauly%b@%m%f → %F{14}%8~%f \n%B%#%b '
+
+      nix-subcommand() {
+        cmd="$1"
+        shift
+        pkgs=()
+        for pkg in "$@"; do
+          shift
+          [ "$pkg" = -- ] && break
+          [ "$pkg" = "''${pkg##*#}" ] && pkg="nixpkgs#$pkg"
+          pkgs+="$pkg"
+        done
+        export NIXPKGS_ALLOW_UNFREE=1 NIXPKGS_ALLOW_BROKEN=1
+        nix "$cmd" --impure "''${pkgs[@]}" -- "$@"
+      }
+
+      shell() { nix-subcommand "shell" "$@" }
+      run()   { nix-subcommand "run" "$@"   }
+      build() { nix-subcommand "build" "$@" }
+
       # Completion stuff
       zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
       zstyle ':completion:*' completions 1
@@ -62,9 +85,7 @@
       zstyle ':completion:*' substitute 1
       zstyle ':completion:*' use-compctl false
       zstyle :compinstall filename '$ZDOTDIR/.zshrc'
-      
-      autoload -Uz compinit
-      compinit -d "$ZDOTDIR/zcompdump"
+
 
       # Vim mode 
       KEYTIMEOUT=1
