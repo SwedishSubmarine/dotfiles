@@ -91,6 +91,15 @@ in
       "Mod+Ctrl+J"  = { hotkey-overlay.title = "Move window or workspace down";  action = move-window-down-or-to-workspace-down; };
       "Mod+Ctrl+K"  = { hotkey-overlay.title = "Move window or workspace up";    action = move-window-up-or-to-workspace-up; };
       "Mod+O"       = { hotkey-overlay.title = "Toggle overview";                action = toggle-overview; };
+      "Mod+1"       = { hotkey-overlay.title = "Focus workspace 1";              action = focus-workspace "firefox";};
+      "Mod+2"       = { hotkey-overlay.title = "Focus workspace 2";              action = focus-workspace "wezterm";};
+      "Mod+3"       = { hotkey-overlay.title = "Focus workspace 3";              action = focus-workspace "vesktop";};
+      "Mod+4"       = { hotkey-overlay.title = "Focus workspace 4";              action = focus-workspace 4;};
+      "Mod+5"       = { hotkey-overlay.title = "Focus workspace 5";              action = focus-workspace 5;};
+      "Mod+6"       = { hotkey-overlay.title = "Focus workspace 6";              action = focus-workspace 6;};
+      "Mod+7"       = { hotkey-overlay.title = "Focus workspace 7";              action = focus-workspace 7;};
+      "Mod+8"       = { hotkey-overlay.title = "Focus workspace 8";              action = focus-workspace 8;};
+      "Mod+9"       = { hotkey-overlay.title = "Focus workspace 9";              action = focus-workspace 9;};
 
       # Dynamic screen cast
       "Mod+M"       = { hotkey-overlay.title = "Dynamic cast window";            action = set-dynamic-cast-window; };
@@ -124,9 +133,26 @@ in
 	      { command = [ "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; } # needed for screen-sharing to work
 	      { command = [ "systemctl" "--user" "start" "background" "nm-applet" ]; }
         { command = [ "swww-daemon" ]; }
+        { command = [ "vesktop" "--ozone-platform-hint=wayland" ]; }
+        { command = [ "wezterm" ]; }
+        { command = [ "firefox" ]; }
 	    ];
       environment.DISPLAY = XWAYLAND_DISPLAY;
     
+    workspaces = {
+      "1" = {
+        name = "firefox";
+      };
+
+      "2" = {
+        name = "wezterm";
+      };
+
+      "3" = {
+        name = "vesktop";
+      };
+    };
+
     prefer-no-csd = true;
 
     layer-rules = [ 
@@ -214,6 +240,21 @@ in
         default-window-height.proportion = 1.0;
       }
       {
+        matches = [ { at-startup = true; app-id = "firefox"; } ];
+        open-on-workspace = "firefox";
+        default-column-width.proportion = 1.0;
+      }
+      {
+        matches = [ { at-startup = true; app-id = "org.wezfurlong.wezterm"; } ];
+        open-on-workspace = "wezterm";
+        default-column-width.proportion = 1.0;
+      }
+      { 
+        matches = [ { at-startup = true; app-id = "vesktop"; } ];
+        open-on-workspace = "vesktop";
+        default-column-width.proportion = 1.0;
+      }
+      {
         matches = [ { app-id = "vesktop"; } ];
         opacity = 0.965;
       }
@@ -229,7 +270,6 @@ in
     };
 
     layout = {
-      empty-workspace-above-first = true;
       background-color = "transparent";
       focus-ring = {
         enable = true;
