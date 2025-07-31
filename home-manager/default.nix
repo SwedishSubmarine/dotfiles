@@ -45,6 +45,8 @@
       blueberry
 
       ghc
+      cargo
+      gcc
       mdbook
     ];
   };
