@@ -48,14 +48,25 @@
 
       local opts = { noremap = true, silent = true }
 
-      -- Other kepmappings
+      -- Improvements
       vim.keymap.set('n', 'x', '"_x') -- Make x send to blackhole and not act as cut
+      vim.keymap.set('n', '<C-d>', '<C-d>zz') -- Center after half page down
+      vim.keymap.set('n', '<C-u>', '<C-u>zz') -- Center after half page up 
+  
+      -- Shortcuts
+      vim.keymap.set('n', '<leader>w', ':write <CR>')
+      vim.keymap.set('n', '<leader>c', ':noh <CR>') -- Clear search
+
+      -- Movement
       vim.keymap.set('n', 'j', 'gj')
       vim.keymap.set('n', 'k', 'gk') -- I almost always want this
       vim.keymap.set('n', 'gj', 'j')
       vim.keymap.set('n', 'gk', 'k')
-      vim.keymap.set('n', '<leader>w', ':write <CR>')
-      vim.keymap.set('n', '<leader>c', ':noh <CR>') -- Clear search
+
+      -- Flash
+      vim.keymap.set({'n', 'x', 'o'}, '<leader>s', function()
+        require("flash").jump()
+      end, {desc = "Flash" })
 
       -- Pick 
       vim.keymap.set('n', '<leader>f', ':Pick files <CR>')
@@ -78,6 +89,7 @@
       vim.keymap.set('n', '<leader>t', ':pop <CR>')
       vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
       vim.keymap.set('i', '<C-n>', vim.lsp.omnifunc, opts)
+
       local nvim_lsp = require("lspconfig")
       nvim_lsp.nixd.setup({
         cmd = { "nixd" },
@@ -233,6 +245,7 @@
         })
 
         -- The homies
+        require('flash').setup()
         require('colorizer').setup()
         require('render-markdown').setup()
         require('nvim-surround').setup()
@@ -249,6 +262,7 @@
     '';
 
     plugins = with pkgs.vimPlugins; [
+      flash-nvim
       lazy-nvim
       catppuccin-nvim
       lualine-nvim
