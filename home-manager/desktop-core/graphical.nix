@@ -38,18 +38,19 @@ in
     binds = with config.lib.niri.actions; {
       # Common programs
       "Mod+Shift+T" = { hotkey-overlay.title = "Run wezterm"; action = spawn "wezterm"; };
-      "Mod+Shift+I" = { hotkey-overlay.title = "Run firefox";   action = spawn "firefox"; };
+      "Mod+Shift+I" = { hotkey-overlay.title = "Run firefox"; action = spawn "firefox"; };
 
       # Launchers
-      "Mod+Space"   = { hotkey-overlay.title = "rofi launcher";     action = spawn "rofi" "-modes" "drun" "-show" "drun" "-icon-theme" ''"Papirus"'' "-show-icons"; };
-      "Mod+E"       = { hotkey-overlay.title = "niri msg";          action = spawn "sh" "${./rofi/niri-action.sh}"; };
-      "Alt+Tab"     = { hotkey-overlay.title = "rofi window";       action = spawn "rofi" "-show" "window" "-icon-theme" ''"Papirus"'' "-show-icons"; };
+      "Mod+Space"   = { hotkey-overlay.title = "rofi launcher"; action = spawn "rofi" "-modes" "drun" "-show" "drun" "-icon-theme" ''"Papirus"'' "-show-icons"; };
+      "Mod+E"       = { hotkey-overlay.title = "Web search";    action = spawn "sh" "${./rofi/web-search.sh}"; };
+      "Mod+Shift+N" = { hotkey-overlay.title = "Niri msg";      action = spawn "sh" "${./rofi/niri-action.sh}"; };
+      "Alt+Tab"     = { hotkey-overlay.title = "rofi window";   action = spawn "rofi" "-show" "window" "-icon-theme" ''"Papirus"'' "-show-icons"; };
 
       # Utility and help
-      "Mod+Comma"   = { hotkey-overlay.title = "Show these hotkeys";    action = show-hotkey-overlay; };
+      "Mod+Comma"   = { hotkey-overlay.title = "Show hotkeys"; action = show-hotkey-overlay; };
       # Credit for this power-menu script https://github.com/jluttine/rofi-power-menu
-      "Mod+Escape"  = { hotkey-overlay.title = "Quit niri";             action = spawn "rofi" "-show" "power-menu" "-show-icons" "-modi" "power-menu:${./rofi/rofi-power-menu}"; };
-      "Mod+Q"       = { hotkey-overlay.title = "Close window";          action = close-window; };
+      "Mod+Escape"  = { hotkey-overlay.title = "Quit niri";    action = spawn "rofi" "-show" "power-menu" "-show-icons" "-modi" "power-menu:${./rofi/rofi-power-menu}"; };
+      "Mod+Q"       = { hotkey-overlay.title = "Close window"; action = close-window; };
       
       # Screenshots, screenshot-screen is bronken so doing this until it's fixed
       "Mod+Shift+3" = { hotkey-overlay.title = "Screenshot screen";     action = spawn ["niri" "msg" "action" "screenshot-screen"]; };
@@ -64,8 +65,8 @@ in
       "Mod+TouchpadScrollDown"  = { hotkey-overlay.title = "Shrink window"; action = set-window-height "-10"; };
       "Mod+R"       = { action = switch-preset-window-height; };
       "Mod+Shift+R" = { action = reset-window-height; };
-      "Mod+F"       = { hotkey-overlay.title = "Switch width";          action = switch-preset-column-width; };
-      "Mod+Shift+F" = { hotkey-overlay.title = "Maximize Column";       action = maximize-column; };
+      "Mod+F"       = { hotkey-overlay.title = "Switch width";    action = switch-preset-column-width; };
+      "Mod+Shift+F" = { hotkey-overlay.title = "Maximize Column"; action = maximize-column; };
 
       # No idea how tabs work, looking this up later
       "Mod+T"       = { hotkey-overlay.title = "Switch to tabbed view"; action = toggle-column-tabbed-display; };
@@ -73,13 +74,13 @@ in
       "Mod+Up"      = { hotkey-overlay.title = "Previous tab";          action = focus-window-up; };
 
       # Window and column movement
-      "Mod+Tab"     = { hotkey-overlay.title = "Focus last window";         action = focus-window-previous; };
-      "Mod+H"       = { hotkey-overlay.title = "Focus Column to the Left";  action = focus-column-left;     };
-      "Mod+L"       = { hotkey-overlay.title = "Focus Column to the Right"; action = focus-column-right;    };
-      "Mod+Ctrl+H"  = { hotkey-overlay.title = "Move Column Left";          action = move-column-left;      };
-      "Mod+Ctrl+L"  = { hotkey-overlay.title = "Move Column Right";         action = move-column-right;       };
-      "Mod+V"       = { hotkey-overlay.title = "Toggle floating windows";   action = toggle-window-floating;  } ; 
-      "Mod+Shift+V" = { hotkey-overlay.title = "Switch tiling/window focus";action = switch-focus-between-floating-and-tiling; } ; 
+      "Mod+Tab"     = { hotkey-overlay.title = "Focus last window";          action = focus-window-previous; };
+      "Mod+H"       = { hotkey-overlay.title = "Focus Column to the Left";   action = focus-column-left;     };
+      "Mod+L"       = { hotkey-overlay.title = "Focus Column to the Right";  action = focus-column-right;    };
+      "Mod+Ctrl+H"  = { hotkey-overlay.title = "Move Column Left";           action = move-column-left;      };
+      "Mod+Ctrl+L"  = { hotkey-overlay.title = "Move Column Right";          action = move-column-right;       };
+      "Mod+V"       = { hotkey-overlay.title = "Toggle floating windows";    action = toggle-window-floating;  } ; 
+      "Mod+Shift+V" = { hotkey-overlay.title = "Switch tiling/window focus"; action = switch-focus-between-floating-and-tiling; } ; 
       # "       "     = { hotkey-overlay.title = "                 "; action =                      ; };
       "Mod+Shift+H"  = { hotkey-overlay.title = "Consume or expel left";     action = consume-or-expel-window-left; };
       "Mod+Shift+L"  = { hotkey-overlay.title = "Consume or expel right";    action = consume-or-expel-window-right; };
@@ -103,16 +104,16 @@ in
       "Mod+9"       = { hotkey-overlay.title = "Focus workspace 9";              action = focus-workspace 9;};
 
       # Dynamic screen cast
-      "Mod+M"       = { hotkey-overlay.title = "Dynamic cast window";            action = set-dynamic-cast-window; };
-      "Mod+Shift+M" = { hotkey-overlay.title = "Dynamic cast monitor";           action = set-dynamic-cast-monitor; };
-      "Mod+Shift+C" = { hotkey-overlay.title = "Clear dynamic cast target";      action = clear-dynamic-cast-target; };
+      "Mod+M"       = { hotkey-overlay.title = "Dynamic cast window";       action = set-dynamic-cast-window; };
+      "Mod+Shift+M" = { hotkey-overlay.title = "Dynamic cast monitor";      action = set-dynamic-cast-monitor; };
+      "Mod+Shift+C" = { hotkey-overlay.title = "Clear dynamic cast target"; action = clear-dynamic-cast-target; };
 
       # Function row
       "XF86MonBrightnessDown".action.spawn = ["brightnessctl" "s" "10%-"];
       "XF86MonBrightnessUp".action.spawn = ["brightnessctl" "s" "10%+"];
 
       "XF86LaunchA".action = toggle-overview; 
-      "XF86Search".action.spawn = ["sh" "${./rofi/web-search.sh}"];
+      # "XF86Search".action.spawn = ["sh" "${./rofi/niri-action.sh}"];
       "XF86Sleep".action.spawn = ["sh" "-c" "niri msg action do-screen-transition && swaylock"];
 
       "XF86AudioPrev".action.spawn = ["playerctl" "previous"];
