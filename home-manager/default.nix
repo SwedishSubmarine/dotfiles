@@ -48,6 +48,7 @@
       cargo
       gcc
       mdbook
+      nixfmt-rfc-style
     ];
   };
 
@@ -63,4 +64,3 @@
     ./programs/default.nix
   ];
 }
-

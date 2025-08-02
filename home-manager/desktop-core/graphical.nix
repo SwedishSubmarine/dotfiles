@@ -1,5 +1,5 @@
-{  config, pkgs, ... }:
-let 
+{ config, pkgs, ... }:
+let
   XWAYLAND_DISPLAY = ":3";
 in
 {
@@ -7,7 +7,7 @@ in
     ./rofi/rofi.nix
     ./mako.nix
   ];
-        
+
   # Window manager
   programs.niri.settings = {
     debug.render-drm-device = "/dev/dri/renderD128";
@@ -37,119 +37,287 @@ in
     hotkey-overlay.hide-not-bound = true;
     binds = with config.lib.niri.actions; {
       # Common programs
-      "Mod+Shift+T" = { hotkey-overlay.title = "Run wezterm"; action = spawn "wezterm"; };
-      "Mod+Shift+I" = { hotkey-overlay.title = "Run firefox"; action = spawn "firefox"; };
+      "Mod+Shift+T" = {
+        hotkey-overlay.title = "Run wezterm";
+        action = spawn "wezterm";
+      };
+      "Mod+Shift+I" = {
+        hotkey-overlay.title = "Run firefox";
+        action = spawn "firefox";
+      };
 
       # Launchers
-      "Mod+Space"   = { hotkey-overlay.title = "rofi launcher"; action = spawn "rofi" "-modes" "drun" "-show" "drun" "-icon-theme" ''"Papirus"'' "-show-icons"; };
-      "Mod+E"       = { hotkey-overlay.title = "Web search";    action = spawn "sh" "${./rofi/web-search.sh}"; };
-      "Mod+Shift+N" = { hotkey-overlay.title = "Niri msg";      action = spawn "sh" "${./rofi/niri-action.sh}"; };
-      "Alt+Tab"     = { hotkey-overlay.title = "rofi window";   action = spawn "rofi" "-show" "window" "-icon-theme" ''"Papirus"'' "-show-icons"; };
+      "Mod+Space" = {
+        hotkey-overlay.title = "rofi launcher";
+        action = spawn "rofi" "-modes" "drun" "-show" "drun" "-icon-theme" ''"Papirus"'' "-show-icons";
+      };
+      "Mod+E" = {
+        hotkey-overlay.title = "Web search";
+        action = spawn "sh" "${./rofi/web-search.sh}";
+      };
+      "Mod+Shift+N" = {
+        hotkey-overlay.title = "Niri msg";
+        action = spawn "sh" "${./rofi/niri-action.sh}";
+      };
+      "Alt+Tab" = {
+        hotkey-overlay.title = "rofi window";
+        action = spawn "rofi" "-show" "window" "-icon-theme" ''"Papirus"'' "-show-icons";
+      };
 
       # Utility and help
-      "Mod+Comma"   = { hotkey-overlay.title = "Show hotkeys"; action = show-hotkey-overlay; };
+      "Mod+Comma" = {
+        hotkey-overlay.title = "Show hotkeys";
+        action = show-hotkey-overlay;
+      };
       # Credit for this power-menu script https://github.com/jluttine/rofi-power-menu
-      "Mod+Escape"  = { hotkey-overlay.title = "Quit niri";    action = spawn "rofi" "-show" "power-menu" "-show-icons" "-modi" "power-menu:${./rofi/rofi-power-menu}"; };
-      "Mod+Q"       = { hotkey-overlay.title = "Close window"; action = close-window; };
-      
+      "Mod+Escape" = {
+        hotkey-overlay.title = "Quit niri";
+        action =
+          spawn "rofi" "-show" "power-menu" "-show-icons" "-modi"
+            "power-menu:${./rofi/rofi-power-menu}";
+      };
+      "Mod+Q" = {
+        hotkey-overlay.title = "Close window";
+        action = close-window;
+      };
+
       # Screenshots, screenshot-screen is bronken so doing this until it's fixed
-      "Mod+Shift+3" = { hotkey-overlay.title = "Screenshot screen";     action = spawn ["niri" "msg" "action" "screenshot-screen"]; };
-      "Mod+Shift+4" = { hotkey-overlay.title = "Screenshot region";     action = screenshot; };
-      "Mod+Shift+5" = { hotkey-overlay.title = "Screenshot window";     action = screenshot-window { write-to-disk = false; }; };
-      "XF86AudioMicMute" = { hotkey-overlay.title = "Change wallpaper"; action = spawn "systemctl" "--user" "start" "wallpaper.service"; };
+      "Mod+Shift+3" = {
+        hotkey-overlay.title = "Screenshot screen";
+        action = spawn "niri" "msg" "action" "screenshot-screen";
+      };
+      "Mod+Shift+4" = {
+        hotkey-overlay.title = "Screenshot region";
+        action = screenshot;
+      };
+      "Mod+Shift+5" = {
+        hotkey-overlay.title = "Screenshot window";
+        action = screenshot-window { write-to-disk = false; };
+      };
+      "XF86AudioMicMute" = {
+        hotkey-overlay.title = "Change wallpaper";
+        action = spawn "systemctl" "--user" "start" "wallpaper.service";
+      };
 
       # Window and column size
-      "Mod+TouchpadScrollRight" = { hotkey-overlay.title = "Expand window"; action = set-window-width "+10"; };
-      "Mod+TouchpadScrollLeft"  = { hotkey-overlay.title = "Shrink window"; action = set-window-width "-10"; };
-      "Mod+TouchpadScrollUp"    = { hotkey-overlay.title = "Expand window"; action = set-window-height "+10"; };
-      "Mod+TouchpadScrollDown"  = { hotkey-overlay.title = "Shrink window"; action = set-window-height "-10"; };
-      "Mod+R"       = { action = switch-preset-window-height; };
-      "Mod+Shift+R" = { action = reset-window-height; };
-      "Mod+F"       = { hotkey-overlay.title = "Switch width";    action = switch-preset-column-width; };
-      "Mod+Shift+F" = { hotkey-overlay.title = "Maximize Column"; action = maximize-column; };
+      "Mod+TouchpadScrollRight" = {
+        hotkey-overlay.title = "Expand window";
+        action = set-window-width "+10";
+      };
+      "Mod+TouchpadScrollLeft" = {
+        hotkey-overlay.title = "Shrink window";
+        action = set-window-width "-10";
+      };
+      "Mod+TouchpadScrollUp" = {
+        hotkey-overlay.title = "Expand window";
+        action = set-window-height "+10";
+      };
+      "Mod+TouchpadScrollDown" = {
+        hotkey-overlay.title = "Shrink window";
+        action = set-window-height "-10";
+      };
+      "Mod+R" = {
+        action = switch-preset-window-height;
+      };
+      "Mod+Shift+R" = {
+        action = reset-window-height;
+      };
+      "Mod+F" = {
+        hotkey-overlay.title = "Switch width";
+        action = switch-preset-column-width;
+      };
+      "Mod+Shift+F" = {
+        hotkey-overlay.title = "Maximize Column";
+        action = maximize-column;
+      };
 
-      # No idea how tabs work, looking this up later
-      "Mod+T"       = { hotkey-overlay.title = "Switch to tabbed view"; action = toggle-column-tabbed-display; };
-      "Mod+Down"    = { hotkey-overlay.title = "Next tab";              action = focus-window-down; };
-      "Mod+Up"      = { hotkey-overlay.title = "Previous tab";          action = focus-window-up; };
+      #Tabs
+      "Mod+T" = {
+        hotkey-overlay.title = "Switch to tabbed view";
+        action = toggle-column-tabbed-display;
+      };
+      "Mod+Down" = {
+        hotkey-overlay.title = "Next tab";
+        action = focus-window-down;
+      };
+      "Mod+Up" = {
+        hotkey-overlay.title = "Previous tab";
+        action = focus-window-up;
+      };
 
       # Window and column movement
-      "Mod+Tab"     = { hotkey-overlay.title = "Focus last window";          action = focus-window-previous; };
-      "Mod+H"       = { hotkey-overlay.title = "Focus Column to the Left";   action = focus-column-left;     };
-      "Mod+L"       = { hotkey-overlay.title = "Focus Column to the Right";  action = focus-column-right;    };
-      "Mod+Ctrl+H"  = { hotkey-overlay.title = "Move Column Left";           action = move-column-left;      };
-      "Mod+Ctrl+L"  = { hotkey-overlay.title = "Move Column Right";          action = move-column-right;       };
-      "Mod+V"       = { hotkey-overlay.title = "Toggle floating windows";    action = toggle-window-floating;  } ; 
-      "Mod+Shift+V" = { hotkey-overlay.title = "Switch tiling/window focus"; action = switch-focus-between-floating-and-tiling; } ; 
-      # "       "     = { hotkey-overlay.title = "                 "; action =                      ; };
-      "Mod+Shift+H"  = { hotkey-overlay.title = "Consume or expel left";     action = consume-or-expel-window-left; };
-      "Mod+Shift+L"  = { hotkey-overlay.title = "Consume or expel right";    action = consume-or-expel-window-right; };
+      "Mod+Tab" = {
+        hotkey-overlay.title = "Focus last window";
+        action = focus-window-previous;
+      };
+      "Mod+H" = {
+        hotkey-overlay.title = "Focus Column to the Left";
+        action = focus-column-left;
+      };
+      "Mod+L" = {
+        hotkey-overlay.title = "Focus Column to the Right";
+        action = focus-column-right;
+      };
+      "Mod+Ctrl+H" = {
+        hotkey-overlay.title = "Move Column Left";
+        action = move-column-left;
+      };
+      "Mod+Ctrl+L" = {
+        hotkey-overlay.title = "Move Column Right";
+        action = move-column-right;
+      };
+      "Mod+V" = {
+        hotkey-overlay.title = "Toggle floating windows";
+        action = toggle-window-floating;
+      };
+      "Mod+Shift+V" = {
+        hotkey-overlay.title = "Switch tiling/window focus";
+        action = switch-focus-between-floating-and-tiling;
+      };
+      "Mod+Shift+H" = {
+        hotkey-overlay.title = "Consume or expel left";
+        action = consume-or-expel-window-left;
+      };
+      "Mod+Shift+L" = {
+        hotkey-overlay.title = "Consume or expel right";
+        action = consume-or-expel-window-right;
+      };
 
       # Workspaces
-      "Mod+J"       = { hotkey-overlay.title = "Focus window or workspace down"; action = focus-window-or-workspace-down; };
-      "Mod+K"       = { hotkey-overlay.title = "Focus window or workspace up";   action = focus-window-or-workspace-up; };
-      "Mod+Shift+J" = { hotkey-overlay.title = "Focus workspace down";           action = focus-workspace-down; };
-      "Mod+Shift+K" = { hotkey-overlay.title = "Focus workspace up";             action = focus-workspace-up; };
-      "Mod+Ctrl+J"  = { hotkey-overlay.title = "Move window or workspace down";  action = move-window-down-or-to-workspace-down; };
-      "Mod+Ctrl+K"  = { hotkey-overlay.title = "Move window or workspace up";    action = move-window-up-or-to-workspace-up; };
-      "Mod+O"       = { hotkey-overlay.title = "Toggle overview";                action = toggle-overview; };
-      "Mod+1"       = { hotkey-overlay.title = "Focus workspace 1";              action = focus-workspace "firefox";};
-      "Mod+2"       = { hotkey-overlay.title = "Focus workspace 2";              action = focus-workspace "wezterm";};
-      "Mod+3"       = { hotkey-overlay.title = "Focus workspace 3";              action = focus-workspace "vesktop";};
-      "Mod+4"       = { hotkey-overlay.title = "Focus workspace 4";              action = focus-workspace 4;};
-      "Mod+5"       = { hotkey-overlay.title = "Focus workspace 5";              action = focus-workspace 5;};
-      "Mod+6"       = { hotkey-overlay.title = "Focus workspace 6";              action = focus-workspace 6;};
-      "Mod+7"       = { hotkey-overlay.title = "Focus workspace 7";              action = focus-workspace 7;};
-      "Mod+8"       = { hotkey-overlay.title = "Focus workspace 8";              action = focus-workspace 8;};
-      "Mod+9"       = { hotkey-overlay.title = "Focus workspace 9";              action = focus-workspace 9;};
+      "Mod+J" = {
+        hotkey-overlay.title = "Focus window or workspace down";
+        action = focus-window-or-workspace-down;
+      };
+      "Mod+K" = {
+        hotkey-overlay.title = "Focus window or workspace up";
+        action = focus-window-or-workspace-up;
+      };
+      "Mod+Shift+J" = {
+        hotkey-overlay.title = "Focus workspace down";
+        action = focus-workspace-down;
+      };
+      "Mod+Shift+K" = {
+        hotkey-overlay.title = "Focus workspace up";
+        action = focus-workspace-up;
+      };
+      "Mod+Ctrl+J" = {
+        hotkey-overlay.title = "Move window or workspace down";
+        action = move-window-down-or-to-workspace-down;
+      };
+      "Mod+Ctrl+K" = {
+        hotkey-overlay.title = "Move window or workspace up";
+        action = move-window-up-or-to-workspace-up;
+      };
+      "Mod+O" = {
+        hotkey-overlay.title = "Toggle overview";
+        action = toggle-overview;
+      };
+      "Mod+1" = {
+        hotkey-overlay.title = "Focus workspace 1";
+        action = focus-workspace "firefox";
+      };
+      "Mod+2" = {
+        hotkey-overlay.title = "Focus workspace 2";
+        action = focus-workspace "wezterm";
+      };
+      "Mod+3" = {
+        hotkey-overlay.title = "Focus workspace 3";
+        action = focus-workspace "vesktop";
+      };
+      "Mod+4" = {
+        hotkey-overlay.title = "Focus workspace 4";
+        action = focus-workspace 4;
+      };
+      "Mod+5" = {
+        hotkey-overlay.title = "Focus workspace 5";
+        action = focus-workspace 5;
+      };
+      "Mod+6" = {
+        hotkey-overlay.title = "Focus workspace 6";
+        action = focus-workspace 6;
+      };
+      "Mod+7" = {
+        hotkey-overlay.title = "Focus workspace 7";
+        action = focus-workspace 7;
+      };
+      "Mod+8" = {
+        hotkey-overlay.title = "Focus workspace 8";
+        action = focus-workspace 8;
+      };
+      "Mod+9" = {
+        hotkey-overlay.title = "Focus workspace 9";
+        action = focus-workspace 9;
+      };
 
       # Dynamic screen cast
-      "Mod+M"       = { hotkey-overlay.title = "Dynamic cast window";       action = set-dynamic-cast-window; };
-      "Mod+Shift+M" = { hotkey-overlay.title = "Dynamic cast monitor";      action = set-dynamic-cast-monitor; };
-      "Mod+Shift+C" = { hotkey-overlay.title = "Clear dynamic cast target"; action = clear-dynamic-cast-target; };
+      "Mod+M" = {
+        hotkey-overlay.title = "Dynamic cast window";
+        action = set-dynamic-cast-window;
+      };
+      "Mod+Shift+M" = {
+        hotkey-overlay.title = "Dynamic cast monitor";
+        action = set-dynamic-cast-monitor;
+      };
+      "Mod+Shift+C" = {
+        hotkey-overlay.title = "Clear dynamic cast target";
+        action = clear-dynamic-cast-target;
+      };
 
       # Function row
-      "XF86MonBrightnessDown".action.spawn = ["brightnessctl" "s" "10%-"];
-      "XF86MonBrightnessUp".action.spawn = ["brightnessctl" "s" "10%+"];
+      "XF86MonBrightnessDown".action.spawn = [
+        "brightnessctl"
+        "s"
+        "10%-"
+      ];
+      "XF86MonBrightnessUp".action.spawn = [
+        "brightnessctl"
+        "s"
+        "10%+"
+      ];
 
-      "XF86LaunchA".action = toggle-overview; 
+      "XF86LaunchA".action = toggle-overview;
       # "XF86Search".action.spawn = ["sh" "${./rofi/niri-action.sh}"];
-      "XF86Sleep".action.spawn = ["sh" "-c" "niri msg action do-screen-transition && swaylock"];
+      "XF86Sleep".action = spawn "sh" "-c" "niri msg action do-screen-transition && swaylock";
 
-      "XF86AudioPrev".action.spawn = ["playerctl" "previous"];
-      "XF86AudioPlay".action.spawn = ["playerctl" "play-pause"];
-      "XF86AudioNext".action.spawn = ["playerctl" "next"];
+      "XF86AudioPrev".action = spawn "playerctl" "previous";
 
-      "XF86AudioMute".action.spawn = ["wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"];
-      "XF86AudioLowerVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_SINK@" "5%-"];
-      "XF86AudioRaiseVolume".action.spawn = ["wpctl" "set-volume" "@DEFAULT_SINK@" "5%+"];
-	  };
+      "XF86AudioPlay".action = spawn "playerctl" "play-pause";
+
+      "XF86AudioNext".action = spawn "playerctl" "next";
+
+      "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_SINK@" "toggle";
+
+      "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "5%-";
+      "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "5%+";
+    };
 
     switch-events = with config.lib.niri.actions; {
-      "lid-close" = { action = spawn "sh" "-c" "niri msg action do-screen-transition && swaylock"; };
+      "lid-close" = {
+        action = spawn "sh" "-c" "niri msg action do-screen-transition && swaylock";
+      };
     };
 
     spawn-at-startup = [
-	      { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" XWAYLAND_DISPLAY ]; }
-	      # { command = [ "${x-wayland-clipboard-daemon}" ]; }
-	      { command = [ "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; } # needed for screen-sharing to work
-	      { command = [ "systemctl" "--user" "start" "background" "nm-applet" ]; }
-        { command = [ "swww-daemon" ]; }
-        { command = [ "vesktop" "--ozone-platform-hint=wayland" ]; }
-        { command = [ "wezterm" ]; }
-        { command = [ "firefox" ]; }
-	    ];
-      environment.DISPLAY = XWAYLAND_DISPLAY;
-    
+      { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" XWAYLAND_DISPLAY ]; }
+      # { command = [ "${x-wayland-clipboard-daemon}" ]; }
+      { command = [ "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; } # needed for screen-sharing to work
+      {
+command = [ "systemctl" "--user" "start" "background" "nm-applet" ]; }
+      { command = [ "swww-daemon" ]; }
+      {
+command = [ "vesktop" "--ozone-platform-hint=wayland" ]; }
+      { command = [ "wezterm" ]; }
+      { command = [ "firefox" ]; }
+    ];
+    environment.DISPLAY = XWAYLAND_DISPLAY;
+
     workspaces = {
       "1" = {
         name = "firefox";
       };
-
       "2" = {
         name = "wezterm";
       };
-
       "3" = {
         name = "vesktop";
       };
@@ -157,7 +325,7 @@ in
 
     prefer-no-csd = true;
 
-    layer-rules = [ 
+    layer-rules = [
       {
         matches = [ { namespace = ''^swww-daemon$''; } ];
         place-within-backdrop = true;
@@ -172,17 +340,24 @@ in
       {
         default-column-width.proportion = 0.5;
         draw-border-with-background = false;
-        geometry-corner-radius = 
-          let rad = 10.0;
-          in { bottom-left = rad; bottom-right = rad; top-right = rad; top-left = rad; };
-        clip-to-geometry=true;
+        geometry-corner-radius =
+          let
+            rad = 10.0;
+          in
+          {
+            bottom-left = rad;
+            bottom-right = rad;
+            top-right = rad;
+            top-left = rad;
+          };
+        clip-to-geometry = true;
       }
       {
-      excludes = [
-        { title = '' - YouTube — Mozilla Firefox$''; }
-        { title = '' - Twitch — Mozilla Firefox$''; }
-        { app-id = ''^darktable$''; }
-      ];
+        excludes = [
+          { title = ''- YouTube — Mozilla Firefox$''; }
+          { title = ''- Twitch — Mozilla Firefox$''; }
+          { app-id = ''^darktable$''; }
+        ];
       }
       {
         matches = [ { app-id = "org.pulseaudio.pavucontrol"; } ];
@@ -226,13 +401,23 @@ in
         default-column-width.proportion = 1.0;
       }
       {
-        matches = [ { app-id = "thunderbird"; title = "Edit Item"; } ];
+        matches = [
+          {
+            app-id = "thunderbird";
+            title = "Edit Item";
+          }
+        ];
         open-floating = true;
         default-window-height.proportion = 0.5;
         default-column-width.proportion = 0.3;
       }
       {
-        matches = [ { app-id = "thunderbird"; title = "Write.*"; } ];
+        matches = [
+          {
+            app-id = "thunderbird";
+            title = "Write.*";
+          }
+        ];
         open-floating = true;
         default-window-height.proportion = 0.9;
         default-column-width.proportion = 0.9;
@@ -242,17 +427,32 @@ in
         default-window-height.proportion = 1.0;
       }
       {
-        matches = [ { at-startup = true; app-id = "firefox"; } ];
+        matches = [
+          {
+            at-startup = true;
+            app-id = "firefox";
+          }
+        ];
         open-on-workspace = "firefox";
         default-column-width.proportion = 1.0;
       }
       {
-        matches = [ { at-startup = true; app-id = "org.wezfurlong.wezterm"; } ];
+        matches = [
+          {
+            at-startup = true;
+            app-id = "org.wezfurlong.wezterm";
+          }
+        ];
         open-on-workspace = "wezterm";
         default-column-width.proportion = 1.0;
       }
-      { 
-        matches = [ { at-startup = true; app-id = "vesktop"; } ];
+      {
+        matches = [
+          {
+            at-startup = true;
+            app-id = "vesktop";
+          }
+        ];
         open-on-workspace = "vesktop";
         default-column-width.proportion = 1.0;
       }
@@ -290,8 +490,8 @@ in
       };
       tab-indicator = {
         enable = true;
-        width=5.0;
-        gap=4.0;
+        width = 5.0;
+        gap = 4.0;
       };
     };
   };
