@@ -1,5 +1,5 @@
 { asahi-firmware, ... }:
-{ config, lib, pkgs, niri, yazi, inputs, ... }:
+{ pkgs, niri, yazi, ... }:
 {
   imports =
     [ 

@@ -1,4 +1,4 @@
-{   config, pkgs, ... }: {
+{ pkgs, ... }: {
   systemd.user.services.nm-applet = {
     Unit = {
       Description = "Network manager applet";

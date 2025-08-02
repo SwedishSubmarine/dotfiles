@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 {
   catppuccin = {
     flavor = "macchiato";
