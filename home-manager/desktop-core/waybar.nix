@@ -8,9 +8,6 @@
     };
   };
 
-  # Going to add more stuff to waybar:
-  # Probably not workspaces
-  # Power profiles daemon
   programs.waybar = {
     enable = true;
     systemd = {

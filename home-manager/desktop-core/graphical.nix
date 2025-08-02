@@ -7,7 +7,7 @@ in
     ./rofi/rofi.nix
     ./mako.nix
   ];
-
+        
   # Window manager
   programs.niri.settings = {
     debug.render-drm-device = "/dev/dri/renderD128";
@@ -26,6 +26,7 @@ in
         tap = false;
         click-method = "clickfinger";
         natural-scroll = false;
+        dwt = true;
       };
     };
 
