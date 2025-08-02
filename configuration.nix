@@ -10,7 +10,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
-  networking.hostName = "Adamantine"; 
+  networking.hostName = "Adamantite"; 
   networking.networkmanager.enable = true;  
   networking.wireless.iwd = {
     enable = true;
