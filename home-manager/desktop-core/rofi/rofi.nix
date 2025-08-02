@@ -7,5 +7,8 @@
     extraConfig = {
       matching = "fuzzy";
     };
+    plugins = with pkgs; [
+      rofi-rbw
+    ];
   };
 }
