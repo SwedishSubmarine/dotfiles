@@ -301,11 +301,9 @@ in
       { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" XWAYLAND_DISPLAY ]; }
       # { command = [ "${x-wayland-clipboard-daemon}" ]; }
       { command = [ "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; } # needed for screen-sharing to work
-      {
-command = [ "systemctl" "--user" "start" "background" "nm-applet" ]; }
+      { command = [ "systemctl" "--user" "start" "background" "nm-applet" ]; }
       { command = [ "swww-daemon" ]; }
-      {
-command = [ "vesktop" "--ozone-platform-hint=wayland" ]; }
+      { command = [ "vesktop" "--ozone-platform-hint=wayland" ]; }
       { command = [ "wezterm" ]; }
       { command = [ "firefox" ]; }
     ];
