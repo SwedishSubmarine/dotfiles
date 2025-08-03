@@ -47,6 +47,7 @@
       -- Keybindings
 
       local opts = { noremap = true, silent = true }
+      local wk = require("which-key")
 
       -- Improvements
       vim.keymap.set('n', 'x', '"_x') -- Make x send to blackhole and not act as cut
@@ -54,40 +55,44 @@
       vim.keymap.set('n', '<C-u>', '<C-u>zz') -- Center after half page up 
   
       -- Shortcuts
-      vim.keymap.set('n', '<leader>w', ':write <CR>')
-      vim.keymap.set('n', '<leader>c', ':noh <CR>') -- Clear search
+      vim.keymap.set('n', '<leader>w', ':write <CR>', {desc = "Write file"})
+      vim.keymap.set('n', '<leader>c', ':noh <CR>', {desc = "Clear search highlight"}) -- Clear search
 
       -- Movement
-      vim.keymap.set('n', 'j', 'gj')
-      vim.keymap.set('n', 'k', 'gk') -- I almost always want this
-      vim.keymap.set('n', 'gj', 'j')
-      vim.keymap.set('n', 'gk', 'k')
+      vim.keymap.set('n', 'j', 'gj', {desc = "Screenline down"})
+      vim.keymap.set('n', 'k', 'gk', {desc = "Screenline up"}) -- I almost always want this
+      vim.keymap.set('n', 'gj', 'j', {desc = "Bufferline down"})
+      vim.keymap.set('n', 'gk', 'k', {desc = "Bufferline up"})
 
       -- Flash
       vim.keymap.set({'n', 'x', 'o'}, '<leader>s', function()
         require("flash").jump()
       end, {desc = "Flash" })
 
+      -- Which-key
+      vim.keymap.set({'n', 'x', 'o'}, '<leader>,', function()
+        require("which-key").show({ global = true })
+      end, {desc = "Keymaps"})
+
       -- Pick 
-      vim.keymap.set('n', '<leader>f', ':Pick files <CR>')
-      vim.keymap.set('n', '<leader>h', ':Pick help <CR>')
+      vim.keymap.set('n', '<leader>f', ':Pick files <CR>', {desc = "Pick files"})
+      vim.keymap.set('n', '<leader>h', ':Pick help <CR>', {desc = "Pick help"})
 
       -- LSP
       vim.lsp.enable({ "lua_ls" })
-      vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action)
-      vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition)
-      vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, opts)
-      vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, opts)
-      vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
-      vim.keymap.set('v', '<leader>lf', vim.lsp.buf.format)
-      vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, opts)
+      vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, {desc = "LSP Code code action"})
+      vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition, {desc = "LSP Code definition"})
+      vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, {desc = "LSP Code rename"})
+      vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, {desc = "LSP Code implementation"})
+      vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format, {desc = "LSP Code formatting"})
+      vim.keymap.set('n', '<leader>gr', vim.lsp.buf.references, {desc = "LSP Code reference"})
+      vim.keymap.set('n', 'K', vim.lsp.buf.hover, {desc = "LSP code hover"})
 
-      vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, opts)
-      vim.keymap.set('n', '<leader>n', vim.diagnostic.goto_next, opts)
-      vim.keymap.set('n', '<leader>N', vim.diagnostic.goto_prev, opts)
+      vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, {desc = "Diagnostic float"})
+      vim.keymap.set('n', '<leader>n', vim.diagnostic.goto_next, {desc = "Diagnostic next"})
+      vim.keymap.set('n', '<leader>N', vim.diagnostic.goto_prev, {desc = "Diagnostic previous"})
 
-      vim.keymap.set('n', '<leader>t', ':pop <CR>')
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+      vim.keymap.set('n', '<leader>t', ':pop <CR>', {desc = "Pop tag stack"})
       vim.keymap.set('i', '<C-n>', vim.lsp.omnifunc, opts)
 
       local nvim_lsp = require("lspconfig")
@@ -245,6 +250,7 @@
         })
 
         -- The homies
+        require('which-key').setup()
         require('flash').setup()
         require('colorizer').setup()
         require('render-markdown').setup()
@@ -263,7 +269,6 @@
 
     plugins = with pkgs.vimPlugins; [
       flash-nvim
-      lazy-nvim
       catppuccin-nvim
       lualine-nvim
       mini-icons
@@ -284,6 +289,7 @@
       transparent-nvim
       render-markdown-nvim
       nvim-colorizer-lua
+      which-key-nvim
     ];
 
     extraPackages = with pkgs; [
