@@ -67,6 +67,10 @@
       run()   { nix-subcommand "run" "$@"   }
       build() { nix-subcommand "build" "$@" }
 
+      function fcp() {
+        ${pkgs.wl-clipboard}/bin/wl-copy < "$@"
+      }
+
       # Completion stuff
       zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
       zstyle ':completion:*' completions 1
