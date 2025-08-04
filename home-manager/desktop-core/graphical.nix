@@ -11,6 +11,7 @@ in
   # Window manager
   programs.niri.settings = {
     debug.render-drm-device = "/dev/dri/renderD128";
+    debug.deactivate-unfocused-windows = [];
 
     # Input
     input = {

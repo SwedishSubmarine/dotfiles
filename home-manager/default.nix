@@ -15,6 +15,7 @@
       ffmpeg
       resvg
       _7zz
+      ripgrep
 
       chromium
       firefox
