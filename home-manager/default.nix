@@ -16,6 +16,7 @@
       resvg
       _7zz
       ripgrep
+      unzip
 
       chromium
       firefox
@@ -45,6 +46,7 @@
       playerctl
       blueberry
 
+      elixir
       ghc
       cargo
       gcc

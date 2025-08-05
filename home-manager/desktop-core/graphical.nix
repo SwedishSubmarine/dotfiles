@@ -131,6 +131,10 @@ in
         hotkey-overlay.title = "Maximize Column";
         action = maximize-column;
       };
+      "Mod+Alt+Shift+F" = {
+        hotkey-overlay.title = "Fullscreen";
+        action = fullscreen-window;
+      };
 
       #Tabs
       "Mod+T" = {
@@ -357,6 +361,20 @@ in
           { title = ''- Twitch — Mozilla Firefox$''; }
           { app-id = ''^darktable$''; }
         ];
+      }
+      { matches = [ { is-window-cast-target = true; } ];
+        focus-ring = {
+          active.color = "#f38ba8";
+          inactive.color = "#7d0d2d";
+        };
+        border = {
+          enable = true;
+          width = 1;
+          inactive.color = "#7d0d2d80";
+        };
+        shadow = {
+          color = "#7d0d2d70"; 
+        };
       }
       {
         matches = [ { app-id = "org.pulseaudio.pavucontrol"; } ];
