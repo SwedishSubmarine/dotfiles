@@ -95,32 +95,34 @@ in
         hotkey-overlay.title = "Screenshot window";
         action = screenshot-window { write-to-disk = false; };
       };
-      "XF86AudioMicMute" = {
-        hotkey-overlay.title = "Change wallpaper";
-        action = spawn "systemctl" "--user" "start" "wallpaper.service";
-      };
 
       # Window and column size
       "Mod+TouchpadScrollRight" = {
-        hotkey-overlay.title = "Expand window";
+        # hotkey-overlay.title = "Expand window";
+        hotkey-overlay.hidden = true;
         action = set-window-width "+10";
       };
       "Mod+TouchpadScrollLeft" = {
-        hotkey-overlay.title = "Shrink window";
+        # hotkey-overlay.title = "Shrink window";
+        hotkey-overlay.hidden = true;
         action = set-window-width "-10";
       };
       "Mod+TouchpadScrollUp" = {
-        hotkey-overlay.title = "Expand window";
+        # hotkey-overlay.title = "Expand window";
+        hotkey-overlay.hidden = true;
         action = set-window-height "+10";
       };
       "Mod+TouchpadScrollDown" = {
-        hotkey-overlay.title = "Shrink window";
+        # hotkey-overlay.title = "Shrink window";
+        hotkey-overlay.hidden = true;
         action = set-window-height "-10";
       };
       "Mod+R" = {
+        hotkey-overlay.title = "Switch height";
         action = switch-preset-window-height;
       };
       "Mod+Shift+R" = {
+        hotkey-overlay.title = "Reset height";
         action = reset-window-height;
       };
       "Mod+F" = {
@@ -142,33 +144,33 @@ in
         action = toggle-column-tabbed-display;
       };
       "Mod+Down" = {
-        hotkey-overlay.title = "Next tab";
+        hotkey-overlay.hidden = true;
         action = focus-window-down;
       };
       "Mod+Up" = {
-        hotkey-overlay.title = "Previous tab";
+        hotkey-overlay.hidden = true;
         action = focus-window-up;
       };
 
       # Window and column movement
       "Mod+Tab" = {
-        hotkey-overlay.title = "Focus last window";
+        hotkey-overlay.title = "Focus previous window";
         action = focus-window-previous;
       };
       "Mod+H" = {
-        hotkey-overlay.title = "Focus Column to the Left";
+        hotkey-overlay.title = "Focus column/window {hjkl}";
         action = focus-column-left;
       };
       "Mod+L" = {
-        hotkey-overlay.title = "Focus Column to the Right";
+        hotkey-overlay.hidden = true;
         action = focus-column-right;
       };
       "Mod+Ctrl+H" = {
-        hotkey-overlay.title = "Move Column Left";
+        hotkey-overlay.title = "Move column/window {hjkl}";
         action = move-column-left;
       };
       "Mod+Ctrl+L" = {
-        hotkey-overlay.title = "Move Column Right";
+        hotkey-overlay.hidden = true;
         action = move-column-right;
       };
       "Mod+V" = {
@@ -180,37 +182,38 @@ in
         action = switch-focus-between-floating-and-tiling;
       };
       "Mod+Shift+H" = {
-        hotkey-overlay.title = "Consume or expel left";
+        hotkey-overlay.title = "Consume or expel {hl}";
         action = consume-or-expel-window-left;
       };
       "Mod+Shift+L" = {
-        hotkey-overlay.title = "Consume or expel right";
+        hotkey-overlay.hidden = true;
         action = consume-or-expel-window-right;
       };
 
       # Workspaces
       "Mod+J" = {
-        hotkey-overlay.title = "Focus window or workspace down";
+        hotkey-overlay.hidden = true;
         action = focus-window-or-workspace-down;
       };
       "Mod+K" = {
-        hotkey-overlay.title = "Focus window or workspace up";
+        hotkey-overlay.hidden = true;
         action = focus-window-or-workspace-up;
       };
       "Mod+Shift+J" = {
-        hotkey-overlay.title = "Focus workspace down";
+        hotkey-overlay.title = "Focus workspace {jk}";
         action = focus-workspace-down;
       };
       "Mod+Shift+K" = {
-        hotkey-overlay.title = "Focus workspace up";
+        hotkey-overlay.hidden = true;
         action = focus-workspace-up;
       };
       "Mod+Ctrl+J" = {
-        hotkey-overlay.title = "Move window or workspace down";
+        hotkey-overlay.title = "Move window or workspace {jk}";
         action = move-window-down-or-to-workspace-down;
       };
       "Mod+Ctrl+K" = {
-        hotkey-overlay.title = "Move window or workspace up";
+        # hotkey-overlay.title = "Move window or workspace up";
+        hotkey-overlay.hidden = true;
         action = move-window-up-or-to-workspace-up;
       };
       "Mod+O" = {
@@ -222,36 +225,55 @@ in
         action = focus-workspace "firefox";
       };
       "Mod+2" = {
-        hotkey-overlay.title = "Focus workspace 2";
+        hotkey-overlay.title = "Focus workspace 2...";
         action = focus-workspace "wezterm";
       };
       "Mod+3" = {
-        hotkey-overlay.title = "Focus workspace 3";
         action = focus-workspace "vesktop";
       };
       "Mod+4" = {
-        hotkey-overlay.title = "Focus workspace 4";
         action = focus-workspace 4;
       };
       "Mod+5" = {
-        hotkey-overlay.title = "Focus workspace 5";
         action = focus-workspace 5;
       };
       "Mod+6" = {
-        hotkey-overlay.title = "Focus workspace 6";
         action = focus-workspace 6;
       };
       "Mod+7" = {
-        hotkey-overlay.title = "Focus workspace 7";
         action = focus-workspace 7;
       };
       "Mod+8" = {
-        hotkey-overlay.title = "Focus workspace 8";
         action = focus-workspace 8;
       };
       "Mod+9" = {
-        hotkey-overlay.title = "Focus workspace 9";
         action = focus-workspace 9;
+      };
+
+      # Monitor movement 
+      "Mod+Alt+H" = {
+        hotkey-overlay.title = "Focus left monitor";
+        action = focus-monitor-left;
+      };
+      "Mod+Alt+L" = {
+        hotkey-overlay.title = "Focus right monitor";
+        action = focus-monitor-right;
+      };
+      "Mod+Shift+Tab" = {
+        hotkey-overlay.title = "Focus other monitor"; # Assuming two monitors
+        action = focus-monitor-previous;
+      };
+      "Mod+Ctrl+Shift+H" = {
+        hotkey-overlay.title = "Move window to left monitor";
+        action = move-window-to-monitor-left;
+      };
+      "Mod+Ctrl+Shift+L" = {
+        hotkey-overlay.title = "Move window to right monitor";
+        action = move-window-to-monitor-right;
+      };
+      "Shift+Alt+Tab" = {
+        hotkey-overlay.title = "Move window to other monitor"; # Assuming two monitors
+        action = move-window-to-monitor-previous;
       };
 
       # Dynamic screen cast
@@ -269,29 +291,22 @@ in
       };
 
       # Function row
-      "XF86MonBrightnessDown".action.spawn = [
-        "brightnessctl"
-        "s"
-        "10%-"
-      ];
-      "XF86MonBrightnessUp".action.spawn = [
-        "brightnessctl"
-        "s"
-        "10%+"
-      ];
+      "XF86MonBrightnessDown".action.spawn = [ "brightnessctl" "s" "10%-"]; 
+      "XF86MonBrightnessUp".action.spawn = [ "brightnessctl" "s" "10%+" ];
 
       "XF86LaunchA".action = toggle-overview;
-      # "XF86Search".action.spawn = ["sh" "${./rofi/niri-action.sh}"];
+
+      "XF86AudioMicMute" = {
+        hotkey-overlay.title = "Random wallpaper";
+        action = spawn "systemctl" "--user" "start" "wallpaper.service";
+      };
       "XF86Sleep".action = spawn "sh" "-c" "niri msg action do-screen-transition && swaylock";
 
       "XF86AudioPrev".action = spawn "playerctl" "previous";
-
       "XF86AudioPlay".action = spawn "playerctl" "play-pause";
-
       "XF86AudioNext".action = spawn "playerctl" "next";
 
       "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_SINK@" "toggle";
-
       "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "5%-";
       "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_SINK@" "5%+";
     };
