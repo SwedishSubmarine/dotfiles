@@ -4,7 +4,11 @@
     enable = true;
     defaultEditor = true;
     extraConfig = ''
-      autocmd FileType markdown setlocal textwidth=80 wrapmargin=0 linebreak formatoptions+=t
+      autocmd FileType markdown setlocal textwidth=80 wrapmargin=0 linebreak formatoptions+=t spell spelllang=en_us
+
+    set wildmenu
+    set wildoptions=pum,fuzzy
+    set completeopt=menuone,fuzzy,noinsert
     '';
     extraLuaConfig = ''
       ----------------------------------------------------------------------------
@@ -252,8 +256,13 @@
         -- The homies
         require('which-key').setup()
         require('flash').setup()
-        require('colorizer').setup()
-        require('render-markdown').setup()
+        require('render-markdown').setup({
+          link = {
+            footnote = {
+              enabled = false,
+            }
+          }
+        })
         require('nvim-surround').setup()
         require("ibl").setup()
         require('mini.icons').setup()
@@ -265,6 +274,14 @@
           number_only = true, -- Peek only when the command is only a number instead of when it starts with a number
           centered_peeking = true, -- Peeked line will be centered relative to window
         }
+        require('colorizer').setup({
+          user_default_options = {
+            names = false;
+            RRGGBBAA = true;
+            rgb_fn = true;
+            hsl_fn = true;
+          }
+        })
     '';
 
     plugins = with pkgs.vimPlugins; [
