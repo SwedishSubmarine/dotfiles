@@ -151,7 +151,7 @@
       for i = 1, 8 do
         table.insert(keys, {
           key = tostring(i),
-          mods = mod.SUPER,
+          mods = mod.ALT,
          action = act.ActivateTab(i - 1),
         })
       end
