@@ -6,6 +6,7 @@
     stateVersion = "25.05";
 
     packages = with pkgs; [
+      # Terminal applications
       wget
       imagemagick
       swww
@@ -17,7 +18,9 @@
       _7zz
       ripgrep
       unzip
+      wl-color-picker
 
+      # Graphical applications
       chromium
       firefox
       thunderbird
@@ -29,6 +32,7 @@
       signal-desktop
       poppler
 
+      # Fonts
       fontconfig
       papirus-icon-theme
       nerd-fonts.monaspace
@@ -36,8 +40,10 @@
       nerd-fonts.fira-code
       nerd-fonts.roboto-mono
 
+      # Gnome
       gnome-keyring
 
+      # Utilities (Mainly for waybar)
       xwayland-satellite
       libnotify
       networkmanagerapplet
@@ -46,12 +52,14 @@
       playerctl
       blueberry
 
+      #Languages
       elixir
       ghc
       cargo
       gcc
       mdbook
       nixfmt-rfc-style
+      typst
     ];
   };
 

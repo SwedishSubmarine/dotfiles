@@ -83,7 +83,7 @@
       vim.keymap.set('n', '<leader>h', ':Pick help <CR>', {desc = "Pick help"})
 
       -- LSP
-      vim.lsp.enable({ "lua_ls" })
+      vim.lsp.enable({ "lua_ls", "tinymist" })
       vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, {desc = "LSP Code code action"})
       vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition, {desc = "LSP Code definition"})
       vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, {desc = "LSP Code rename"})
@@ -313,6 +313,7 @@
     extraPackages = with pkgs; [
       nixd
       lua-language-server
+      tinymist
     ];
   };
 }
