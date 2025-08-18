@@ -36,7 +36,7 @@
         local columns=$(tput cols)
         local lines=$(tput lines)
         
-        local min_columns=84
+        local min_columns=80
         local min_lines=24
 
         if (( columns >= min_columns && lines >= min_lines )); then
