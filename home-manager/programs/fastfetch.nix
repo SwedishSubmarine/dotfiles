@@ -25,7 +25,10 @@
         }
         "separator"
         "os"
-        "host"
+        {
+          type = "host";
+          format = "MacBook Air (M2, 2023)";
+        }
         {
           key = "Display";
           type = "display";
