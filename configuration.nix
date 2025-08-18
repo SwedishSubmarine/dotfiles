@@ -76,9 +76,11 @@
 
   services.libinput.enable = true;
 
+
+  virtualisation.docker.enable = true;
   users.users.emily = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
     packages = with pkgs; [
