@@ -68,11 +68,6 @@
       vim.keymap.set('n', 'gj', 'j', {desc = "Bufferline down"})
       vim.keymap.set('n', 'gk', 'k', {desc = "Bufferline up"})
 
-      -- Flash
-      vim.keymap.set({'n', 'x', 'o'}, '<leader>s', function()
-        require("flash").jump()
-      end, {desc = "Flash" })
-
       -- Which-key
       vim.keymap.set({'n', 'x', 'o'}, '<leader>,', function()
         require("which-key").show({ global = true })
@@ -255,7 +250,6 @@
 
         -- The homies
         require('which-key').setup()
-        require('flash').setup()
         require('render-markdown').setup({
           link = {
             footnote = {
@@ -285,7 +279,6 @@
     '';
 
     plugins = with pkgs.vimPlugins; [
-      flash-nvim
       catppuccin-nvim
       lualine-nvim
       nvim-web-devicons
