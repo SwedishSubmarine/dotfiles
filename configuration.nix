@@ -92,6 +92,7 @@
   environment.pathsToLink = [ "/share/zsh" ];
   environment.systemPackages = with pkgs; [
     git
+    git-crypt
     binutils
     coreutils
   ];
