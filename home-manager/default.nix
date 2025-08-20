@@ -31,6 +31,7 @@
       darktable
       signal-desktop
       poppler
+      bitwarden
 
       # Fonts
       fontconfig

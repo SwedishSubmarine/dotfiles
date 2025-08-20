@@ -46,6 +46,10 @@ in
         hotkey-overlay.title = "Run firefox";
         action = spawn "firefox";
       };
+      "Mod+Shift+B" = {
+        hotkey-overlay.title = "Run bitwarden";
+        action = spawn "bitwarden";
+      };
 
       # Launchers
       "Mod+Space" = {
@@ -457,6 +461,16 @@ in
       {
         matches = [ { app-id = "org.wezfurlong.wezterm"; } ];
         default-window-height.proportion = 1.0;
+      }
+      {
+        matches = [
+          {
+            app-id = "Bitwarden";
+          }
+        ];
+        open-floating = true;
+        default-window-height.proportion = 0.8;
+        default-column-width.proportion = 0.5;
       }
       {
         matches = [
