@@ -31,6 +31,8 @@
       setopt globdots
       setopt transientrprompt
       setopt prompt_subst
+
+      source ${../../secrets/dhack.zsh}
       
       function startup_fetch(){
         local columns=$(tput cols)
