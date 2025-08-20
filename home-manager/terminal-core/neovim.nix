@@ -23,6 +23,7 @@
       vim.o.expandtab = true -- make tabs spaces
       vim.o.tabstop = 2      -- visual spaces per TAB
       vim.o.shiftwidth = 2   -- insert spaces on a tab
+      vim.o.smartindent = true
 
       -- Basic UI 
       vim.o.signcolumn = "yes" 
