@@ -19,6 +19,7 @@
       ripgrep
       unzip
       wl-color-picker
+      nomad
 
       # Graphical applications
       chromium

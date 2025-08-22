@@ -32,7 +32,7 @@
       setopt transientrprompt
       setopt prompt_subst
 
-      source ${../../secrets/dhack.zsh}
+      source ${../../secrets/dHack.zsh}
       
       function startup_fetch(){
         local columns=$(tput cols)
