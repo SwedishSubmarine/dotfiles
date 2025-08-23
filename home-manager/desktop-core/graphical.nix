@@ -68,10 +68,6 @@ in
         hotkey-overlay.title = "Niri msg";
         action = spawn "sh" "${./rofi/niri-action.sh}";
       };
-      "Alt+Tab" = {
-        hotkey-overlay.title = "rofi window";
-        action = spawn "rofi" "-show" "window" "-icon-theme" ''"Papirus"'' "-show-icons";
-      };
 
       # Utility and help
       "Mod+Comma" = {
@@ -279,7 +275,7 @@ in
         hotkey-overlay.title = "Move window to right monitor";
         action = move-window-to-monitor-right;
       };
-      "Shift+Alt+Tab" = {
+      "Ctrl+Alt+Tab" = {
         hotkey-overlay.title = "Move window to other monitor"; # Assuming two monitors
         action = move-window-to-monitor-previous;
       };
@@ -294,8 +290,20 @@ in
         action = set-dynamic-cast-monitor;
       };
       "Mod+Shift+C" = {
-        hotkey-overlay.title = "Clear dynamic cast target";
+       hotkey-overlay.title = "Clear dynamic cast target";
         action = clear-dynamic-cast-target;
+      };
+
+      # Niri switcher
+      "Alt+Tab" = { 
+        hotkey-overlay.title = "Niriswitcher";
+        repeat = false; 
+        action = spawn "gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application";
+      };
+
+      "Alt+Shift+Tab" = {
+        repeat = false;
+        action = spawn "gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application"; 
       };
 
       # Function row
@@ -331,6 +339,8 @@ in
       { command = [ "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; } # needed for screen-sharing to work
       { command = [ "systemctl" "--user" "start" "background" "nm-applet" ]; }
       { command = [ "swww-daemon" ]; }
+      { command = [ "niriswitcher"]; }
+
       { command = [ "vesktop" "--ozone-platform-hint=wayland" ]; }
       { command = [ "wezterm" ]; }
       { command = [ "firefox" ]; }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, unstable, ... }:
 {
   home = {
     username = "emily";
@@ -20,6 +20,7 @@
       unzip
       wl-color-picker
       nomad
+      cowsay
 
       # Graphical applications
       chromium
@@ -33,6 +34,7 @@
       signal-desktop
       poppler
       bitwarden
+      unstable.niriswitcher
 
       # Fonts
       fontconfig
