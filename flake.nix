@@ -36,8 +36,8 @@
           rev = "0948f98ed9093839a233e859960cad7235518fc3";
         };
       in 
-        nixpkgs.lib.nixosSystem {
-          system = "aarch64-darwin";
+        nixpkgs.lib.nixosSystem rec {
+          system = "aarch64-linux";
           specialArgs = inputs;
           modules = [
             nixos-apple-silicon.nixosModules.apple-silicon-support
@@ -48,6 +48,12 @@
 	          {
 	            home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { 
+                  unstable = import nixpkgs-unstable {
+                    inherit system;
+                    config.allowUnfree = true;
+                  };
+              };
               home-manager.users.emily = { 
                 imports = [
                   ./home-manager/default.nix
