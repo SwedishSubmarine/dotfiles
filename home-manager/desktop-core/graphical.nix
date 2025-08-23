@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 let
   XWAYLAND_DISPLAY = ":3";
+  random-wallpaper = pkgs.writeScript "random-wallpaper" ''
+    #!/bin/sh
+    swww img $(find ${../../wallpapers} -type f \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1) --transition-type any --transition-fps 60
+  '';
 in
 {
   imports = [
@@ -549,7 +553,7 @@ in
     };
     Service = {
       Type = "oneshot";
-      ExecStart = "${../../wallpapers/random-script.sh}";
+      ExecStart = "${random-wallpaper}";
     };
     Install.WantedBy = [ "default.target" ];
   };
