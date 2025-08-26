@@ -66,6 +66,25 @@
   # Enable CUPS to print documents. ??
   # services.printing.enable = true;
 
+  # Airplay
+
+  services.avahi.enable = true;
+  services.pipewire = {
+    raopOpenFirewall = true;
+    extraConfig.pipewire = {
+      "10-airplay" = {
+        "context.modules" = [
+          {
+            name = "libpipewire-module-raop-discover";
+            args = {
+              "raop.latency.ms" = 500;
+            };
+          }
+        ];
+      };
+    };
+  };
+
   services.pipewire = {
     enable = true;
     pulse.enable = true;
