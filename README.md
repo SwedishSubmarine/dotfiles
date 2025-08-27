@@ -62,3 +62,26 @@ rofi-power-menu](https://github.com/jluttine/rofi-power-menu/tree/master) repo.
 Thank god for this one because I could not have done it myself!
 
 The niri msg rofi menu is taken from my friend Xenia 🥺
+
+## Random weird stuff
+I generate the zsh folder within this directory, so I ignore `/zsh` but zsh
+sucks so I still need to have a `.zshenv` file in my home directory.
+
+Yes I use home-manager for my server, I really really really really need it I
+promise (i do not)
+
+### Neovim
+I use both vim config and lua config under `program.neovim` to set options. This
+is because I'm stupid and now I find it too funny to change back so it stays. I
+also handle autocmd stuff for markdown in vimscript because i just don't know
+how to do it in lua sorgy ^^. 
+
+I'm like 90% sure the way I handle transparency in neovim is just like way too
+overcomplicated but it works so I'm rolling with it.
+
+I use like only emoji completion ngl I have in the past just had cmp installed
+for emojis and am considering getting rid of the rest again because I just don't
+use them very much.
+
+I use `programs.neovim.extraPackages` for language servers. I think this is
+awesome and cool 🐈 
