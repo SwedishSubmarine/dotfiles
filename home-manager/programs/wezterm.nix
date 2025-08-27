@@ -1,4 +1,4 @@
-{ ... }:
+{ theme, ... }:
 {
   programs.wezterm = {
     enable = true;
@@ -11,7 +11,7 @@
       
       -- Random options 
       
-      config.color_scheme = 'Catppuccin Macchiato'
+      config.color_scheme = 'Catppuccin Macchiato' 
       config.use_fancy_tab_bar = false
       config.canonicalize_pasted_newlines = 'LineFeed'
       --config.initial_cols = 88
@@ -20,8 +20,8 @@
       
       -- Command Palette 
       
-      config.command_palette_bg_color = "#363a4f"
-      config.command_palette_fg_color = "#cad3f5"
+      config.command_palette_bg_color = "#${theme.current.surface0}"
+      config.command_palette_fg_color = "#${theme.current.text1}"
       
       config.window_padding = {
         left   = 4,
@@ -43,27 +43,27 @@
           background = "rgba(36, 39, 58, 0.95)",
           active_tab = { 
             bg_color = "rgba(36, 39, 58, 0.95)",
-            fg_color = '#c6a0f6',
+            fg_color = '#${theme.current.accent}',
           },
           inactive_tab = {
-            bg_color = '#1e2030',
+            bg_color = '#${theme.current.base2}',
             bg_color = "rgba(30, 32, 48, 0.95)",
-            fg_color = '#6e738d',
+            fg_color = '#${theme.current.overlay0}',
           },
           new_tab = {
             bg_color = "rgba(36, 39, 58, 0.95)",
-            fg_color = '#24273a',
+            fg_color = '#${theme.current.base1}',
           },
         },
-        split = '#303446',
+        split = '#303446', -- slightly arbitrary oops
       }
       
       wezterm.on('update-status', function(window, pane)
         window:set_left_status(wezterm.format {
           { Attribute = { Intensity = 'Bold' } },
-          { Foreground = { Color = '#c6a0f6' } },
+          { Foreground = { Color = '#${theme.current.accent}' } },
           { Text = ' Hiiii ^-^ ' },
-          { Foreground = { Color = '#6e738d' } },
+          { Foreground = { Color = '#${theme.current.overlay0}' } },
           { Text = '||' },
         })
       end)
@@ -71,7 +71,7 @@
       wezterm.on('update-status', function(window, pane)
         window:set_right_status(wezterm.format {
           { Attribute = { Intensity = 'Bold' } },
-          { Foreground = { Color = '#a0dee5' } },
+          { Foreground = { Color = '#${theme.current.light-blue}' } },
           { Text = 'meow  ' },
         })
       end)

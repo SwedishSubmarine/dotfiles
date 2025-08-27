@@ -19,5 +19,6 @@
     ./mpv.nix
     ./zathura.nix
     ./ssh.nix
+    ./wezterm.nix
   ];
 }
