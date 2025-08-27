@@ -45,6 +45,8 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.emily = {
     isNormalUser = true;
+    shell = pkgs.zsh;
+    ignoreShellProgramCheck = true;
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIARypcjzq0rpw1YRa8IJ91SsC4jrXgbB0SaYHfSlb9T4 et@MacBook-Air-2.local"
