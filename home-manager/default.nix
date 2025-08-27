@@ -68,14 +68,8 @@
   };
 
   imports = [
-    ./terminal-core/neovim.nix
-    ./terminal-core/zsh.nix
-    ./terminal-core/wezterm.nix
-    ./terminal-core/git.nix
-    ./desktop-core/xdg.nix
-    ./desktop-core/graphical.nix
-    ./desktop-core/swaylock.nix
-    ./desktop-core/waybar.nix
-    ./programs/default.nix
+    ./terminal-core/terminal.nix
+    ./desktop-core/desktop.nix
+    ./programs
   ];
 }

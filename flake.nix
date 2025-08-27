@@ -10,10 +10,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
+
     nixos-apple-silicon = {
       url = "github:tpwrules/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-minecraft = {
+      url = "github:Infinidoge/nix-minecraft";
+      inputs.nixpkgs.follows = "nixpkgs";
+    }; 
 
     niri = {
       url = "github:sodiboo/niri-flake";
@@ -27,7 +36,7 @@
     yazi.url = "github:sxyazi/yazi";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-apple-silicon, niri, catppuccin, yazi, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-apple-silicon, niri, catppuccin, yazi, nixos-hardware, nix-minecraft, ... }@inputs: {
     nixosConfigurations.Adamantite = 
       let 
         asahi-firmware = builtins.fetchGit {
@@ -41,7 +50,7 @@
           specialArgs = inputs;
           modules = [
             nixos-apple-silicon.nixosModules.apple-silicon-support
-          	(import ./configuration.nix {inherit asahi-firmware; })
+          	(import ./nixos/adamantite/configuration.nix {inherit asahi-firmware; })
             catppuccin.nixosModules.catppuccin
             niri.nixosModules.niri
             home-manager.nixosModules.home-manager
@@ -63,6 +72,26 @@
               home-manager.backupFileExtension = "backup";
 	          }
           ];
+    };
+    nixosConfigurations.Uru = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      specialArgs = inputs;
+      modules = [
+        ./nixos/uru/configuration.nix
+        nixos-hardware.nixosModules.apple-t2
+        # Yes i have home manager for my server ^^
+        home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.emily = { 
+            imports = [
+            ./home-manager/uru.nix
+            ];
+          };
+          home-manager.backupFileExtension = "backup";
+        }
+      ];
     };
   };
 }
