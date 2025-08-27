@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 let
   XWAYLAND_DISPLAY = ":3";
   random-wallpaper = pkgs.writeScript "random-wallpaper" ''
@@ -18,6 +18,9 @@ in
     debug.deactivate-unfocused-windows = [];
 
     # Input
+    cursor = {
+      size = 36;
+    };
     input = {
       keyboard = {
         xkb = {
@@ -298,12 +301,12 @@ in
       "Alt+Tab" = { 
         hotkey-overlay.title = "Niriswitcher";
         repeat = false; 
-        action = spawn "gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application";
+        action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application";
       };
 
       "Alt+Shift+Tab" = {
         repeat = false;
-        action = spawn "gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application"; 
+        action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application"; 
       };
 
       # Function row
@@ -543,6 +546,13 @@ in
           "in'" = "srgb";
           relative-to = "workspace-view";
         };
+        inactive.gradient = {
+          from = "#7e83ab";
+          to = "#896da8";
+          angle = 0;
+          "in'" = "srgb";
+          relative-to = "workspace-view";
+        };
       };
       shadow = {
         enable = true;
@@ -555,6 +565,20 @@ in
       };
     };
   };
+
+  xdg.configFile."niriswitcher/config.toml".text = ''
+    separate_workspaces = false 
+  '';
+  xdg.configFile."niriswitcher/style.css".text = ''
+    .application-title {
+      color: rgba(202, 211, 245);
+    }
+
+    :root {
+      --bg-color: rgb(30, 32, 48);
+      --border-color: rgb(198, 160, 246)
+    }
+  '';
 
   # Random desktop wallpaper service
   systemd.user.services.wallpaper = {
