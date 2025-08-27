@@ -25,7 +25,7 @@ changing theme easier:
 * `overlay1` (brighter overlay color)
 
 On rare occasions I will also use these colors, they're way more specific to my
-current colorscheme catppuccin macchiato so they may be harder to adjust for
+current colorscheme, _catppuccin macchiato_, so they may be harder to adjust for
 other colorschemes.
 * `base3` (tertiary background color, much darker, using for swaylock)
 * `surface1` (brighter surface color)
