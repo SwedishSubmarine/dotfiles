@@ -16,6 +16,11 @@
         user = "hacke";
         port = 222;
       };
+      uru = {
+        hostname = "qwdcraft.60.nu";
+        port = 2222;
+        user = "emily";
+      };
     };
   };
 }
