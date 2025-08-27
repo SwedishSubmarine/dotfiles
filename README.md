@@ -2,12 +2,12 @@
 NixOS configuration currently managing my M2 MacBook Air, **Adamantite** running nixOS under asahi as well as my server, an old Mac Mini, **Uru**. 
 
 ## Structure
-`colors.nix`: Colorscheme configuration
-`flake.nix`: Flake defining my configurations
-`home-manager`: Home-manager modules
-`nixos`: NixOS configuration modules
-`secrets`: Git-crypt encrypted secrets
-`wallpapers`: All the wallpapers that I use, used for `sddm` and `swww`
+- `colors.nix`: Colorscheme configuration
+- `flake.nix`: Flake defining my configurations
+- `home-manager`: Home-manager modules
+- `nixos`: NixOS configuration modules
+- `secrets`: Git-crypt encrypted secrets
+- `wallpapers`: All the wallpapers that I use, used for `sddm` and `swww`
 
 ## Colors 
 I use colors.nix and inherit a theme to change colors. Call a certain color
