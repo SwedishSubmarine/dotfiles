@@ -21,6 +21,9 @@
       wl-color-picker
       nomad
       cowsay
+      rbw
+      pinentry-all
+      wtype
 
       # Graphical applications
       chromium
@@ -35,6 +38,7 @@
       poppler
       bitwarden
       unstable.niriswitcher
+      rofi-rbw-wayland
 
       # Fonts
       fontconfig
@@ -64,6 +68,7 @@
       mdbook
       nixfmt-rfc-style
       typst
+      python3
     ];
   };
 

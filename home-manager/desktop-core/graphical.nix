@@ -53,8 +53,12 @@ in
         hotkey-overlay.title = "Run firefox";
         action = spawn "firefox";
       };
+      "Mod+B" = {
+        hotkey-overlay.title = "Run rofi-rbw";
+        action = spawn "rofi-rbw";
+      };
       "Mod+Shift+B" = {
-        hotkey-overlay.title = "Run bitwarden";
+        hotkey-overlay.title = "Run bitwarden gui";
         action = spawn "bitwarden";
       };
 
