@@ -42,6 +42,7 @@
           "custom/power"
           "tray"
           "battery"
+          "niri/workspaces"
         ];
       };
       "niri/window" = {
@@ -59,6 +60,13 @@
           "\\((\\d+)\\) Discord \\| ([^|]*)" = "$2 ($1)";
           "(.* TIDAL)" = " $1 ";
           " " = "";
+        };
+      };
+      "niri/workspaces" = {
+        format = "{icon}";
+        format-icons = {
+          active = "";
+          default = "";
         };
       };
       "power-profiles-daemon" = {
@@ -302,6 +310,23 @@
           box-shadow:    none;
           text-shadow:   none;
           transition-duration: 0s;
+      }
+
+      #workspaces button {
+          color:      #${theme.current.text1};
+      }
+      
+      #workspaces button.empty {
+          color:      alpha(#${theme.current.text1},.5);
+      }
+
+      #workspaces button:hover {
+          color:      #${theme.current.red};
+          background: #${theme.current.base2};
+      }
+
+      #workspaces button.active {
+          color:      #${theme.current.accent};
       }
 
       #tray {
