@@ -1,4 +1,4 @@
-{ config, pkgs, unstable, ... }:
+{ config, pkgs, theme, unstable, ... }:
 let
   XWAYLAND_DISPLAY = ":3";
   random-wallpaper = pkgs.writeScript "random-wallpaper" ''
@@ -440,7 +440,7 @@ in
         default-column-width.proportion = 0.4;
         focus-ring = {
           width = 2;
-          active.color = "#b7bdf8";
+          active.color = "#${theme.current.accent2}";
         };
         default-floating-position = {
           relative-to = "top-right";
@@ -540,15 +540,15 @@ in
         enable = true;
         width = 3;
         active.gradient = {
-          from = "#b7bdf8";
-          to = "#c6a0f6";
+          from = "#${theme.current.accent2}";
+          to = "#${theme.current.accent}";
           angle = 0;
           "in'" = "srgb";
           relative-to = "workspace-view";
         };
         inactive.gradient = {
-          from = "#7e83ab";
-          to = "#896da8";
+          from = "#7e83ab"; # Unfortunate
+          to = "#896da8"; # Unfortunate
           angle = 0;
           "in'" = "srgb";
           relative-to = "workspace-view";
@@ -571,12 +571,12 @@ in
   '';
   xdg.configFile."niriswitcher/style.css".text = ''
     .application-title {
-      color: rgba(202, 211, 245);
+      color: #${theme.current.text1};
     }
 
     :root {
-      --bg-color: rgb(30, 32, 48);
-      --border-color: rgb(198, 160, 246)
+      --bg-color: #${theme.current.base2};
+      --border-color: #${theme.current.accent};
     }
   '';
 

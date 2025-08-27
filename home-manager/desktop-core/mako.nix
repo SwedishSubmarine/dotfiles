@@ -1,4 +1,4 @@
-{ ... }:
+{ theme, ... }:
 {
   # Notification Daemon
   services.mako = {
@@ -9,8 +9,8 @@
       margin = "30";
       width = 500;
       font = "Hack Nerd Font"  ;
-      border-color = "#b7bdf8"; # Catppuccin lavender
-      background-color = "#363a4f"; # Cappuccin surface 0
+      border-color = "#${theme.current.accent2}"; # Catppuccin lavender
+      background-color = "#${theme.current.surface0}"; # Cappuccin surface 0
       default-timeout=7500;
       ignore-timeout=1;
     };

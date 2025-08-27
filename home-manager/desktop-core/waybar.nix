@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, theme, ... }: 
+{
   systemd.user.services.nm-applet = {
     Unit = {
       Description = "Network manager applet";
@@ -147,70 +148,38 @@
       };
     };
     style = ''
-      @define-color   rose     #f4dbd6;
-      @define-color   flamingo #f0c6c6;
-      @define-color   pink     #f5bde6;
-      @define-color   mauve    #c6a0f6;
-      @define-color   lavender #b7bdf8;
-      @define-color   red      #ed8796;
-      @define-color   maroon   #ee99a0;
-      @define-color   peach    #f5a97f;
-      @define-color   yellow   #eed49f;
-      @define-color   blue     #8aadf4;
-      @define-color   sapphire #7dc4e4;
-      @define-color   sky      #91d7e3;
-      @define-color   teal     #8bd5ca;
-      @define-color   green    #a6da95;
-
-      @define-color   text     #cad3f5;
-      @define-color   subtext1 #b8c0e0;
-      @define-color   subtext0 #a5adcb;
-
-      @define-color   overlay0 #6e738d;
-      @define-color   overlay1 #8087a2;
-      @define-color   overlay2 #939ab7;
-
-      @define-color   surface0 #363a4f;
-      @define-color   surface1 #494d64;
-      @define-color   surface2 #5b6078;
-
-      @define-color   base     #24273a;
-      @define-color   mantle   #1e2030;
-      @define-color   crust    #181926;
-
       * {
           font-size:18px;
           font-family: "Hack Nerd Font";
       }
-
       menu {
-          background-color: alpha(@mantle,.6);
-          color: @text;
-          border: 2px solid @mauve
+          background-color: alpha(#${theme.current.base2},.6);
+          color: #${theme.current.text1};
+          border: 2px solid #${theme.current.accent};
       }
 
       menu :disabled {
-          color: rgba(95, 91, 92, 1);
+          color: rgba(95, 91, 92, 1); 
       }
 
       #left {
           padding-left: 10px;
           padding-right: 10px;
           margin:10px 0px 0px 12px;
-          background: alpha(@mantle,.7);
+          background: alpha(#${theme.current.base2},.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border-radius:10px;
-          border: 3px solid @mauve;
+          border: 3px solid #${theme.current.accent};
       }
 
       #window {
           padding-left: 10px;
           padding-right: 10px;
           margin:10px 0px 0px 5px;
-          background: alpha(@mantle,.7);
+          background: alpha(#${theme.current.base2},.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border-radius:10px;
-          border: 3px solid @mauve;
+          border: 3px solid #${theme.current.accent};
       }
 
       window#waybar.empty #window {
@@ -219,7 +188,7 @@
 
       window#waybar {
         background-color: rgba(0,0,0,0);
-        color: @text;
+        color: #${theme.current.text1};
       }
 
       window#waybar.hidden {
@@ -231,9 +200,9 @@
           padding-right: 10px;
           margin:10px 0px 0px 0px;
           border-radius:10px;
-          background: alpha(@mantle,.7);
+          background: alpha(#${theme.current.base2},.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
-          border: 3px solid @mauve;
+          border: 3px solid #${theme.current.accent};
       }
       */
 
@@ -242,10 +211,10 @@
           padding-right: 10px;
           margin:10px 5px 0px 5px;
           border-radius:10px;
-          background: alpha(@mantle,.7);
+          background: alpha(#${theme.current.base2},.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
-          border: 3px solid @mauve;
-          color: @teal;
+          border: 3px solid #${theme.current.accent};
+          color: #${theme.current.teal};
       }
 
       .modules-right {
@@ -253,15 +222,15 @@
           padding-right: 10px;
           margin:10px 12px 0px 0px;
           border-radius:10px;
-          background: alpha(@mantle,.7);
+          background: alpha(#${theme.current.base2},.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
-          border: 3px solid @mauve;
+          border: 3px solid #${theme.current.accent};
       }
 
       #pulseaudio {
         padding-left: 10px;
         padding-right: 5px;
-        color: @yellow;
+        color: #${theme.current.yellow};
       }
 
       #pulseaudio-slider {
@@ -278,14 +247,14 @@
           background-image: none;
           border: none;
           box-shadow: none;
-          color: @text;
+          color: #${theme.current.text1};
       }
 
       #pulseaudio-slider trough {
           min-height: 15px;
           min-width: 10px;
           border-radius: 5px;
-          background-color: @crust;
+          background-color: #${theme.current.base3};
       }
       #pulseaudio-slider highlight {
           min-width: 10px;
@@ -296,14 +265,14 @@
       #backlight {
         padding-left: 10px;
         padding-right: 10px;
-        color: @yellow;
+        color: #${theme.current.yellow};
       }
 
       #backlight-slider {
           padding-left: 0px;
           padding-right: 0px;
           min-width: 100px;
-          color: @text;
+          color: #${theme.current.text1};
       }
 
       /* don't show the grabbable thing in the slider */
@@ -320,7 +289,7 @@
           min-height: 15px;
           min-width: 10px;
           border-radius: 5px;
-          background-color: @crust;
+          background-color: #${theme.current.base3};
       }
       #backlight-slider highlight {
           min-width: 10px;
@@ -346,15 +315,15 @@
       }
 
       #battery.warning {
-         color:       @peach; 
+         color:       #${theme.current.orange}; 
       }
 
       #battery.critical {
-          color:      @red;
+          color:      #${theme.current.red};
       }
       
       #custom-power {
-          color:      @mauve;
+          color:      #${theme.current.accent};
           padding-left: 0px;
           padding-right: 0px;
       }
@@ -362,19 +331,19 @@
       #network {
           padding-left: 20px;
           padding-right: 10px;
-          color: @sky;
+          color: #${theme.current.light-blue};
       }
 
       #bluetooth {
           padding-left: 10px;
           padding-right: 10px;
-          color: @blue;
+          color: #${theme.current.blue};
       }
 
       #clock {
           padding-left: 10px;
           padding-right: 10px;
-          color: @text;
+          color: #${theme.current.text1};
       }
 
       #power-profiles-daemon {
@@ -383,11 +352,11 @@
       }
 
       #power-profiles-daemon.balanced {
-          color: @yellow;
+          color: #${theme.current.yellow};
       }
 
       #power-profiles-daemon.power-saver {
-          color: @green;
+          color: #${theme.current.green};
       }
     '';
   };

@@ -36,7 +36,11 @@
     yazi.url = "github:sxyazi/yazi";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-apple-silicon, niri, catppuccin, yazi, nixos-hardware, nix-minecraft, ... }@inputs: {
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-apple-silicon, niri, catppuccin, yazi, nixos-hardware, nix-minecraft, ... }@inputs: 
+  let 
+    theme = import ./colors.nix;
+  in 
+  {
     nixosConfigurations.Adamantite = 
       let 
         asahi-firmware = builtins.fetchGit {
@@ -58,10 +62,11 @@
 	            home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { 
-                  unstable = import nixpkgs-unstable {
-                    inherit system;
-                    config.allowUnfree = true;
-                  };
+                inherit theme;
+                unstable = import nixpkgs-unstable {
+                  inherit system;
+                  config.allowUnfree = true;
+                };
               };
               home-manager.users.emily = { 
                 imports = [
