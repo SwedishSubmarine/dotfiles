@@ -294,49 +294,55 @@
       }
 
       #backlight-slider trough {
-          min-height: 15px;
-          min-width: 10px;
-          border-radius: 5px;
+          min-height:     15px;
+          min-width:      10px;
+          border-radius:  5px;
           background-color: #${theme.current.base3};
       }
       #backlight-slider highlight {
-          min-width: 10px;
-          border-radius: 5px;
+          min-width:      10px;
+          border-radius:  5px;
           background-color: rgba(247, 246, 246, 1);
       }
       * {
-          border:        none;
-          border-radius: 0;
-          box-shadow:    none;
-          text-shadow:   none;
+          border:         none;
+          border-radius:  0;
+          box-shadow:     none;
+          text-shadow:    none;
           transition-duration: 0s;
+      }
+
+      #workspaces {
+          padding-right:  0px;
       }
 
       #workspaces button {
           color:      #${theme.current.text1};
+          padding-left:   7px;
+          padding-right:  7px;
       }
       
       #workspaces button.empty {
-          color:      alpha(#${theme.current.text1},.5);
+          color:          alpha(#${theme.current.text1},.5);
       }
 
       #workspaces button:hover {
-          color:      #${theme.current.red};
-          background: #${theme.current.base2};
+          color:          #${theme.current.red};
+          background:     #${theme.current.base2};
       }
 
       #workspaces button.active {
-          color:      #${theme.current.accent};
+          color:          #${theme.current.accent};
       }
 
       #tray {
-          padding-left: 5px;
-          padding-right: 10px;
+          padding-left:   5px;
+          padding-right:  10px;
       }
 
       #battery {
-          padding-left: 0px;
-          padding-right: 10px;
+          padding-left:   0px;
+          padding-right:  10px;
       }
 
       #battery.warning {
