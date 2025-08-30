@@ -106,6 +106,7 @@
     ];
   };
 
+  programs.appimage.enable = true;
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.pathsToLink = [ "/share/zsh" ];

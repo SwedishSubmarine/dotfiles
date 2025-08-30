@@ -22,6 +22,7 @@
     menu-keybindings ctrl+c:copy,ctrl+t:type
   '';
   
+  # Theme
   xdg.configFile."rofi/rounded.rasi".text = ''
     * {
         // font:  "Hack 12";

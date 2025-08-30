@@ -24,6 +24,7 @@
       rbw
       pinentry-all
       wtype
+      prismlauncher
 
       # Graphical applications
       chromium
@@ -60,7 +61,7 @@
       playerctl
       blueberry
 
-      #Languages
+      #Languages and frameworks
       elixir
       ghc
       cargo

@@ -326,13 +326,12 @@
           color:          alpha(#${theme.current.text1},.5);
       }
 
-      #workspaces button:hover {
-          color:          #${theme.current.red};
-          background:     #${theme.current.base2};
-      }
-
       #workspaces button.active {
           color:          #${theme.current.accent};
+      }
+      #workspaces button:hover {
+          color:          #${theme.current.red};
+          background:     inherit; 
       }
 
       #tray {
