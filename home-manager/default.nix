@@ -4,7 +4,7 @@
     username = "emily";
     homeDirectory = "/home/emily";
     stateVersion = "25.05";
-
+    
     packages = with pkgs; [
       # Terminal applications
       wget
@@ -40,6 +40,11 @@
       bitwarden
       unstable.niriswitcher
       rofi-rbw-wayland
+      lyra-cursors
+      steam
+      steam-run
+      gamescope
+      wl-displays
 
       # Fonts
       fontconfig
