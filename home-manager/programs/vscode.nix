@@ -9,5 +9,4 @@
       ];
     };
   };
-  catppuccin.vscode.profiles.default.enable = true;
 }

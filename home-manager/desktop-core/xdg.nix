@@ -41,7 +41,12 @@
       tidal = {
         name = "Tidal";
         exec = "${pkgs.chromium}/bin/chromium --ozone-platform-hint=wayland --app=https://listen.tidal.com";
-        icon = "${pkgs.papirus-icon-theme}/share/icons/Papirus/tidal/48x48/apps/tidal.svg";
+        icon = "${pkgs.papirus-icon-theme}/share/icons/Papirus/48x48/apps/tidal.svg";
+      };
+      steamBIG = {
+        name = "Steam Big Picture Mode";
+        exec = "${pkgs.gamescope}/bin/gamescope --full -W 2880 -H 1800 -r 60 --force-grab-cursor -- steam -tenfoot";
+        icon = "${pkgs.papirus-icon-theme}/share/icons/Papirus/48x48/apps/steam.svg";
       };
       firefox = {
         name = "Firefox";

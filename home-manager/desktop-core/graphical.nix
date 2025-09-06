@@ -243,7 +243,7 @@ in
         action = focus-workspace "vesktop";
       };
       "Mod+4" = {
-        action = focus-workspace 4;
+        action = focus-workspace "steam";
       };
       "Mod+5" = {
         action = focus-workspace 5;
@@ -363,6 +363,9 @@ in
       };
       "3" = {
         name = "vesktop";
+      };
+      "4" = {
+        name = "steam";
       };
     };
 
@@ -530,6 +533,12 @@ in
       {
         matches = [ { app-id = "code"; } ];
         opacity = 0.95;
+      }
+      {
+        matches = [ { app-id = "gamescope"; } ];
+        open-on-workspace = "steam";
+        default-column-width.proportion = 1.0;
+        opacity = 1.0;
       }
     ];
 
