@@ -16,6 +16,6 @@
   };
 
   imports = [
-    ./terminal-core/terminal.nix
+    ../terminal-core/terminal.nix
   ];
 }
