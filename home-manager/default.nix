@@ -41,10 +41,8 @@
       unstable.niriswitcher
       rofi-rbw-wayland
       lyra-cursors
-      steam
-      steam-run
       gamescope
-      wl-displays
+      way-displays
 
       # Fonts
       fontconfig

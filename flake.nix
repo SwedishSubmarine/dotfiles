@@ -70,7 +70,7 @@
               };
               home-manager.users.emily = { 
                 imports = [
-                  ./home-manager/adamantite.nix
+                  ./home-manager
                   catppuccin.homeModules.catppuccin
                 ];
               };
