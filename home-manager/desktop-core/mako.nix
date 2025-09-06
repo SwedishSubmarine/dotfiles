@@ -13,6 +13,9 @@
       background-color = "#${theme.current.surface0}"; # Cappuccin surface 0
       default-timeout=7500;
       ignore-timeout=1;
+      "mode=dnd" = {
+        invisible = true;
+      };
     };
   };
 }
