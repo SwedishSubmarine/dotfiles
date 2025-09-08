@@ -1,9 +1,18 @@
-{ config, pkgs, theme, unstable, ... }:
+{ settings, config, pkgs, theme, unstable, ... }:
 let
   XWAYLAND_DISPLAY = ":3";
   random-wallpaper = pkgs.writeScript "random-wallpaper" ''
     #!/bin/sh
     swww img $(find ${../../wallpapers} -type f \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1) --transition-type any --transition-fps 60
+  '';
+  calendar = pkgs.writeScript "calendar" ''
+    ID=$(niri msg -j windows | jq '[.[] | select(.app_id=="firefox") | .id] | last')
+    if [ "$ID" != "null" ] ; then
+        # firefox is open, switch to it
+        niri msg action focus-window --id "$ID"
+    fi
+
+    xdg-open "https://calendar.google.com"
   '';
 in
 {
@@ -242,9 +251,11 @@ in
       "Mod+3" = {
         action = focus-workspace "vesktop";
       };
-      "Mod+4" = {
+      "Mod+4" = (if settings.steam then {
         action = focus-workspace "steam";
-      };
+      } else {
+        action = focus-workspace 4;
+      });
       "Mod+5" = {
         action = focus-workspace 5;
       };
@@ -318,6 +329,11 @@ in
       "XF86MonBrightnessUp".action.spawn = [ "brightnessctl" "s" "10%+" ];
 
       "XF86LaunchA".action = toggle-overview;
+      
+      "XF86Search" = {
+        hotkey-overlay.title = "Open calendar";
+        action = spawn "sh" "${calendar}";
+      };
 
       "XF86AudioMicMute" = {
         hotkey-overlay.title = "Random wallpaper";
@@ -363,9 +379,6 @@ in
       };
       "3" = {
         name = "vesktop";
-      };
-      "4" = {
-        name = "steam";
       };
     };
 
@@ -534,12 +547,6 @@ in
         matches = [ { app-id = "code"; } ];
         opacity = 0.95;
       }
-      {
-        matches = [ { app-id = "gamescope"; } ];
-        open-on-workspace = "steam";
-        default-column-width.proportion = 1.0;
-        opacity = 1.0;
-      }
     ];
 
     overview = {
@@ -577,7 +584,17 @@ in
         gap = 4.0;
       };
     };
-  };
+  } // (if settings.steam then {
+    workspaces."4".name = "steam"; 
+    window-rules = [
+      {
+        matches = [ { app-id = "gamescope"; } ];
+        open-on-workspace = "steam";
+        default-column-width.proportion = 1.0;
+        opacity = 1.0;
+      }
+    ];
+  } else {} );
 
   xdg.configFile."niriswitcher/config.toml".text = ''
     separate_workspaces = false 

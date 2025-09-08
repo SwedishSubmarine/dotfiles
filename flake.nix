@@ -96,8 +96,10 @@
         system = system;
         specialArgs = args system settings;
         modules = graphical base 
-          ++ (if settings.niri  then [niri.nixosModules.niri] else
-              if settings.kde   then [ plasma-manager.homeManagerModules.plasma-manager ] else [])
+          # Could conceptually want both niri and kde
+          ++ (if settings.niri  then [niri.nixosModules.niri] else [])
+          ++ (if settings.kde   then [ plasma-manager.homeManagerModules.plasma-manager ] else [])
+          # These are by nature mutually exclusive
           ++ (if settings.asahi then [ nixos-apple-silicon.nixosModules.apple-silicon-support ] else
               if settings.t2    then [ nixos-hardware.nixosModules.apple-t2 ] else []);
       };
@@ -111,6 +113,7 @@
       t2 = false;
       kde = false;
       server = false;
+      steam = false;
     };
     # T2 x86 Laptop
     nixosConfigurations.Eridium =  systemConfig "x86_64-linux" ./nixos/eridium/configuration.nix {
@@ -120,6 +123,7 @@
       t2 = true;
       kde = false;
       server = false;
+      steam = true;
     };
     # T2 x86 Server
     nixosConfigurations.Uru = systemConfig "x86_64-linux" ./nixos/uru/configuration.nix {
@@ -129,6 +133,7 @@
       t2 = true;
       kde = false;
       server = true;
+      steam = false;
     };
   };
 }
