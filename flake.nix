@@ -29,14 +29,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     catppuccin = {
       url = "github:catppuccin/nix";
     };
 
-    yazi.url = "github:sxyazi/yazi";
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-apple-silicon, niri, catppuccin, yazi, nixos-hardware, nix-minecraft, ... }@inputs: 
   let 
     theme = import ./colors.nix;
 
@@ -87,8 +91,8 @@
         system = system;
         specialArgs = args system settings;
         modules = graphical base 
-          ++ (if settings.niri  then [niri.nixosModules.niri] else [])
-          #  if settings.kde    then [ plasma-manager.homeManagerModules.plasma-manager ] else [])
+          ++ (if settings.niri  then [niri.nixosModules.niri] else
+              if settings.kde   then [ plasma-manager.homeManagerModules.plasma-manager ] else [])
           ++ (if settings.asahi then [ nixos-apple-silicon.nixosModules.apple-silicon-support ] else
               if settings.t2    then [ nixos-hardware.nixosModules.apple-t2 ] else []);
       };
