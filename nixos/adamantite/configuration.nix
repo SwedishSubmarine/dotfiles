@@ -1,5 +1,4 @@
-{ asahi-firmware, ... }:
-{ pkgs, niri, yazi, ... }:
+{ pkgs, inputs, asahi-firmware, ... }:
 {
   imports =
     [ 
@@ -18,7 +17,7 @@
     ];
   };
 
-  nixpkgs.overlays = [ niri.overlays.niri yazi.overlays.default ];
+  nixpkgs.overlays = [ inputs.niri.overlays.niri inputs.yazi.overlays.default ];
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
 
