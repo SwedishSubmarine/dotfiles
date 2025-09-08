@@ -39,8 +39,14 @@
       url = "github:catppuccin/nix";
     };
 
+    yazi = {
+      url = "github:sxyazi/yazi";
+    };
   };
 
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, 
+              nixos-apple-silicon, niri, catppuccin, nixos-hardware, 
+              plasma-manager, ... }@inputs: 
   let 
     theme = import ./colors.nix;
 
