@@ -1,9 +1,9 @@
-{ asahi-firmware, ... }:
-{ pkgs, niri, yazi, ... }:
+{ pkgs, inputs, asahi-firmware, ... }:
 {
   imports =
     [ 
       ./hardware-configuration.nix
+      ../shared.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -11,26 +11,13 @@
   boot.loader.efi.canTouchEfiVariables = false;
 
   networking.hostName = "Adamantite"; 
-  networking.networkmanager.enable = true;  
-  networking.wireless.iwd = {
-    enable = true;
-    settings.General.EnableNetworkConfiguration = true;
-  };
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [
     ];
   };
 
-  # Standards
-  time.timeZone = "Europe/Stockholm";
-  i18n.defaultLocale = "en_US.UTF-8";
-  console = {
-    keyMap = "sv-latin1";
-  };
-
-  nixpkgs.config.allowUnfree = true; 
-  nixpkgs.overlays = [ niri.overlays.niri yazi.overlays.default ];
+  nixpkgs.overlays = [ inputs.niri.overlays.niri inputs.yazi.overlays.default ];
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
 
@@ -66,35 +53,7 @@
   # Enable CUPS to print documents. ??
   # services.printing.enable = true;
 
-  # Airplay
-
-  services.avahi.enable = true;
-  services.pipewire = {
-    raopOpenFirewall = true;
-    extraConfig.pipewire = {
-      "10-airplay" = {
-        "context.modules" = [
-          {
-            name = "libpipewire-module-raop-discover";
-            args = {
-              "raop.latency.ms" = 500;
-            };
-          }
-        ];
-      };
-    };
-  };
-
-  services.pipewire = {
-    enable = true;
-    pulse.enable = true;
-    alsa.enable = true;
-    jack.enable = true;
-    wireplumber.enable = true;
-  };
-
   services.libinput.enable = true;
-
 
   virtualisation.docker.enable = true;
   users.users.emily = {
@@ -106,9 +65,6 @@
     ];
   };
 
-  programs.appimage.enable = true;
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.pathsToLink = [ "/share/zsh" ];
   environment.systemPackages = with pkgs; [
     git
@@ -117,12 +73,5 @@
     coreutils
   ];
 
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-  # services.openssh.enable = true;
-
   system.stateVersion = "25.11"; # Did you read the comment? yea probably :3
-
 }

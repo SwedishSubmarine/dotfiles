@@ -29,104 +29,107 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
+
     catppuccin = {
       url = "github:catppuccin/nix";
     };
 
-    yazi.url = "github:sxyazi/yazi";
+    yazi = {
+      url = "github:sxyazi/yazi";
+    };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-apple-silicon, niri, catppuccin, yazi, nixos-hardware, nix-minecraft, ... }@inputs: 
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, 
+              nixos-apple-silicon, niri, catppuccin, nixos-hardware, 
+              plasma-manager, ... }@inputs: 
   let 
     theme = import ./colors.nix;
+
+    asahi-firmware = builtins.fetchGit {
+      url = "git@githug.xyz:Emilerr/asahi-firmware.git";
+      ref = "main";
+      rev = "0948f98ed9093839a233e859960cad7235518fc3";
+  };
   in 
-  {
-    nixosConfigurations.Adamantite = 
-      let 
-        asahi-firmware = builtins.fetchGit {
-          url = "git@githug.xyz:Emilerr/asahi-firmware.git";
-          ref = "main";
-          rev = "0948f98ed9093839a233e859960cad7235518fc3";
+    let 
+      nix-config-module = {
+        nix.registry.nixpkgs.flake = nixpkgs;
+        nix.registry.unstable.flake = nixpkgs-unstable;
+        system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
+      };
+
+      args = system: settings: {
+        inherit inputs; 
+        inherit settings;
+        unstable = import nixpkgs-unstable {
+          inherit system;
+          config.allowUnfree = true;
         };
-      in 
-        nixpkgs.lib.nixosSystem rec {
-          system = "aarch64-linux";
-          specialArgs = inputs;
-          modules = [
-            nixos-apple-silicon.nixosModules.apple-silicon-support
-          	(import ./nixos/adamantite/configuration.nix {inherit asahi-firmware; })
-            catppuccin.nixosModules.catppuccin
-            niri.nixosModules.niri
-            home-manager.nixosModules.home-manager
-	          {
-	            home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { 
-                inherit theme;
-                unstable = import nixpkgs-unstable {
-                  inherit system;
-                  config.allowUnfree = true;
-                };
-              };
-              home-manager.users.emily = { 
-                imports = [
-                  ./home-manager
-                  catppuccin.homeModules.catppuccin
-                ];
-              };
-              home-manager.backupFileExtension = "backup";
-	          }
-          ];
-    };
-    nixosConfigurations.Eridium = nixpkgs.lib.nixosSystem rec {
-      system = "x86_64-linux";
-      specialArgs = inputs;
-      modules = [
-        ./nixos/eridium/configuration.nix
-        nixos-hardware.nixosModules.apple-t2
-	catppuccin.nixosModules.catppuccin
-	niri.nixosModules.niri
-        # Yes i have home manager for my server ^^
+      } // (if settings.asahi then { inherit asahi-firmware; } else {});  
+
+      home-module = { settings, unstable, ... }: let common = rec {
+        username = settings.user;
+        homedir = "/home/${username}";
+      }; in {
+        home-manager = {
+          backupFileExtension = "backup";
+          extraSpecialArgs = { inherit theme settings unstable common; };
+          useGlobalPkgs = true;
+          useUserPackages = true;
+          users.${settings.user} = { imports = [ ./home-manager catppuccin.homeModules.catppuccin ]; };
+        };
+      };
+
+      graphical = base: [
+        nix-config-module
+        catppuccin.nixosModules.catppuccin 
         home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-	    home-manager.extraSpecialArgs = {
-		inherit theme;
-		unstable = import nixpkgs-unstable {
-			inherit system;
-			config.allowUnfree = true;
-		};
-	    };
-            home-manager.users.emily = { 
-            imports = [
-		    ./home-manager
-		    catppuccin.homeModules.catppuccin
-            ];
-          };
-          home-manager.backupFileExtension = "backup";
-        }
+        base
+        home-module 
       ];
+
+      systemConfig = system: base: settings: nixpkgs.lib.nixosSystem {
+        system = system;
+        specialArgs = args system settings;
+        modules = graphical base 
+          ++ (if settings.niri  then [niri.nixosModules.niri] else
+              if settings.kde   then [ plasma-manager.homeManagerModules.plasma-manager ] else [])
+          ++ (if settings.asahi then [ nixos-apple-silicon.nixosModules.apple-silicon-support ] else
+              if settings.t2    then [ nixos-hardware.nixosModules.apple-t2 ] else []);
+      };
+    in
+  {
+    # M2 Laptop
+    nixosConfigurations.Adamantite = systemConfig "aarch64-linux" ./nixos/adamantite/configuration.nix {
+      user = "emily";
+      niri = true;
+      asahi = true;
+      t2 = false;
+      kde = false;
+      server = false;
     };
-    nixosConfigurations.Uru = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = inputs;
-      modules = [
-        ./nixos/uru/configuration.nix
-        nixos-hardware.nixosModules.apple-t2
-        # Yes i have home manager for my server ^^
-        home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.users.emily = { 
-            imports = [
-            ./home-manager/uru.nix
-            ];
-          };
-          home-manager.backupFileExtension = "backup";
-        }
-      ];
+    # T2 x86 Laptop
+    nixosConfigurations.Eridium =  systemConfig "x86_64-linux" ./nixos/eridium/configuration.nix {
+      user = "emily";
+      niri = "true";
+      asahi = false;
+      t2 = true;
+      kde = false;
+      server = false;
+    };
+    # T2 x86 Server
+    nixosConfigurations.Uru = systemConfig "x86_64-linux" ./nixos/uru/configuration.nix {
+      user = "emily";
+      niri = false;
+      asahi = false;
+      t2 = true;
+      kde = false;
+      server = true;
     };
   };
 }

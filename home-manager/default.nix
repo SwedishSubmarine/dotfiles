@@ -1,32 +1,33 @@
-{ pkgs, unstable, ... }:
+{ pkgs, unstable, settings, ... }:
 {
   home = {
-    username = "emily";
-    homeDirectory = "/home/emily";
     stateVersion = "25.05";
     
     packages = with pkgs; [
       # Terminal applications
       wget
-      imagemagick
-      swww
-      cava
-      wev
       yt-dlp
       ffmpeg
-      resvg
       _7zz
       ripgrep
       unzip
-      wl-color-picker
-      nomad
       cowsay
+
+      ## Everything below will not be installed on a server
+    ] ++ (if !settings.server then [
+      resvg
+      imagemagick
+      cava
+      wev
+      nomad
       rbw
-      pinentry-all
       wtype
-      prismlauncher
 
       # Graphical applications
+      swww
+      wl-color-picker
+      pinentry-all
+      prismlauncher
       chromium
       firefox
       thunderbird
@@ -73,12 +74,13 @@
       nixfmt-rfc-style
       typst
       python3
-    ];
+    ] else []);
   };
 
   imports = [
     ./terminal-core/terminal.nix
+    ] ++ (if !settings.server then [
     ./desktop-core/desktop.nix
     ./programs
-  ];
+    ] else []);
 }
