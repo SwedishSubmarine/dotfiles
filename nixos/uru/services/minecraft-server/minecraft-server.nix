@@ -53,23 +53,23 @@
 	    Carpet = pkgs.fetchurl {
 	      url = "https://github.com/gnembon/fabric-carpet/releases/download/1.4.161/fabric-carpet-1.21.4-1.4.161+v241203.jar";
 	      sha256 = "sha256-AxFO/ZnFl6Y4ZD2OuXt9xIUxjAB3UHddil6MhmtE7XY="; };
-            CarpetExtras = pkgs.fetchurl {
-	      url = "https://github.com/gnembon/carpet-extra/releases/download/1.4.161/carpet-extra-1.21.4-1.4.161.jar";
-	      sha256 = "sha256-b/7KVVsUNTGkzlru6ISSi/ZDBgLQi2kOvBb3iEHXrjE="; };
-            ViewDistanceFix = pkgs.fetchurl {
+      CarpetExtras = pkgs.fetchurl {
+        url = "https://github.com/gnembon/carpet-extra/releases/download/1.4.161/carpet-extra-1.21.4-1.4.161.jar";
+        sha256 = "sha256-b/7KVVsUNTGkzlru6ISSi/ZDBgLQi2kOvBb3iEHXrjE="; };
+      ViewDistanceFix = pkgs.fetchurl {
 	      url = "https://cdn.modrinth.com/data/nxrXbh5K/versions/JHg6ZYop/viewdistancefix-fabric-1.21.4-1.0.2.jar"; 
 	      sha512 = "803b4d83b4c09c231b66c3f5fd068b4f55491c743207455fda8eb175a70ab51b5c6f09185d589555829906b44da1843e8ac722ea39919c4cc2a15dc4d5493b13"; };
 	    Servux = pkgs.fetchurl { 
 	      url = "https://cdn.modrinth.com/data/zQhsx8KF/versions/fKoMLUos/servux-fabric-1.21.4-0.5.1.jar"; 
 	      sha512 = "49510a9e8d6894567f5d3461fb4b6e87e4d8ecb0664f337fe38f3a79b47887dbe1ac6a233aa0cc4e115b67c4d15ca895fd88a4ee941cdc6f86237a2bbd0c36f1"; };
-            Dynmap = pkgs.fetchurl { 
+      Dynmap = pkgs.fetchurl { 
 	      url = "https://cdn.modrinth.com/data/fRQREgAc/versions/ewsTwo6L/Dynmap-3.7-beta-8-fabric-1.21.3.jar"; 
 	      sha512 = "04cd1f4170306f317e14b4c2abc45176a30177ecd9a90d3a0c12a21ac2c529ec288c53d71617c4546fb869d473afad87b85239ef87b811bb23408f49d3693516"; };
 	    PlayerRoles = pkgs.fetchurl { 
 	      url = "https://cdn.modrinth.com/data/Rt1mrUHm/versions/Y5EAJzwR/player-roles-1.6.13.jar";        
 	      sha512 = "14cf8bb7da02fdb61765dd12b8f9fb0c92b5dfdce7d2b4068eb64735ddd97707e237d7845c4868acdabe2eb6b844f3d5cb525399571aa1eb007b4d521e5ffd15"; };
           }); 
-	};
+	      };
       };
     };
   };
