@@ -104,6 +104,7 @@
       };
     in
   {
+    # M2 Laptop
     nixosConfigurations.Adamantite = systemConfig "aarch64-linux" ./nixos/adamantite/configuration.nix {
       user = "emily";
       niri = true;
@@ -112,6 +113,16 @@
       kde = false;
       server = false;
     };
+    # T2 x86 Laptop
+    nixosConfigurations.Eridium =  systemConfig "x86_64-linux" ./nixos/eridium/configuration.nix {
+      user = "emily";
+      niri = "true";
+      asahi = false;
+      t2 = true;
+      kde = false;
+      server = false;
+    };
+    # T2 x86 Server
     nixosConfigurations.Uru = systemConfig "x86_64-linux" ./nixos/uru/configuration.nix {
       user = "emily";
       niri = false;
@@ -119,56 +130,6 @@
       t2 = true;
       kde = false;
       server = true;
-    };
-    # nixosConfigurations.Uru = nixpkgs.lib.nixosSystem {
-    #   system = "x86_64-linux";
-    #   specialArgs = inputs;
-    #   modules = [
-    #     ./nixos/uru/configuration.nix
-    #     nixos-hardware.nixosModules.apple-t2
-    #     # Yes i have home manager for my server ^^
-    #     home-manager.nixosModules.home-manager
-    #       {
-    #         home-manager.useGlobalPkgs = true;
-    #         home-manager.useUserPackages = true;
-    #         home-manager.users.emily = { 
-    #         imports = [
-    #           ./home-manager/uru.nix
-    #         ];
-    #       };
-    #       home-manager.backupFileExtension = "backup";
-    #     }
-    #   ];
-    # };
-    nixosConfigurations.Eridium = nixpkgs.lib.nixosSystem rec {
-      system = "x86_64-linux";
-      specialArgs = inputs;
-      modules = [
-        ./nixos/eridium/configuration.nix
-        nixos-hardware.nixosModules.apple-t2
-        catppuccin.nixosModules.catppuccin
-        niri.nixosModules.niri
-        # Yes i have home manager for my server ^^
-        home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {
-              inherit theme;
-              unstable = import nixpkgs-unstable {
-                inherit system;
-                config.allowUnfree = true;
-              };
-            };
-        home-manager.users.emily = { 
-          imports = [
-		        ./home-manager
-		        catppuccin.homeModules.catppuccin
-          ];
-        };
-        home-manager.backupFileExtension = "backup";
-        }
-      ];
     };
   };
 }
