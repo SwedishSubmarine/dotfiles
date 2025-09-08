@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "A not so basic flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05"; 
@@ -44,9 +44,8 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, 
-              nixos-apple-silicon, niri, catppuccin, nixos-hardware, 
-              plasma-manager, ... }@inputs: 
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-apple-silicon,
+              niri, catppuccin, nixos-hardware, plasma-manager, ... }@inputs: 
   let 
     theme = import ./colors.nix;
 
