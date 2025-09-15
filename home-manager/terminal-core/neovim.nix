@@ -3,6 +3,8 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    vimAlias = true;
+    viAlias = true;
     extraConfig = ''
       autocmd FileType markdown setlocal textwidth=80 wrapmargin=0 linebreak formatoptions+=t spell spelllang=en_us
 
