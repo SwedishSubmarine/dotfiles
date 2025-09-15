@@ -20,5 +20,6 @@
     ./zathura.nix
     ./ssh.nix
     ./wezterm.nix
+    ./swaylock.nix
   ];
 }

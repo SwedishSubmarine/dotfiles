@@ -6,7 +6,7 @@ programs.swaylock = {
   settings = {
     screenshots = true;
     effect-blur = "15x3";
-    effect-vignette = "0.4:0.2";
+    # effect-vignette = "0.4:0.2";
     clock = true;
     grace = 0;
 

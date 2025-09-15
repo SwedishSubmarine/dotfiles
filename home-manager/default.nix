@@ -22,6 +22,7 @@
       nomad
       rbw
       wtype
+      unstable.minefair
 
       # Graphical applications
       swww
@@ -42,7 +43,6 @@
       unstable.niriswitcher
       rofi-rbw-wayland
       lyra-cursors
-      gamescope
       way-displays
 
       # Fonts

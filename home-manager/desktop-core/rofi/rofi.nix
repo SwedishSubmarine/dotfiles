@@ -2,8 +2,8 @@
 {
   programs.rofi = {
     enable = true;
-    package = unstable.rofi-wayland;
     theme = "~/.config/rofi/rounded.rasi";
+    package = unstable.rofi;
     extraConfig = {
       matching = "fuzzy";
       kb-row-down = "Control+j,Control+p,Down";
