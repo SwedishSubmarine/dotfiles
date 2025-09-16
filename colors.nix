@@ -5,6 +5,7 @@ rec {
     # flamingo  = "f0c6c6";
     pink       = "f5bde6"; # Pink
     accent     = "c6a0f6"; # Mauve
+    purple     = "c6a0f6"; # Same as accent but easier to generalize
     red        = "ed8796"; # Red
     # maroon    = "ee99a0";
     orange     = "f5a97f"; # Peach

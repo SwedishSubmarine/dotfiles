@@ -61,8 +61,6 @@
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
-    packages = with pkgs; [
-    ];
   };
 
   environment.pathsToLink = [ "/share/zsh" ];

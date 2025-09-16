@@ -21,6 +21,8 @@ in
   imports = [
     ./rofi/rofi.nix
     ./mako.nix
+    ./waybar.nix
+    ./xdg.nix
   ];
 
   # Window manager

@@ -80,7 +80,7 @@
   imports = [
     ./terminal-core/terminal.nix
     ] ++ (if !settings.server then [
-    ./desktop-core/desktop.nix
+    ./desktop-core/graphical.nix
     ./programs
     ] else []);
 }

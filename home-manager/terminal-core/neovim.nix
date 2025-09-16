@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, theme, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -60,7 +60,7 @@
       vim.keymap.set('n', 'x', '"_x') -- Make x send to blackhole and not act as cut
       vim.keymap.set('n', '<C-d>', '<C-d>zz') -- Center after half page down
       vim.keymap.set('n', '<C-u>', '<C-u>zz') -- Center after half page up 
-  
+
       -- Shortcuts
       vim.keymap.set('n', '<leader>w', ':write <CR>', {desc = "Write file"})
       vim.keymap.set('n', '<leader>c', ':noh <CR>', {desc = "Clear search highlight"}) -- Clear search
@@ -264,8 +264,34 @@
             }
           }
         })
+
+        local highlight = {
+          "Red",
+          "Yellow",
+          "Blue",
+          "Orange",
+          "Green",
+          "Purple",
+          "Cyan",
+        }
+
+        local hooks = require "ibl.hooks"
+        hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+          vim.api.nvim_set_hl(0, "Red",     { fg = "#${theme.current.red}" })
+          vim.api.nvim_set_hl(0, "Yellow",  { fg = "#${theme.current.yellow}" })
+          vim.api.nvim_set_hl(0, "Blue",    { fg = "#${theme.current.blue}" })
+          vim.api.nvim_set_hl(0, "Orange",  { fg = "#${theme.current.orange}" })
+          vim.api.nvim_set_hl(0, "Green",   { fg = "#${theme.current.green}" })
+          vim.api.nvim_set_hl(0, "Purple",  { fg = "#${theme.current.purple}" })
+          vim.api.nvim_set_hl(0, "Cyan",    { fg = "#${theme.current.cyan}" })
+        end)
+        require("ibl").setup { 
+          indent = { 
+            highlight = highlight, 
+            char = "┆"
+          }
+        }
         require('nvim-surround').setup()
-        require("ibl").setup()
         require('mini.icons').setup()
         require('mini.pick').setup()
         require('numb').setup{
