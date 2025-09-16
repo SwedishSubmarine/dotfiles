@@ -27,14 +27,14 @@
     sddm = {
       enable = true;
       wayland.enable = true;
+      theme = "catppuccin-macchiato";
       package = pkgs.kdePackages.sddm;
     };
   };
 
   catppuccin.sddm = { 
-    clockEnabled = true;
     enable = true;
-    accent = "mauve";
+    accentColor = "mauve";
     flavor = "macchiato";
     background = "${../../wallpapers/wallpaper-theme-converter-25.png}";
     font = "MonaspiceRn Nerd Font";
@@ -46,6 +46,7 @@
   # Private git-repo
   hardware.asahi.peripheralFirmwareDirectory = asahi-firmware;
   hardware.asahi.enable = true;
+  hardware.asahi.useExperimentalGPUDriver = true;
   hardware.asahi.setupAsahiSound = true;
   hardware.bluetooth.enable = true;
 
