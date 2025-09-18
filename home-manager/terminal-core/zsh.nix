@@ -15,6 +15,7 @@
       ls  = "${pkgs.eza}/bin/eza --icons --color -A";
       lsl = "${pkgs.eza}/bin/eza --icons --color -Al --git-repos --git";
       lst = "${pkgs.eza}/bin/eza --icons --color -A --tree --level=3";
+      carfetch = "${pkgs.fastfetch}/bin/fastfetch --logo ~/car.webp --logo-type iterm --logo-width 42";
     };
     # Previously plugins (PP 🐈)
     syntaxHighlighting.enable = true;
