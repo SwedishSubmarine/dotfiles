@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, theme, settings, ... }:
 let 
   yazi-plugins = pkgs.fetchFromGitHub {
 		owner = "yazi-rs";
@@ -13,6 +13,16 @@ in
     # package = yazi.packages.${pkgs.system}.default;
     enableZshIntegration = true;
     shellWrapperName = "y";
+    flavors = {
+      gruvbox = "${../../resources/yazi/gruvbox}";
+      macchiatto = "${../../resources/yazi/macchiatto}";
+    };
+    theme = {
+      flavor = {
+        dark = (if theme.current.name=="gruvbox" then "gruvbox" 
+        else if theme.current.name=="macchiatto" then "macchiatto" else "");
+      };
+    };
     settings = {
       mgr = {
         show_hidden = true;
@@ -93,10 +103,5 @@ in
         }
       ];
     };
-  };
-  catppuccin.yazi = {
-    enable = true;
-    flavor = "macchiato";
-    accent = "mauve";
   };
 }
