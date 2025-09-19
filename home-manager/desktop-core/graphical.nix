@@ -3,7 +3,7 @@ let
   XWAYLAND_DISPLAY = ":3";
   random-wallpaper = pkgs.writeScript "random-wallpaper" ''
     #!/bin/sh
-    swww img $(find ${../../wallpapers} -type f \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1) --transition-type any --transition-fps 60
+    swww img $(find ${theme.current.wallpapers} -type f,l \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1) --transition-type any --transition-fps 60
   '';
   calendar = pkgs.writeScript "calendar" ''
     # Stolen from Xenia again :3
@@ -547,14 +547,14 @@ in
         open-on-workspace = "vesktop";
         default-column-width.proportion = 1.0;
       }
-      {
-        matches = [ { app-id = "vesktop"; } ];
-        opacity = 0.965;
-      }
-      {
-        matches = [ { app-id = "code"; } ];
-        opacity = 0.95;
-      }
+      # {
+      #   matches = [ { app-id = "vesktop"; } ];
+      #   opacity = 0.965;
+      # }
+      # {
+      #   matches = [ { app-id = "code"; } ];
+      #   opacity = 0.95;
+      # }
     ];
 
     overview = {
@@ -575,8 +575,8 @@ in
           relative-to = "workspace-view";
         };
         inactive.gradient = {
-          from = "#7e83ab"; # Unfortunate
-          to = "#896da8"; # Unfortunate
+          from = "#${theme.current.accent2}60";
+          to = "#${theme.current.accent}60";
           angle = 0;
           "in'" = "srgb";
           relative-to = "workspace-view";

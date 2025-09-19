@@ -15,7 +15,6 @@
         "x-scheme-handler/https" = "firefox.desktop";
         "x-scheme-handler/about" = "firefox.desktop";
         "x-scheme-handler/unknown" = "firefox.desktop";
-        "application/pdf" = "zathura.desktop";
 
         "x-scheme-handler/mailto" = "userapp-Thunderbird-NYEK92.desktop";
         "message/rfc822" = "userapp-Thunderbird-NYEK92.desktop";
