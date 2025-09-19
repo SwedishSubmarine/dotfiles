@@ -11,7 +11,6 @@
       
       -- Random options 
       
-      config.color_scheme = 'Catppuccin Macchiato' 
       config.use_fancy_tab_bar = false
       config.canonicalize_pasted_newlines = 'LineFeed'
       --config.initial_cols = 88
@@ -30,7 +29,7 @@
         bottom = 4,
       }
 
-      config.window_background_opacity = 0.95
+      -- config.window_background_opacity = 0.95 
       
       config.inactive_pane_hsb = {
         saturation = 1,
@@ -40,18 +39,17 @@
       
       config.colors = {
         tab_bar = { 
-          background = "rgba(36, 39, 58, 0.95)",
+          background = "${theme.current.base1}95",
           active_tab = { 
-            bg_color = "rgba(36, 39, 58, 0.95)",
+            bg_color = '${theme.current.base1}95',
             fg_color = '#${theme.current.accent}',
           },
           inactive_tab = {
-            bg_color = '#${theme.current.base2}',
-            bg_color = "rgba(30, 32, 48, 0.95)",
+            bg_color = '${theme.current.base2}95',
             fg_color = '#${theme.current.overlay0}',
           },
           new_tab = {
-            bg_color = "rgba(36, 39, 58, 0.95)",
+            bg_color = '${theme.current.base1}95',
             fg_color = '#${theme.current.base1}',
           },
         },
@@ -171,7 +169,10 @@
 
       config.keys = keys
       
-      return config
-    '';
+    '' + (if theme.current.name=="gruvbox" then
+      '' config.color_scheme = 'Gruvbox Dark (Gogh)' ''
+    else if theme.current.name=="macchiato" then
+      ''config.color_scheme = 'Catppuccin Macchiato' ''
+    else '' '') +  '' return config'';
   };
 }
