@@ -121,8 +121,35 @@
         },
       })
 
-      ---------------------------------------------------------------------------
+      -------------------------------------------------------------------------
       -- Colorscheme
+      -- Gruvbox config
+      -------------------------------------------------------------------------
+      require("gruvbox").setup({
+        overrides = {
+          SignColumn = {fg = "#${theme.current.accent}"},
+          ["@markup.heading.1.markdown"] = {fg = "#${theme.current.accent2}"},
+          ["@markup.heading.2.markdown"] = {fg = "#${theme.current.green}"},
+          ["@markup.heading.3.markdown"] = {fg = "#${theme.current.teal}"},
+          ["@markup.heading.4.markdown"] = {fg = "#${theme.current.blue}"},
+          ["@markup.heading.5.markdown"] = {fg = "#${theme.current.purple}"},
+          ["@markup.heading.6.markdown"] = {fg = "#${theme.current.red}"},
+          ["RenderMarkdownH1Bg"] = {bg = "#${theme.current.accent2}",fg = "#${theme.current.overlay2}"},
+          ["RenderMarkdownH2Bg"] = {bg = "#${theme.current.green}",   fg = "#${theme.current.overlay2}"},
+          ["RenderMarkdownH3Bg"] = {bg = "#${theme.current.teal}", fg = "#${theme.current.overlay2}"},
+          ["RenderMarkdownH4Bg"] = {bg = "#${theme.current.blue}",   fg = "#${theme.current.overlay2}"},
+          ["RenderMarkdownH5Bg"] = {bg = "#${theme.current.purple}",  fg = "#${theme.current.overlay2}"},
+          ["RenderMarkdownH6Bg"] = {bg = "#${theme.current.red}",    fg = "#${theme.current.overlay2}"},
+        }
+      })
+      -------------------------------------------------------------------------
+
+      '' + (if theme.current.name=="gruvbox" then
+      '' vim.cmd("colorscheme gruvbox") ''
+      else if theme.current.name=="macchiato" then
+      '' local colorscheme = 'catppuccin-macchiato' ''
+      else '' '') + ''
+
       require("transparent").setup({
         extra_groups = {
           "NormalFloat"
@@ -131,15 +158,7 @@
           "CursorLine"
         },
       })
-
-      local colorscheme = 'catppuccin-macchiato'
-
-      local is_ok, _ = pcall(vim.cmd, "colorscheme " .. colorscheme)
-      if not is_ok then
-          vim.notify('colorscheme ' .. colorscheme .. ' not found!')
-          return
-      end
-      ---------------------------------------------------------------------------
+      --------------------------------------------------------------------------
       -- Plugins
 
       -- Lualine
@@ -256,15 +275,26 @@
         })
 
         -- The homies
+        -----------------------------------------------------------------------
+        -- Swaggers no config type beat
+        -----------------------------------------------------------------------
+        require('nvim-surround').setup()
+        require('mini.icons').setup()
         require('which-key').setup()
+        require('mini.pick').setup()
+        -----------------------------------------------------------------------
+        -- Render markdown
+        -----------------------------------------------------------------------
         require('render-markdown').setup({
           link = {
             footnote = {
               enabled = false,
             }
-          }
+          },
         })
-
+        -----------------------------------------------------------------------
+        -- Indent blankline
+        -----------------------------------------------------------------------
         local highlight = {
           "Red",
           "Yellow",
@@ -274,7 +304,6 @@
           "Purple",
           "Cyan",
         }
-
         local hooks = require "ibl.hooks"
         hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
           vim.api.nvim_set_hl(0, "Red",     { fg = "#${theme.current.red}" })
@@ -291,9 +320,9 @@
             char = "┆"
           }
         }
-        require('nvim-surround').setup()
-        require('mini.icons').setup()
-        require('mini.pick').setup()
+        -----------------------------------------------------------------------
+        -- Numb
+        -----------------------------------------------------------------------
         require('numb').setup{
           show_numbers = true, -- Enable 'number' for the window while peeking
           show_cursorline = true, -- Enable 'cursorline' for the window while peeking()
@@ -301,6 +330,9 @@
           number_only = true, -- Peek only when the command is only a number instead of when it starts with a number
           centered_peeking = true, -- Peeked line will be centered relative to window
         }
+        -----------------------------------------------------------------------
+        -- Colorizer
+        -----------------------------------------------------------------------
         require('colorizer').setup({
           user_default_options = {
             names = false;
@@ -309,10 +341,11 @@
             hsl_fn = true;
           }
         })
+        -----------------------------------------------------------------------
     '';
-
     plugins = with pkgs.vimPlugins; [
       catppuccin-nvim
+      gruvbox-nvim
       lualine-nvim
       nvim-web-devicons
       mini-icons
