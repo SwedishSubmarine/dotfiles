@@ -9,8 +9,4 @@
       ytdl-format = "bestvideo[height<=?1080][vcodec!~='av1']+bestaudio";
     };
   };
-
-  catppuccin.mpv = {
-    enable = true;
-  };
 }

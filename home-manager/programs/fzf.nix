@@ -1,4 +1,4 @@
-{ ... }:
+{ theme, ... }:
 {
   programs.fzf = {
     enable = true;
@@ -8,21 +8,21 @@
       "--border"
     ];
     colors = {
-      "bg+" = "#363A4F";
-      bg = "#24273A";
-      spinner = "#F4DBD6";
-      hl = "#ED8796";
-      fg = "#CAD3F5";
-      header = "#ED8796";
-      info = "#C6A0F6";
-      pointer = "#F4DBD6";
-      marker = "#B7BDF8";
-      "fg+" = "#CAD3F5";
-      prompt = "#C6A0F6";
-      "hl+" = "#ED8796";
-      selected-bg = "#494D64";
-      border = "#363A4F";
-      label = "#CAD3F5";
+      "bg+" = "#${theme.current.surface0}";
+      bg = "#${theme.current.base1}";
+      spinner = "#${theme.current.accent}";
+      hl = "#${theme.current.red}";
+      fg = "#${theme.current.text1}";
+      header = "#${theme.current.red}";
+      info = "#${theme.current.accent}";
+      pointer = "#${theme.current.accent2}";
+      marker = "#${theme.current.light-purple}";
+      "fg+" = "#${theme.current.text1}";
+      prompt = "#${theme.current.accent}";
+      "hl+" = "#${theme.current.red}";
+      selected-bg = "#${theme.current.surface1}";
+      border = "#${theme.current.surface0}";
+      label = "#${theme.current.text1}";
     };
   };
 }

@@ -17,7 +17,6 @@
     ./yazi.nix
     ./fd.nix
     ./mpv.nix
-    ./zathura.nix
     ./ssh.nix
     ./wezterm.nix
     ./swaylock.nix

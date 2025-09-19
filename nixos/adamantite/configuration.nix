@@ -36,7 +36,7 @@
     enable = true;
     accentColor = "mauve";
     flavor = "macchiato";
-    background = "${../../wallpapers/wallpaper-theme-converter-25.png}";
+    background = "${../../catppuccin-wallpapers/wallpaper-theme-converter-25.png}";
     font = "MonaspiceRn Nerd Font";
     fontSize = "12";
     assertQt6Sddm = true;

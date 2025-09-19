@@ -14,7 +14,7 @@ programs.swaylock = {
     indicator-radius = 200;
     indicator-caps-lock = true;
 
-    # Colors - Based on catppuccin macchiato
+    # Colors 
     ring-color = "${theme.current.accent}"; # Mauve
     ring-clear-color = "${theme.current.base1}"; # Base
     ring-caps-lock-color = "${theme.current.orange}"; # Peach

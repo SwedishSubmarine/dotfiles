@@ -15,12 +15,12 @@ in
     shellWrapperName = "y";
     flavors = {
       gruvbox = "${../../resources/yazi/gruvbox}";
-      macchiatto = "${../../resources/yazi/macchiatto}";
+      macchiato = "${../../resources/yazi/macchiato}";
     };
     theme = {
       flavor = {
         dark = (if theme.current.name=="gruvbox" then "gruvbox" 
-        else if theme.current.name=="macchiatto" then "macchiatto" else "");
+        else if theme.current.name=="macchiato" then "macchiato" else "");
       };
     };
     settings = {
