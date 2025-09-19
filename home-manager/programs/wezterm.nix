@@ -168,11 +168,6 @@
       end
 
       config.keys = keys
-      
-    '' + (if theme.current.name=="gruvbox" then
-      '' config.color_scheme = 'Gruvbox Dark (Gogh)' ''
-    else if theme.current.name=="macchiato" then
-      ''config.color_scheme = 'Catppuccin Macchiato' ''
-    else '' '') +  '' return config'';
+    '' + theme.current.wezterm + "\n" + ''return config'';
   };
 }

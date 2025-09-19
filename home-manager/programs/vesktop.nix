@@ -3,12 +3,13 @@
   programs.vesktop = {
     enable = true;
     vencord = {
+      themes = {
+        cur = theme.current.discordcss;
+      };
       settings = {
-        enabledThemes = if theme.current.name=="gruvbox" then [
-          "gruvbox-dark.theme.css" 
-        ] else if theme.current.name=="macchiato" then [
-          "macchiatto.css"
-        ] else [];
+        enabledThemes = [
+          "cur.css"
+        ];
       };
     };
   };

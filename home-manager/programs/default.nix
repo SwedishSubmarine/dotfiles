@@ -20,5 +20,6 @@
     ./ssh.nix
     ./wezterm.nix
     ./swaylock.nix
+    ./vesktop.nix
   ];
 }

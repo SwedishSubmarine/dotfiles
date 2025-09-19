@@ -143,13 +143,7 @@
         }
       })
       -------------------------------------------------------------------------
-
-      '' + (if theme.current.name=="gruvbox" then
-      '' vim.cmd("colorscheme gruvbox") ''
-      else if theme.current.name=="macchiato" then
-      '' local colorscheme = 'catppuccin-macchiato' ''
-      else '' '') + ''
-
+      '' + theme.current.nvim + "\n" + '' 
       require("transparent").setup({
         extra_groups = {
           "NormalFloat"

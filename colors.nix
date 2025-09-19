@@ -30,7 +30,13 @@ rec {
     base1        = "24273a"; # Base
     base2        = "1e2030"; # Mantle
     base3        = "181926"; # Crust
+
     wallpapers   = "${./catppuccin-wallpapers}";
+    discordcss   = "${./resources/vesktop/macchiatto.css}";
+    yazi         = "${./resources/yazi/macchiato}";
+    wezterm      = ''config.color_scheme = "Catppuccin Macchiato"'';
+    nvim         = ''vim.cmd("colorscheme catppuccin-macchiato")'';
+    bat          = "Catppuccin Macchiato";
   };
   gruvbox = rec {
     name         = "gruvbox";
@@ -63,6 +69,12 @@ rec {
     base1        = "282828"; # bg0
     base2        = "1d2021"; # bg0_h
     base3        = base2; # bg0_h
+
     wallpapers   = "${./gruvbox-wallpapers}";
+    discordcss   = "${./resources/vesktop/gruvbox-dark.theme.css}";
+    yazi         = "${./resources/yazi/gruvbox}";
+    wezterm      = ''config.color_scheme = "Gruvbox Dark (Gogh)"'';
+    nvim         = ''vim.cmd("colorscheme gruvbox")'';
+    bat          = "gruvbox-dark";
   };
 }

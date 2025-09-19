@@ -14,13 +14,11 @@ in
     enableZshIntegration = true;
     shellWrapperName = "y";
     flavors = {
-      gruvbox = "${../../resources/yazi/gruvbox}";
-      macchiato = "${../../resources/yazi/macchiato}";
+      currentTheme = theme.current.yazi;
     };
     theme = {
       flavor = {
-        dark = (if theme.current.name=="gruvbox" then "gruvbox" 
-        else if theme.current.name=="macchiato" then "macchiato" else "");
+        dark = "currentTheme"; 
       };
     };
     settings = {
