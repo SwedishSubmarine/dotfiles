@@ -1,4 +1,4 @@
-{ pkgs, inputs, asahi-firmware, ... }:
+{ theme, pkgs, inputs, asahi-firmware, ... }:
 {
   imports =
     [ 
@@ -27,7 +27,7 @@
         sddm = {
           enable = true;
           wayland.enable = true;
-          theme = "${../../resources/sddm/gruvboxqt5}";
+          theme = theme.current.sddm;
           extraPackages = with pkgs.libsForQt5; [
             qt5.qtgraphicaleffects
             layer-shell-qt

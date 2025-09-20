@@ -65,6 +65,7 @@
       args = system: settings: {
         inherit inputs; 
         inherit settings;
+        inherit theme;
         unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
