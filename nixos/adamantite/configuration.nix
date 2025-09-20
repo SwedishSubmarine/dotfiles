@@ -44,36 +44,6 @@
     coreutils
   ];
 
-  # services.displayManager = {
-  #   defaultSession = "niri";
-  #   sddm = {
-  #     enable = true;
-  #     wayland.enable = true;
-  #     # theme = "catppuccin-macchiato";
-  #     # theme = "${../../resources/sddm/gruvbox}";
-  #     theme = "${pkgs.where-is-my-sddm-theme}/share/sddm/themes/where_is_my_sddm_theme";
-  #     # package = pkgs.kdePackages.sddm;
-  #     extraPackages = with pkgs.kdePackages; [
-  #       layer-shell-qt
-  #     ];
-  #     # package = pkgs.libsForQt5.sddm;
-  #     # extraPackages = with pkgs.libsForQt5; [
-  #     #   qt5.qtgraphicaleffects
-  #     #   layer-shell-qt
-  #     # ];
-  #   };
-  # };
-
-  # catppuccin.sddm = { 
-  #   enable = true;
-  #   accentColor = "mauve";
-  #   flavor = "macchiato";
-  #   background = "${../../catppuccin-wallpapers/wallpaper-theme-converter-25.png}";
-  #   font = "MonaspiceRn Nerd Font";
-  #   fontSize = "12";
-  #   assertQt6Sddm = true;
-  # };
-
   # Specify path to peripheral firmware files.
   # Private git-repo
   hardware.asahi.peripheralFirmwareDirectory = asahi-firmware;
