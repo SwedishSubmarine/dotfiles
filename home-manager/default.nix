@@ -23,8 +23,16 @@
       rbw
       wtype
       unstable.minefair
+      (python3.withPackages (ps: with ps; [
+        matplotlib
+        numpy
+        scipy
+      ]))
 
       # Graphical applications
+      texliveMedium
+      latexrun
+      zathura
       swww
       wl-color-picker
       pinentry-all
@@ -73,7 +81,6 @@
       mdbook
       nixfmt-rfc-style
       typst
-      python3
     ] else []);
   };
 
