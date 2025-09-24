@@ -1,5 +1,6 @@
 rec {
   current = gruvbox;
+
   macchiato = rec {
     accent       = purple;
     accent2      = pink;

@@ -11,6 +11,12 @@
     set wildmenu
     set wildoptions=pum,fuzzy
     set completeopt=menuone,fuzzy,noinsert
+
+    "Vimtex
+    filetype plugin on
+    syntax enable
+
+    let g:vimtex_view_method = 'zathura'
     '';
     extraLuaConfig = ''
       ----------------------------------------------------------------------------
@@ -140,6 +146,12 @@
           ["RenderMarkdownH4Bg"] = {bg = "#${theme.current.blue}",   fg = "#${theme.current.overlay2}"},
           ["RenderMarkdownH5Bg"] = {bg = "#${theme.current.purple}",  fg = "#${theme.current.overlay2}"},
           ["RenderMarkdownH6Bg"] = {bg = "#${theme.current.red}",    fg = "#${theme.current.overlay2}"},
+          ["markdownH1"] = { fg = "#${theme.current.accent}"},
+          ["markdownH2"] = { fg = "#${theme.current.accent}"},
+          ["markdownH3"] = { fg = "#${theme.current.accent}"},
+          ["markdownH4"] = { fg = "#${theme.current.accent}"},
+          ["markdownH5"] = { fg = "#${theme.current.accent}"},
+          ["markdownH6"] = { fg = "#${theme.current.accent}"},
         }
       })
       -------------------------------------------------------------------------
@@ -335,7 +347,6 @@
             hsl_fn = true;
           }
         })
-        -----------------------------------------------------------------------
     '';
     plugins = with pkgs.vimPlugins; [
       catppuccin-nvim
