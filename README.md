@@ -17,7 +17,9 @@ I use colors.nix and inherit a theme to change colors. Call a certain color
 with `${theme.current.<color>}`. I will try to stick with these colors to make
 changing theme easier: 
 * `accent` (main accent)
+    * For gruvbox I use light yellow and for catppuccin I use mauve.
 * `accent2` (secondary accent)
+    * For gruvbox I use dark yellow and for catppuccin I use pink.
 * `text1` (main text)
 * `text2` (secondary text, slightly darker)
 * `text3` (tertiary text, much darker)
@@ -27,9 +29,8 @@ changing theme easier:
 * `overlay0` (overlay color)
 * `overlay1` (brighter overlay color)
 
-On rare occasions I will also use these colors, they're way more specific to my
-current colorscheme, _catppuccin macchiato_, so they may be harder to adjust for
-other colorschemes.
+These colors are also used on occasion. Primarily for decoration elements like
+waybar and swaylock. 
 * `base3` (tertiary background color, much darker, using for swaylock)
 * `surface1` (brighter surface color)
 * `surface2` (brightest surface color)
@@ -43,17 +44,12 @@ other colorschemes.
 * `light-blue` (using for waybar)
 * `yellow` (using lots for waybar)
 * `green` (using for waybar)
-* `pink` (using for fastfetch)
 
-In certain locations, like in `graphical.nix` I use edited versions
-of my current colorscheme, such as for inactive windows focus ring which
-are less saturated versions of lavender and mauve. I am too lazy to write a
-library myself to adjust the saturation of hex colors so for now they will
-remain as they are. These are mainly for niri at the moment, for focus ring for
-inactive windows (mainly when niriswitcher is focused) and for dynamic casting
-stuff. There *might* also be one for swaylock but I can't recall.
-Wezterm is also weird because it has built in color schemes so I'll replace the
-colors I can and then maybe fix it another time.
+Some colors are modified additionally for RGBA in certain spots. These are
+mainly for niri at the moment, for focus ring for inactive windows (mainly when
+niriswitcher is focused) and for dynamic casting stuff. Wezterm is also weird
+because it has built in color schemes so I'll replace the colors I can and then
+maybe fix it another time.
 
 ## Scripts
 Most of my scripts are baked into certain configuration files.
@@ -70,13 +66,16 @@ I also have a few rofi scripts inside of `home-manager/desktop-core/rofi`.
   access to. 
 
 ## Credits
-Most of the wallpapers are from Simon Stålenhag, his website can be [found
+Many of the catppuccin wallpapers are from Simon Stålenhag, his website can be [found
 here](https://www.simonstalenhag.se/new/other.html), and from two git repos:
 [zhichaohs
 catppuccin-wallpapers](https://github.com/zhichaoh/catppuccin-wallpapers/tree/main)
 repo forked from `vipinVIP/wallpapers` and [notAxons
 wallpapers](https://github.com/notAxon/wallpapers/tree/main) repo.
 The remainder are my own photographs.
+
+For gruvbox I am also using may Simon Stålenhag wallpapers, but also a lot of
+wallpapers found on [this website](https://gruvbox-wallpapers.pages.dev/).
 
 The rofi power menu script is found in the [jluttine
 rofi-power-menu](https://github.com/jluttine/rofi-power-menu/tree/master) repo.
@@ -90,6 +89,14 @@ sucks so I still need to have a `.zshenv` file in my home directory.
 
 Yes I use home-manager for my server, I really really really really need it I
 promise (i do not)
+
+### Colors
+Yea it's weird I call it "Colors" at this point considering it's used for almost
+all my theming. Thank god for my awesome girlfriend telling me I shuold just
+handle theme stuff like this instead of having a bunch of long if statements
+like I did originally. Those were gross and bad and this is cool and awesome.
+Anyways it should be pretty extensible as long as you're a bit liberal with
+color schemes to fit into this scheme. 
 
 ### Neovim
 I use both vim config and lua config under `program.neovim` to set options. This
