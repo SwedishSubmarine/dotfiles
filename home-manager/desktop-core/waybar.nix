@@ -94,7 +94,7 @@
             default = [" " " " " "];
         };
         scroll-step = 1;
-        on-click = "pavucontrol";
+        on-click = "pkill .pavucontrol-wr || pavucontrol";
         tooltip = false;
       };
       network = {
@@ -105,11 +105,11 @@
             wifi = [" "];
             ethernet = ["󰛳"];
         };
-        on-click = "alacritty -e nmtui";
+        on-click = "pkill alacritty || alacritty -e nmtui";
         tooltip = false;
       };
       bluetooth = {
-        on-click = "blueberry";
+        on-click = "pkill blueberry || blueberry";
         format = "";
       };
       clock = {
