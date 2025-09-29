@@ -31,7 +31,7 @@ programs.swaylock = {
     inside-color = "${theme.current.base1}80"; # Base ~50% opacity
     inside-clear-color = "${theme.current.base3}80"; # Crust ~50% opacity
     inside-caps-lock-color = "${theme.current.base1}80"; # Base ~50% opacity
-    inside-ver-color = "${theme.current.cyan}80"; # Sapphire ~50% Opacity
+    inside-ver-color = "${theme.current.blue}80"; # Blue ~50% Opacity
     inside-wrong-color = "${theme.current.red}60"; # Red ~38% Opacity
 
     separator-color = "00000000"; #GET OUTTA HERE
