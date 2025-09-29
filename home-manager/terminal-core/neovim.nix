@@ -81,6 +81,9 @@
       vim.keymap.set('n', 'zs', ':mkview <CR>', {desc = "Save folds"})
       vim.keymap.set('n', 'zl', ':loadview <CR>', {desc = "Load folds"})
 
+      -- Switch
+      vim.keymap.set('n', '<leader>s', ':Switch <CR>', {desc = "Switch"})
+
       -- Which-key
       vim.keymap.set({'n', 'x', 'o'}, '<leader>,', function()
         require("which-key").show({ global = true })
@@ -133,25 +136,27 @@
       -------------------------------------------------------------------------
       require("gruvbox").setup({
         overrides = {
-          SignColumn = {fg = "#${theme.current.accent}"},
-          ["@markup.heading.1.markdown"] = {fg = "#${theme.current.accent2}"},
-          ["@markup.heading.2.markdown"] = {fg = "#${theme.current.green}"},
-          ["@markup.heading.3.markdown"] = {fg = "#${theme.current.teal}"},
-          ["@markup.heading.4.markdown"] = {fg = "#${theme.current.blue}"},
-          ["@markup.heading.5.markdown"] = {fg = "#${theme.current.purple}"},
-          ["@markup.heading.6.markdown"] = {fg = "#${theme.current.red}"},
-          ["RenderMarkdownH1Bg"] = {bg = "#${theme.current.accent2}",fg = "#${theme.current.overlay2}"},
-          ["RenderMarkdownH2Bg"] = {bg = "#${theme.current.green}",   fg = "#${theme.current.overlay2}"},
-          ["RenderMarkdownH3Bg"] = {bg = "#${theme.current.teal}", fg = "#${theme.current.overlay2}"},
-          ["RenderMarkdownH4Bg"] = {bg = "#${theme.current.blue}",   fg = "#${theme.current.overlay2}"},
-          ["RenderMarkdownH5Bg"] = {bg = "#${theme.current.purple}",  fg = "#${theme.current.overlay2}"},
-          ["RenderMarkdownH6Bg"] = {bg = "#${theme.current.red}",    fg = "#${theme.current.overlay2}"},
-          ["markdownH1"] = { fg = "#${theme.current.accent}"},
-          ["markdownH2"] = { fg = "#${theme.current.accent}"},
-          ["markdownH3"] = { fg = "#${theme.current.accent}"},
-          ["markdownH4"] = { fg = "#${theme.current.accent}"},
-          ["markdownH5"] = { fg = "#${theme.current.accent}"},
-          ["markdownH6"] = { fg = "#${theme.current.accent}"},
+          SignColumn = {fg = "#${theme.gruvbox.accent}"},
+          ["@markup.heading.1.markdown"] = {fg = "#${theme.gruvbox.accent2}"},
+          ["@markup.heading.2.markdown"] = {fg = "#${theme.gruvbox.green}"},
+          ["@markup.heading.3.markdown"] = {fg = "#${theme.gruvbox.teal}"},
+          ["@markup.heading.4.markdown"] = {fg = "#${theme.gruvbox.blue}"},
+          ["@markup.heading.5.markdown"] = {fg = "#${theme.gruvbox.purple}"},
+          ["@markup.heading.6.markdown"] = {fg = "#${theme.gruvbox.red}"},
+          ["RenderMarkdownH1Bg"] = {bg = "#${theme.gruvbox.accent2}",fg = "#${theme.gruvbox.overlay2}"},
+          ["RenderMarkdownH2Bg"] = {bg = "#${theme.gruvbox.green}",   fg = "#${theme.gruvbox.overlay2}"},
+          ["RenderMarkdownH3Bg"] = {bg = "#${theme.gruvbox.teal}", fg = "#${theme.gruvbox.overlay2}"},
+          ["RenderMarkdownH4Bg"] = {bg = "#${theme.gruvbox.blue}",   fg = "#${theme.gruvbox.overlay2}"},
+          ["RenderMarkdownH5Bg"] = {bg = "#${theme.gruvbox.purple}",  fg = "#${theme.gruvbox.overlay2}"},
+          ["RenderMarkdownH6Bg"] = {bg = "#${theme.gruvbox.red}",    fg = "#${theme.gruvbox.overlay2}"},
+          ["markdownH1"] = { fg = "#${theme.gruvbox.accent}"},
+          ["markdownH2"] = { fg = "#${theme.gruvbox.accent}"},
+          ["markdownH3"] = { fg = "#${theme.gruvbox.accent}"},
+          ["markdownH4"] = { fg = "#${theme.gruvbox.accent}"},
+          ["markdownH5"] = { fg = "#${theme.gruvbox.accent}"},
+          ["markdownH6"] = { fg = "#${theme.gruvbox.accent}"},
+          ["Search"] = { fg = "#${theme.gruvbox.cyan}"},
+          ["CurSearch"] = { fg = "#${theme.gruvbox.teal}"}
         }
       })
       -------------------------------------------------------------------------
@@ -372,6 +377,7 @@
       render-markdown-nvim
       nvim-colorizer-lua
       which-key-nvim
+      switch-vim
     ];
 
     extraPackages = with pkgs; [
