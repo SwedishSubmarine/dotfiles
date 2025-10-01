@@ -105,9 +105,7 @@ in
       # Credit for this power-menu script https://github.com/jluttine/rofi-power-menu
       "Mod+Escape" = {
         hotkey-overlay.title = "Quit niri";
-        action =
-          spawn "rofi" "-show" "power-menu" "-show-icons" "-modi"
-            "power-menu:${./rofi/rofi-power-menu}";
+        action = spawn "sh" "-c" "rofi -show power-menu -theme-str 'inputbar {enabled: false; } listview {margin: 0 0 0; }' -show-icons -modi power-menu:${./rofi/rofi-power-menu}";
       };
       "Mod+Q" = {
         hotkey-overlay.title = "Close window";
