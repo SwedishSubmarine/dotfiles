@@ -61,7 +61,9 @@ I also have a few rofi scripts inside of `home-manager/desktop-core/rofi`.
   can add more URLs quite easily.
 - `google.sh` Used to quickly open my calendar, drive and mail. Thunderbird just
   isn't very good in my experience.
-- `rofi-power-menu` Small script to give me power options.
+- `rofi-power-menu` Small script to give me power options. Credit goes to 
+[jluttine](https://github.com/jluttine/rofi-power-menu)
+Thank god for this one because I could not have done it myself!
 - `niri-action.sh` Used to run niri msg actions that I don't have easy keyboard
   access to. 
 
@@ -76,10 +78,6 @@ The remainder are my own photographs.
 
 For gruvbox I am also using may Simon Stålenhag wallpapers, but also a lot of
 wallpapers found on [this website](https://gruvbox-wallpapers.pages.dev/).
-
-The rofi power menu script is found in the [jluttine
-rofi-power-menu](https://github.com/jluttine/rofi-power-menu/tree/master) repo.
-Thank god for this one because I could not have done it myself!
 
 The niri msg rofi menu is taken from my friend Xenia 🥺
 
