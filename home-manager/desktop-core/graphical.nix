@@ -75,7 +75,7 @@ in
         action = spawn "bitwarden";
       };
 
-      # Launchers
+      # Launcher and scripts
       "Mod+Space" = {
         hotkey-overlay.title = "rofi launcher";
         action = spawn "rofi" "-modes" "drun" "-show" "drun" "-icon-theme" ''"Papirus"'' "-show-icons";
@@ -87,6 +87,10 @@ in
       "Mod+E" = {
         hotkey-overlay.title = "Web search";
         action = spawn "sh" "${./rofi/web-search.sh}";
+      };
+      "Mod+C" = {
+        hotkey-overlay.title = "Bluetooth connect";
+        action = spawn "sh" "${./rofi/bluetooth.sh}";
       };
       "Mod+Shift+N" = {
         hotkey-overlay.title = "Niri msg";
