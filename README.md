@@ -1,6 +1,7 @@
 # Notes
 NixOS configuration currently managing 
-* **Adamantite**, My M2 MacBook Air, running nixOS under asahi
+* **Adamantite**, My M2 MacBook Air, running NixOS under asahi
+* **Beskar**, My Desktop using nixpkgs-unstable for everything
 * **Eridium**, My 2018 MacBook Pro, with a T2 security chip.
 * **Uru**, My temporary server, an old Mac Mini, with a T2 security chip.
 

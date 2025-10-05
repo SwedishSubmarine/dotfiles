@@ -10,6 +10,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    home-manager-unstable = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware/master";
     };
@@ -44,7 +49,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-apple-silicon,
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, nixos-apple-silicon,
               niri, catppuccin, nixos-hardware, plasma-manager, ... }@inputs:
   let
     theme = import ./colors.nix;
@@ -56,11 +61,10 @@
   };
   in
     let
-      nix-config-module = {
-        nix.registry.nixpkgs.flake = nixpkgs;
+      nix-config-module = { settings, ... }: {
         nix.registry.unstable.flake = nixpkgs-unstable;
         system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-      };
+      } // (if !settings.unstable then { nix.registry.nixpkgs.flake = nixpkgs; } else {});
 
       args = system: settings: {
         inherit inputs;
@@ -85,10 +89,10 @@
         };
       };
 
-      graphical = base: [
+      graphical = base: settings: [
         nix-config-module
         catppuccin.nixosModules.catppuccin
-        home-manager.nixosModules.home-manager
+        (if settings.unstable then home-manager-unstable.nixosModules.home-manager else home-manager.nixosModules.home-manager)
         base
         home-module
       ];
@@ -96,10 +100,10 @@
       systemConfig = system: base: settings: (if settings.unstable then nixpkgs-unstable else nixpkgs).lib.nixosSystem {
         system = system;
         specialArgs = args system settings;
-        modules = graphical base
+        modules = graphical base settings
           # Could conceptually want both niri and kde
           ++ (if settings.niri  then [niri.nixosModules.niri] else [])
-          ++ (if settings.kde   then [ plasma-manager.homeManagerModules.plasma-manager ] else [])
+          # ++ (if settings.kde   then [ plasma-manager.homeModules.plasma-manager ] else [])
           # These are by nature mutually exclusive
           ++ (if settings.asahi then [ nixos-apple-silicon.nixosModules.apple-silicon-support ] else
               if settings.t2    then [ nixos-hardware.nixosModules.apple-t2 ] else []);
@@ -116,6 +120,19 @@
       server = false;
       steam = false;
       unstable = false;
+      osu = false;
+    };
+    # Desktop
+    nixosConfigurations.Beskar = systemConfig "x86_64-linux" ./nixos/beskar/configuration.nix {
+      user = "emily";
+      niri = false;
+      asahi = false;
+      t2 = false;
+      kde = true;
+      server = false;
+      steam = true;
+      unstable = true;
+      osu = true;
     };
     # T2 x86 Laptop
     nixosConfigurations.Eridium =  systemConfig "x86_64-linux" ./nixos/eridium/configuration.nix {
@@ -127,6 +144,7 @@
       server = false;
       steam = true;
       unstable = false;
+      osu = false;
     };
     # T2 x86 Server
     nixosConfigurations.Uru = systemConfig "x86_64-linux" ./nixos/uru/configuration.nix {
@@ -138,6 +156,7 @@
       server = true;
       steam = false;
       unstable = false;
+      osu = false;
     };
   };
 }

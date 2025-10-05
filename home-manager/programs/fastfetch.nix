@@ -40,7 +40,7 @@
         {
           key = "Theme";
           type = "title";
-          format = "Catppuccin Macchiato (Mauve)";
+          format = "${theme.current.name}";
         }
         {
           key = "Terminal";
