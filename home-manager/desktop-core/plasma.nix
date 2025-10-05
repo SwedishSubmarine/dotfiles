@@ -1,7 +1,6 @@
-{ settings, inputs, config, pkgs, theme, ...}: 
 {
   imports = [
     ./rofi/rofi.nix
-    ./xdg.nix
   ];
+# Put plasma manager stuff here later if i have the energy
 }
