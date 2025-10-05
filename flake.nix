@@ -117,6 +117,17 @@
       steam = false;
       unstable = false;
     };
+    # Desktop
+    nixosConfigurations.Kyber = systemConfig "x86_64-linux" ./nixos/kyber/configuration.nix {
+      user = "emily";
+      niri = false;
+      asahi = false;
+      t2 = false;
+      kde = true;
+      server = false;
+      steam = true;
+      unstable = true;
+    };
     # T2 x86 Laptop
     nixosConfigurations.Eridium =  systemConfig "x86_64-linux" ./nixos/eridium/configuration.nix {
       user = "emily";
