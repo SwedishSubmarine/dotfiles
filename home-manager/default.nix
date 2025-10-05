@@ -2,93 +2,101 @@
 {
   home = {
     stateVersion = "25.05";
-    
-    packages = with pkgs; [
-      # Terminal applications
-      wget
-      yt-dlp
-      ffmpeg
-      _7zz
-      ripgrep
-      unzip
-      cowsay
 
-      ## Everything below will not be installed on a server
-    ] ++ (if !settings.server then [
-      resvg
-      imagemagick
-      cava
-      wev
-      nomad
-      rbw
-      wtype
-      unstable.minefair
-      unstable.widevine-cdm
-      (python3.withPackages (ps: with ps; [
-        matplotlib
-        numpy
-        scipy
-      ]))
+    packages =
+      with pkgs;
+      [
+        # Terminal applications
+        wget
+        yt-dlp
+        ffmpeg
+        _7zz
+        ripgrep
+        unzip
+        cowsay
+        ## Everything below will not be installed on a server
+      ]
+      ++ ( if !settings.server then
+      [
+        resvg
+        imagemagick
+        cava
+        wev
+        nomad
+        rbw
+        wtype
+        unstable.minefair
+        unstable.widevine-cdm
+        (python3.withPackages ( ps: with ps; [
+          matplotlib
+          numpy
+          scipy
+        ]))
+        # Graphical applications
+        texliveMedium
+        latexrun
+        zathura
+        swww
+        wl-color-picker
+        pinentry-all
+        prismlauncher
+        firefox
+        thunderbird
+        wl-clipboard
+        alacritty
+        wezterm
+        vesktop
+        darktable
+        signal-desktop
+        poppler
+        bitwarden
+        unstable.niriswitcher
+        rofi-rbw-wayland
+        lyra-cursors
+        way-displays
+        nautilus
 
-      # Graphical applications
-      texliveMedium
-      latexrun
-      zathura
-      swww
-      wl-color-picker
-      pinentry-all
-      prismlauncher
-      firefox
-      thunderbird
-      wl-clipboard
-      alacritty
-      wezterm
-      vesktop
-      darktable
-      signal-desktop
-      poppler
-      bitwarden
-      unstable.niriswitcher
-      rofi-rbw-wayland
-      lyra-cursors
-      way-displays
-      nautilus
+        # Fonts
+        fontconfig
+        papirus-icon-theme
+        nerd-fonts.monaspace
+        nerd-fonts.hack
+        nerd-fonts.fira-code
+        nerd-fonts.roboto-mono
 
-      # Fonts
-      fontconfig
-      papirus-icon-theme
-      nerd-fonts.monaspace
-      nerd-fonts.hack
-      nerd-fonts.fira-code
-      nerd-fonts.roboto-mono
+        # Gnome
+        gnome-keyring
 
-      # Gnome
-      gnome-keyring
+        # Utilities (Mainly for waybar)
+        xwayland-satellite
+        libnotify
+        networkmanagerapplet
+        pavucontrol
+        brightnessctl
+        playerctl
+        blueberry
 
-      # Utilities (Mainly for waybar)
-      xwayland-satellite
-      libnotify
-      networkmanagerapplet
-      pavucontrol
-      brightnessctl
-      playerctl
-      blueberry
-
-      #Languages and frameworks
-      elixir
-      ghc
-      cargo
-      gcc
-      mdbook
-      nixfmt-rfc-style
-      typst
-    ] else []);
+        #Languages and frameworks
+        elixir
+        ghc
+        cargo
+        gcc
+        mdbook
+        nixfmt-rfc-style
+        typst
+      ] else []);
   };
 
-  imports = [
-    ./terminal-core/terminal.nix
-    ] ++ (if !settings.server then [
-    ./desktop-core/graphical.nix
-    ./programs
-    ] else []);
+  imports =
+    [
+      ./terminal-core/terminal.nix
+    ]
+    ++ ( if !settings.server then
+        [ ./programs ]
+      else []) ++ (
+      if settings.niri then
+        [ ./desktop-core/niri.nix ]
+      else if settings.kde then
+        [ ./desktop-core/plasma.nix ]
+      else []);
 }
