@@ -23,6 +23,7 @@
       rbw
       wtype
       unstable.minefair
+      unstable.widevine-cdm
       (python3.withPackages (ps: with ps; [
         matplotlib
         numpy
@@ -37,7 +38,6 @@
       wl-color-picker
       pinentry-all
       prismlauncher
-      chromium
       firefox
       thunderbird
       wl-clipboard
@@ -52,6 +52,7 @@
       rofi-rbw-wayland
       lyra-cursors
       way-displays
+      nautilus
 
       # Fonts
       fontconfig
