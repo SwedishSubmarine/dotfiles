@@ -2,7 +2,7 @@
   description = "A not so basic flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05"; 
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
     nixpkgs-unstable.url = "github:NixOs/nixpkgs/nixos-unstable";
 
     home-manager = {
@@ -22,7 +22,7 @@
     nix-minecraft = {
       url = "github:Infinidoge/nix-minecraft";
       inputs.nixpkgs.follows = "nixpkgs";
-    }; 
+    };
 
     niri = {
       url = "github:sodiboo/niri-flake";
@@ -45,8 +45,8 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, nixos-apple-silicon,
-              niri, catppuccin, nixos-hardware, plasma-manager, ... }@inputs: 
-  let 
+              niri, catppuccin, nixos-hardware, plasma-manager, ... }@inputs:
+  let
     theme = import ./colors.nix;
 
     asahi-firmware = builtins.fetchGit {
@@ -54,8 +54,8 @@
       ref = "main";
       rev = "0948f98ed9093839a233e859960cad7235518fc3";
   };
-  in 
-    let 
+  in
+    let
       nix-config-module = {
         nix.registry.nixpkgs.flake = nixpkgs;
         nix.registry.unstable.flake = nixpkgs-unstable;
@@ -63,14 +63,14 @@
       };
 
       args = system: settings: {
-        inherit inputs; 
+        inherit inputs;
         inherit settings;
         inherit theme;
         unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
         };
-      } // (if settings.asahi then { inherit asahi-firmware; } else {});  
+      } // (if settings.asahi then { inherit asahi-firmware; } else {});
 
       home-module = { settings, unstable, ... }: let common = rec {
         username = settings.user;
@@ -87,16 +87,16 @@
 
       graphical = base: [
         nix-config-module
-        catppuccin.nixosModules.catppuccin 
+        catppuccin.nixosModules.catppuccin
         home-manager.nixosModules.home-manager
         base
-        home-module 
+        home-module
       ];
 
       systemConfig = system: base: settings: (if settings.unstable then nixpkgs-unstable else nixpkgs).lib.nixosSystem {
         system = system;
         specialArgs = args system settings;
-        modules = graphical base 
+        modules = graphical base
           # Could conceptually want both niri and kde
           ++ (if settings.niri  then [niri.nixosModules.niri] else [])
           ++ (if settings.kde   then [ plasma-manager.homeManagerModules.plasma-manager ] else [])

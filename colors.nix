@@ -4,9 +4,9 @@ rec {
   macchiato = rec {
     accent       = purple;
     accent2      = pink;
-    # rosewater = "f4dbd6"; 
+    # rosewater = "f4dbd6";
     # flamingo  = "f0c6c6";
-    name         = "macchiato"; 
+    name         = "macchiato";
     pink         = "f5bde6"; # Pink
     purple       = "c6a0f6"; # Mauve
     red          = "ed8796"; # Red
@@ -19,7 +19,7 @@ rec {
     cyan         = "7dc4e4"; # Sapphire
     blue         = "8aadf4"; # Blue
     light-purple = "b7bdf8"; # Lavender
-    text1        = "cad3f5"; # Text 
+    text1        = "cad3f5"; # Text
     text2        = "b8c0e0"; # Subtext1
     text3        = "a5adcb"; # Subtext0
     overlay2     = "939ab7";
@@ -62,7 +62,7 @@ rec {
     text1        = "ebdbb2"; # fg1
     text2        = "d5c4a1"; # fg2
     text3        = "bdae93"; # fg3
-    overlay2     = "fbf1c7"; # fg0 
+    overlay2     = "fbf1c7"; # fg0
     overlay1     = "928374"; # gray
     overlay0     = "7c6f64"; # bg4
     surface2     = "665c54"; # bg3
