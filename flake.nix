@@ -93,7 +93,7 @@
         home-module 
       ];
 
-      systemConfig = system: base: settings: nixpkgs.lib.nixosSystem {
+      systemConfig = system: base: settings: (if settings.unstable then nixpkgs-unstable else nixpkgs).lib.nixosSystem {
         system = system;
         specialArgs = args system settings;
         modules = graphical base 
@@ -115,16 +115,18 @@
       kde = false;
       server = false;
       steam = false;
+      unstable = false;
     };
     # T2 x86 Laptop
     nixosConfigurations.Eridium =  systemConfig "x86_64-linux" ./nixos/eridium/configuration.nix {
       user = "emily";
-      niri = "true";
+      niri = true;
       asahi = false;
       t2 = true;
       kde = false;
       server = false;
       steam = true;
+      unstable = false;
     };
     # T2 x86 Server
     nixosConfigurations.Uru = systemConfig "x86_64-linux" ./nixos/uru/configuration.nix {
@@ -135,6 +137,7 @@
       kde = false;
       server = true;
       steam = false;
+      unstable = false;
     };
   };
 }
