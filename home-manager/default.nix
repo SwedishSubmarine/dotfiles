@@ -14,75 +14,88 @@
       cowsay
 
       ## Everything below will not be installed on a server
-    ] ++ (if !settings.server then [
-      resvg
-      imagemagick
-      cava
-      wev
-      nomad
-      rbw
-      wtype
-      unstable.minefair
-      unstable.widevine-cdm
-      (python3.withPackages (ps: with ps; [
-        matplotlib
-        numpy
-        scipy
-      ]))
+      ] ++ (if !settings.server then [
+        resvg
+        imagemagick
+        cava
+        wev
+        nomad
+        rbw
+        wtype
+        unstable.minefair
+        unstable.widevine-cdm
+        (python3.withPackages (ps: with ps; [
+          matplotlib
+          numpy
+          scipy
+        ]))
 
-      # Graphical applications
-      texliveMedium
-      latexrun
-      zathura
-      swww
-      wl-color-picker
-      pinentry-all
-      prismlauncher
-      firefox
-      thunderbird
-      wl-clipboard
-      alacritty
-      wezterm
-      vesktop
-      darktable
-      signal-desktop
-      poppler
-      bitwarden
-      unstable.niriswitcher
-      rofi-rbw-wayland
-      lyra-cursors
-      way-displays
-      nautilus
+        # Graphical applications
+        texliveMedium
+        latexrun
+        zathura
+        swww
+        wl-color-picker
+        pinentry-all
+        prismlauncher
+        firefox
+        thunderbird
+        wl-clipboard
+        alacritty
+        wezterm
+        vesktop
+        darktable
+        signal-desktop
+        poppler
+        bitwarden
+        unstable.niriswitcher
+        rofi-rbw-wayland
+        lyra-cursors
+        way-displays
+        nautilus
+        qbittorrent
 
-      # Fonts
-      fontconfig
-      papirus-icon-theme
-      nerd-fonts.monaspace
-      nerd-fonts.hack
-      nerd-fonts.fira-code
-      nerd-fonts.roboto-mono
+        # Fonts
+        fontconfig
+        papirus-icon-theme
+        nerd-fonts.monaspace
+        nerd-fonts.hack
+        nerd-fonts.fira-code
+        nerd-fonts.roboto-mono
 
-      # Gnome
-      gnome-keyring
+        # Gnome
+        gnome-keyring
 
-      # Utilities (Mainly for waybar)
-      xwayland-satellite
-      libnotify
-      networkmanagerapplet
-      pavucontrol
-      brightnessctl
-      playerctl
-      blueberry
+        # Utilities (Mainly for waybar)
+        xwayland-satellite
+        libnotify
+        networkmanagerapplet
+        pavucontrol
+        brightnessctl
+        playerctl
+        blueberry
 
-      #Languages and frameworks
-      elixir
-      ghc
-      cargo
-      gcc
-      mdbook
-      nixfmt-rfc-style
-      typst
-    ] else []);
+        #Languages and frameworks
+        elixir
+        ghc
+        cargo
+        gcc
+        mdbook
+        nixfmt-rfc-style
+        typst
+      ] else [])
+      ++ (if settings.osu then 
+      [ osu-lazer-bin
+        opentabletdriver
+      ] else [])
+      ++ (if settings.steam then 
+      [
+        #Mostly utilities
+        gamescope
+        gamemode
+        mangohud
+        protonup
+      ] else []);
   };
 
   imports = [

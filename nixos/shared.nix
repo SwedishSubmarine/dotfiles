@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, settings, ... }:
 {
   networking = {
     networkmanager.enable = true;
@@ -13,6 +13,19 @@
   i18n = {
     defaultLocale = "en_US.UTF-8";
   };
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "sv_SE.UTF-8";
+    LC_IDENTIFICATION = "sv_SE.UTF-8";
+    LC_MEASUREMENT = "sv_SE.UTF-8";
+    LC_MONETARY = "sv_SE.UTF-8";
+    LC_NAME = "sv_SE.UTF-8";
+    LC_NUMERIC = "sv_SE.UTF-8";
+    LC_PAPER = "sv_SE.UTF-8";
+    LC_TELEPHONE = "sv_SE.UTF-8";
+    LC_TIME = "sv_SE.UTF-8";
+  };
+
   console = {
     keyMap = "sv-latin1";
   };
@@ -26,26 +39,30 @@
   };
 
   # Airplay
-  services.avahi.enable = true;
-  services.pipewire = {
-    raopOpenFirewall = true;
-    extraConfig.pipewire = {
-      "10-airplay" = {
-        "context.modules" = [
-          {
-            name = "libpipewire-module-raop-discover";
-            args = {
-              "raop.latency.ms" = 500;
-            };
-          }
-        ];
-      };
-    };
-  };
+  # services.avahi.enable = true;
+  # services.pipewire = {
+  #   raopOpenFirewall = true;
+  #   extraConfig.pipewire = {
+  #     "10-airplay" = {
+  #       "context.modules" = [
+  #         {
+  #           name = "libpipewire-module-raop-discover";
+  #           args = {
+  #             "raop.latency.ms" = 500;
+  #           };
+  #         }
+  #       ];
+  #     };
+  #   };
+  # };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true; 
-  programs.appimage.enable = true;
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
+  programs.steam.enable = settings.steam;
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORM="wayland;xcb";
