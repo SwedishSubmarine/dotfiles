@@ -120,6 +120,7 @@
       server = false;
       steam = false;
       unstable = false;
+      osu = false;
     };
 
     # Desktop
@@ -132,6 +133,7 @@
       server = false;
       steam = true;
       unstable = true;
+      osu = true;
     };
     # T2 x86 Laptop
     nixosConfigurations.Eridium =  systemConfig "x86_64-linux" ./nixos/eridium/configuration.nix {
@@ -143,6 +145,7 @@
       server = false;
       steam = true;
       unstable = false;
+      osu = false;
     };
     # T2 x86 Server
     nixosConfigurations.Uru = systemConfig "x86_64-linux" ./nixos/uru/configuration.nix {
@@ -154,6 +157,7 @@
       server = true;
       steam = false;
       unstable = false;
+      osu = false;
     };
   };
 }

@@ -84,6 +84,18 @@
         mdbook
         nixfmt-rfc-style
         typst
+      ] else [])
+      ++ (if settings.osu then 
+      [ osu-lazer-bin
+        opentabletdriver
+      ] else [])
+      ++ (if settings.steam then 
+      [
+        #Mostly utilities
+        gamescope
+        gamemode
+        mangohud
+        protonup
       ] else []);
   };
 
