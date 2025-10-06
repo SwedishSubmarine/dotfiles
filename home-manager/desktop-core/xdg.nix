@@ -44,7 +44,7 @@
       };
       firefox = {
         name = "Firefox";
-        exec = "${pkgs.firefox}/bin/firefox";
+        exec = "${pkgs.firefox}/bin/firefox %u";
         icon = "firefox";
       };
       vesktop = {

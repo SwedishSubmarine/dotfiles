@@ -55,6 +55,7 @@
         lyra-cursors
         way-displays
         nautilus
+        qbittorrent
 
         # Fonts
         fontconfig

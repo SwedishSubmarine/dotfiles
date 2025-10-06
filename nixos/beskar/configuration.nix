@@ -9,37 +9,49 @@
   # Bootloader.
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.windows = {
+    "10" = {
+      title = "Windows 10 Home";
+      efiDeviceHandle = "HD1c";
+    };
+  };
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  hardware.opentabletdriver = {
+    enable = true;
+    daemon.enable = true;
+  };
 
   nixpkgs.overlays = [ inputs.niri.overlays.niri inputs.yazi.overlays.default ];
-  programs.niri.enable = true;
-  programs.niri.package = pkgs.niri-unstable;
-  services.desktopManager.plasma6.enable = true;
 
   # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  time.timeZone = "Europe/Stockholm";
   networking.hostName = "Beskar"; # Define your hostname.
   networking.firewall = {
     enable = true;
   };
 
   # Set your time zone.
-  time.timeZone = "Europe/Stockholm";
   services = {
     displayManager = {
       sddm = {
         enable = true;
         wayland.enable = true;
       };
-      defaultSession = "niri";
+    };
+    desktopManager = {
+      plasma6.enable = true;
+    };
+    xserver.xkb = {
+      layout = "se";
+      variant = "nodeadkeys";
+    };
+    mullvad-vpn = {
+      enable = true;
+      package = pkgs.mullvad-vpn;
     };
   };
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "se";
-    variant = "nodeadkeys";
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.emily = {
     isNormalUser = true;
@@ -51,6 +63,9 @@
   environment.systemPackages = with pkgs; [
     neovim 
     git
+    kdePackages.sddm-kcm
+    kdePackages.kcalc
+    wayland-utils
   ];
 
   system.stateVersion = "25.05"; # Did you read the comment?
