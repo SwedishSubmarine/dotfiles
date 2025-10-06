@@ -122,7 +122,6 @@
       unstable = false;
       osu = false;
     };
-
     # Desktop
     nixosConfigurations.Beskar = systemConfig "x86_64-linux" ./nixos/beskar/configuration.nix {
       user = "emily";
