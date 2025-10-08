@@ -53,6 +53,7 @@
       lyra-cursors
       way-displays
       nautilus
+      freecad-wayland
 
       # Fonts
       fontconfig
