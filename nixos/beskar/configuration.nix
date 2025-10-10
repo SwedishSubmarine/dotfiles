@@ -18,6 +18,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  hardware.wooting.enable = true;
   hardware.opentabletdriver = {
     enable = true;
     daemon.enable = true;
@@ -60,6 +61,7 @@
     ignoreShellProgramCheck = true;
   };
 
+  environment.localBinInPath = true;
   environment.systemPackages = with pkgs; [
     neovim 
     git
