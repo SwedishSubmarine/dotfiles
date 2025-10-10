@@ -6,7 +6,7 @@ rec {
     accent2      = pink;
     # rosewater = "f4dbd6";
     # flamingo  = "f0c6c6";
-    name         = "macchiato";
+    name         = "Catppuccin Macchiato";
     pink         = "f5bde6"; # Pink
     purple       = "c6a0f6"; # Mauve
     red          = "ed8796"; # Red
@@ -41,7 +41,7 @@ rec {
     sddm         = "${./resources/sddm/macchiatoqt5}";
   };
   gruvbox = rec {
-    name         = "gruvbox";
+    name         = "Gruvbox Dark (Yellow accent)";
     accent       = light-yellow;
     accent2      = yellow;
     red          = "cc241d"; # dark-red-dark
