@@ -56,6 +56,7 @@
         way-displays
         nautilus
         qbittorrent
+        protontricks
 
         # Fonts
         fontconfig
@@ -86,9 +87,18 @@
         nixfmt-rfc-style
         typst
       ] else [])
+      # x86 only :(
+      ++ (if !settings.asahi then
+      [
+        tidal-hifi
+      ] else [])
       ++ (if settings.osu then 
-      [ osu-lazer-bin
+      [ 
+        osu-lazer-bin
         opentabletdriver
+        zenity
+        wget
+        wootility
       ] else [])
       ++ (if settings.steam then 
       [
