@@ -57,7 +57,7 @@
         way-displays
         nautilus
         qbittorrent
-        protontricks
+        freecad-wayland
 
         # Fonts
         fontconfig
@@ -128,6 +128,7 @@
         gamemode
         mangohud
         protonup
+        protontricks
       ] else []);
   };
 
