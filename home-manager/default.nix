@@ -58,26 +58,8 @@
         nautilus
         qbittorrent
         freecad-wayland
-
-        # Fonts
-        fontconfig
-        papirus-icon-theme
-        nerd-fonts.monaspace
-        nerd-fonts.hack
-        nerd-fonts.fira-code
-        nerd-fonts.roboto-mono
-
-        # Gnome
-        gnome-keyring
-
-        # Utilities (Mainly for waybar)
-        xwayland-satellite
-        libnotify
-        networkmanagerapplet
-        pavucontrol
-        brightnessctl
-        playerctl
-        blueberry
+        winetricks
+        wine
 
         # Fonts
         fontconfig
