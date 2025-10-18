@@ -129,6 +129,7 @@
         mangohud
         protonup
         protontricks
+        steam-run
       ] else []);
   };
 

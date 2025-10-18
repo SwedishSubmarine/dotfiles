@@ -52,6 +52,11 @@
       enable = true;
       package = pkgs.mullvad-vpn;
     };
+    jellyfin = {
+      enable = true;
+      user = "emily";
+      openFirewall = true;
+    };
   };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.emily = {
@@ -61,6 +66,11 @@
     ignoreShellProgramCheck = true;
   };
 
+  programs.steam = {
+    enable = true;
+    protontricks.enable = true;
+  };
+
   environment.localBinInPath = true;
   environment.systemPackages = with pkgs; [
     neovim 
@@ -68,6 +78,9 @@
     kdePackages.sddm-kcm
     kdePackages.kcalc
     wayland-utils
+    pkgs.jellyfin
+    pkgs.jellyfin-web
+    pkgs.jellyfin-ffmpeg
   ];
 
   system.stateVersion = "25.05"; # Did you read the comment?
