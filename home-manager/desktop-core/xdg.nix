@@ -42,6 +42,11 @@
         exec = "${pkgs.chromium}/bin/chromium --ozone-platform-hint=wayland --app=https://listen.tidal.com";
         icon = "${pkgs.papirus-icon-theme}/share/icons/Papirus/48x48/apps/tidal.svg";
       };
+      soundcloud = {
+        name = "Soundcloud";
+        exec = "${pkgs.chromium}/bin/chromium --ozone-platform-hint=wayland --app=https://soundcloud.com";
+        icon = "${pkgs.papirus-icon-theme}/share/icons/Papirus/48x48/apps/soundcloud.svg";
+      };
       firefox = {
         name = "Firefox";
         exec = "${pkgs.firefox}/bin/firefox %u";

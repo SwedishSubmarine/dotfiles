@@ -156,7 +156,9 @@
           ["markdownH5"] = { fg = "#${theme.gruvbox.accent}"},
           ["markdownH6"] = { fg = "#${theme.gruvbox.accent}"},
           ["Search"] = { fg = "#${theme.gruvbox.cyan}"},
-          ["CurSearch"] = { fg = "#${theme.gruvbox.teal}"}
+          ["CurSearch"] = { fg = "#${theme.gruvbox.teal}"},
+          ["markdownBold"] = { fg = "#${theme.gruvbox.accent}"},
+          ["markdownBoldItalic"] = { fg = "#${theme.gruvbox.pink}"},
         }
       })
       -------------------------------------------------------------------------

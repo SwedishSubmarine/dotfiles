@@ -29,7 +29,9 @@
         bottom = 4,
       }
 
-      -- config.window_background_opacity = 0.95 
+      if "${theme.current.name}" == "Catppuccin Macchiato" then
+        config.window_background_opacity = 0.95 
+      end
       
       config.inactive_pane_hsb = {
         saturation = 1,
@@ -39,17 +41,18 @@
       
       config.colors = {
         tab_bar = { 
-          background = "${theme.current.base1}95",
+          -- Only turns on when opacity is on
+          background = "${theme.current.base1}F3",
           active_tab = { 
-            bg_color = '${theme.current.base1}95',
+            bg_color = '${theme.current.base1}F3',
             fg_color = '#${theme.current.accent}',
           },
           inactive_tab = {
-            bg_color = '${theme.current.base2}95',
+            bg_color = '${theme.current.base2}F3',
             fg_color = '#${theme.current.overlay0}',
           },
           new_tab = {
-            bg_color = '${theme.current.base1}95',
+            bg_color = '${theme.current.base1}F3',
             fg_color = '#${theme.current.base1}',
           },
         },

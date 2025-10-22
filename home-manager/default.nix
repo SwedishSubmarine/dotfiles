@@ -58,8 +58,6 @@
         nautilus
         qbittorrent
         freecad-wayland
-        winetricks
-        wine
 
         # Fonts
         fontconfig
@@ -68,6 +66,7 @@
         nerd-fonts.hack
         nerd-fonts.fira-code
         nerd-fonts.roboto-mono
+        libertine
 
         # Gnome
         gnome-keyring
@@ -111,6 +110,8 @@
         mangohud
         protonup
         protontricks
+        winetricks
+        wine
         steam-run
       ] else []);
   };
