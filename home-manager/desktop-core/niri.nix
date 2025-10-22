@@ -3,7 +3,7 @@ let
   XWAYLAND_DISPLAY = ":3";
   random-wallpaper = pkgs.writeScript "random-wallpaper" ''
     #!/bin/sh
-    swww img $(find ${theme.current.wallpapers} -type f,l \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1) --transition-type any --transition-fps 60
+    swww img "$(find ${theme.current.wallpapers} -type f,l \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1)" --transition-type any --transition-fps 60
   '';
   calendar = pkgs.writeScript "calendar" ''
     # Stolen from Xenia again :3
@@ -635,7 +635,7 @@ in
   systemd.user.timers.wallpaper = {
     Timer = {
       Unit = "wallpaper";
-      OnUnitActiveSec = "1h";
+      OnUnitActiveSec = "0.5h";
     };
     Install.WantedBy = [ "timers.target" ];
   };
