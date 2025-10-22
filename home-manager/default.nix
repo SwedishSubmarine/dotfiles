@@ -66,6 +66,7 @@
         nerd-fonts.hack
         nerd-fonts.fira-code
         nerd-fonts.roboto-mono
+        libertine
 
         # Gnome
         gnome-keyring
