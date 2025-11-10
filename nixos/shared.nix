@@ -61,6 +61,9 @@
   programs.appimage = {
     enable = true;
     binfmt = true;
+    package = pkgs.appimage-run.override {
+      extraPkgs = pkgs: [ pkgs.icu ];
+    };
   };
   programs.steam.enable = settings.steam;
   environment.sessionVariables = {

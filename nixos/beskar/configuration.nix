@@ -18,6 +18,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  hardware.bluetooth.enable = true;
   hardware.wooting.enable = true;
   hardware.opentabletdriver = {
     enable = true;
@@ -55,6 +56,12 @@
     jellyfin = {
       enable = true;
       user = "emily";
+      openFirewall = true;
+    };
+    sunshine = {
+      enable = true;
+      capSysAdmin = true;
+      autoStart = true;
       openFirewall = true;
     };
   };
