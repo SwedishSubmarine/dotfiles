@@ -25,6 +25,7 @@
         nomad
         rbw
         wtype
+        mesa-demos
         unstable.minefair
         unstable.widevine-cdm
         (python3.withPackages ( ps: with ps; [
@@ -50,7 +51,7 @@
         darktable
         signal-desktop
         poppler
-        bitwarden
+        bitwarden-desktop
         unstable.niriswitcher
         rofi-rbw-wayland
         lyra-cursors
@@ -99,7 +100,6 @@
       ] else [])
       ++ (if settings.osu then 
       [ 
-        osu-lazer-bin
         opentabletdriver
         zenity
         wget
@@ -111,7 +111,7 @@
         gamescope
         gamemode
         mangohud
-        protonup
+        protonup-ng
         protontricks
         winetricks
         wine
