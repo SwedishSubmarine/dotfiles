@@ -58,6 +58,8 @@
         nautilus
         qbittorrent
         freecad-wayland
+        distrobox
+        libreoffice
 
         # Fonts
         fontconfig
@@ -88,6 +90,7 @@
         mdbook
         nixfmt-rfc-style
         typst
+        postgresql
       ] else [])
       # x86 only :(
       ++ (if !settings.asahi then
