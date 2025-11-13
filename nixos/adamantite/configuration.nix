@@ -22,20 +22,27 @@
   programs.niri.package = pkgs.niri-unstable;
 
   services.power-profiles-daemon.enable = true;
-    services = {
-      displayManager = {
-        sddm = {
-          enable = true;
-          wayland.enable = true;
-          theme = theme.current.sddm;
-          extraPackages = with pkgs.libsForQt5; [
-            qt5.qtgraphicaleffects
-            layer-shell-qt
-          ];
-        };
-        defaultSession = "niri";
+  services = {
+    displayManager = {
+      sddm = {
+        enable = true;
+        wayland.enable = true;
+        theme = theme.current.sddm;
+        extraPackages = with pkgs.libsForQt5; [
+          qt5.qtgraphicaleffects
+          layer-shell-qt
+        ];
       };
+      defaultSession = "niri";
     };
+    postgresql = {
+      enable = true;
+      authentication = pkgs.lib.mkOverride 10 ''
+        #type database  DBuser  auth-method
+        local all       all     trust
+      '';
+    };
+  };
   environment.pathsToLink = [ "/share/zsh" ];
   environment.systemPackages = with pkgs; [
     git
