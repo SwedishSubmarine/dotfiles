@@ -88,7 +88,7 @@ in
         hotkey-overlay.title = "Web search";
         action = spawn "sh" "${./rofi/web-search.sh}";
       };
-      "Mod+C" = {
+      "Mod+P" = {
         hotkey-overlay.title = "Bluetooth connect";
         action = spawn "sh" "${./rofi/bluetooth.sh}";
       };

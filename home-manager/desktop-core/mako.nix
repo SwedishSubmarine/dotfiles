@@ -10,9 +10,9 @@
       width = 500;
       font = "Hack Nerd Font"  ;
       border-color = "#${theme.current.accent2}"; # Catppuccin lavender
-      background-color = "#${theme.current.surface0}"; # Cappuccin surface 0
+      background-color = "#${theme.current.surface0}E0"; # Cappuccin surface 0
       default-timeout=7500;
-      ignore-timeout=1;
+      ignore-timeout=0;
       "mode=dnd" = {
         invisible = true;
       };
