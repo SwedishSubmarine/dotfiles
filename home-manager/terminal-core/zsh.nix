@@ -133,15 +133,21 @@
       ZSH_THEME_GIT_PROMPT_STASHED=""
       ZSH_THEME_GIT_PROMPT_CLEAN=""
 
+      eval "$(zoxide init --cmd cd zsh)"
+
       #Prompt
       VIM_MODE_INITIAL_KEYMAP=viins
+    '' + (if settings.server then ''
+      PROMPT='%B%F{14}Emjauly%b@%m%f → %F{9}%8~%f'
+      PROMPT+='
+      $(gitprompt)'
+      PROMPT+='%B%#%b '
+    '' else ''
       PROMPT='%B%F{13}Emjauly%b@%m%f → %F{14}%8~%f'
       PROMPT+='
       $(gitprompt)'
       PROMPT+='%B%#%b '
-
-      eval "$(zoxide init --cmd cd zsh)"
-    '';
+    '');
 
     plugins = [
     # zsh-git-prompt

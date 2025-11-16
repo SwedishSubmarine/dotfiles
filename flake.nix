@@ -158,5 +158,16 @@
       unstable = false;
       osu = false;
     };
+    nixosConfigurations.Chlorophyte = systemConfig "x86_64-linux" ./nixos/chlorophyte/configuration.nix {
+      user = "emily";
+      niri = false;
+      asahi = false;
+      t2 = false;
+      kde = false;
+      server = true;
+      steam = false;
+      unstable = false;
+      osu = false;
+    };
   };
 }
