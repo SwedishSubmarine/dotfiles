@@ -21,6 +21,11 @@
         port = 2222;
         user = "emily";
       };
+      chlorophyte = {
+        # Temp until domain has been bought :)
+        hostname = "192.168.0.140";
+        user = "emily";
+      };
     };
   };
 }
