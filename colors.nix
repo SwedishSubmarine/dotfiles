@@ -38,7 +38,6 @@ rec {
     wezterm      = ''config.color_scheme = "Catppuccin Macchiato"'';
     nvim         = ''vim.cmd("colorscheme catppuccin-macchiato")'';
     bat          = "Catppuccin Macchiato";
-    sddm         = "${./resources/sddm/macchiatoqt5}";
   };
   gruvbox = rec {
     name         = "Gruvbox Dark (Yellow accent)";
@@ -78,6 +77,5 @@ rec {
     wezterm      = ''config.color_scheme = "Gruvbox Dark (Gogh)"'';
     nvim         = ''vim.cmd("colorscheme gruvbox")'';
     bat          = "gruvbox-dark";
-    sddm         = "${./resources/sddm/gruvboxqt5}";
   };
 }

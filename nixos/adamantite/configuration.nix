@@ -27,10 +27,10 @@
       sddm = {
         enable = true;
         wayland.enable = true;
-        theme = theme.current.sddm;
+        theme = "where_is_my_sddm_theme";
         extraPackages = with pkgs; [
-          # libsForQt5.qt5.qtgraphicaleffects
           kdePackages.layer-shell-qt
+          kdePackages.qt5compat
         ];
       };
       defaultSession = "niri";
@@ -49,18 +49,38 @@
     git-crypt
     binutils
     coreutils
+    (where-is-my-sddm-theme.override {
+      themeConfig.General = {
+        background = "${../../gruvbox-wallpapers/gruvbox_astro.jpg}";
+        passwordInputRadius = "10";
+        passwordInputWidth = "0.25";
+        passwordInputCursorVisible = "true";
+        showSessionsByDefault = "true";
+        showUsersByDefault = "true";
+        usersFontSize = "32";
+        backgroundMode = "aspect";
+        passwordFontSize = "36";
+        passwordCursorColor = "#${theme.current.accent}";
+        passwordTextColor = "#${theme.current.accent}";
+        basicTextColor = "#${theme.current.text1}";
+        font = "Hack";
+      };
+    })
   ];
 
   # Specify path to peripheral firmware files.
   # Private git-repo
   hardware.asahi.peripheralFirmwareDirectory = asahi-firmware;
   hardware.asahi.enable = true;
-  # hardware.asahi.useExperimentalGPUDriver = true;
   hardware.asahi.setupAsahiSound = true;
   hardware.bluetooth.enable = true;
+  hardware.graphics.package = 
+    assert pkgs.mesa.version == "25.3.0";
+    (import (fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/c5ae371f1a6a7fd27823bc500d9390b38c05fa55.tar.gz";
+    sha256 = "sha256-4PqRErxfe+2toFJFgcRKZ0UI9NSIOJa+7RXVtBhy4KE=";
+  }) { localSystem = pkgs.stdenv.hostPlatform; }).mesa;
 
-  # Enable CUPS to print documents. ??
-  # services.printing.enable = true;
 
   services.libinput.enable = true;
 
