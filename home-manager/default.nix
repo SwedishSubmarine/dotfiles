@@ -2,7 +2,6 @@
 {
   home = {
     stateVersion = "25.05";
-
     packages =
       with pkgs;
       [
@@ -35,6 +34,7 @@
         ]))
 
         # Graphical applications
+        vimiv-qt
         texliveMedium
         latexrun
         zathura
@@ -65,11 +65,15 @@
         # Fonts
         fontconfig
         papirus-icon-theme
+        times-newer-roman
         nerd-fonts.monaspace
         nerd-fonts.hack
         nerd-fonts.fira-code
         nerd-fonts.roboto-mono
         libertine
+        roboto
+        source-sans-pro
+        font-awesome
 
         # Gnome
         gnome-keyring

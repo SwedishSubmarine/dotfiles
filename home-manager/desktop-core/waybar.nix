@@ -337,7 +337,9 @@
       #tray {
           padding-left:   5px;
           padding-right:  5px;
-          background:     alpha(#${theme.current.text1},.5);
+          background:     alpha(#${theme.current.text1},.6);
+          border-radius:  20px;
+          margin:         3px;
       }
 
       #battery {
