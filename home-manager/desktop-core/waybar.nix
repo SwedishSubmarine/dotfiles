@@ -336,11 +336,12 @@
 
       #tray {
           padding-left:   5px;
-          padding-right:  10px;
+          padding-right:  5px;
+          background:     alpha(#${theme.current.text1},.5);
       }
 
       #battery {
-          padding-left:   0px;
+          padding-left:   5px;
           padding-right:  10px;
       }
 

@@ -119,7 +119,7 @@
       kde = false;
       server = false;
       steam = false;
-      unstable = false;
+      unstable = true;
       osu = false;
     };
     # Desktop

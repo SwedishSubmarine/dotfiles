@@ -28,9 +28,9 @@
         enable = true;
         wayland.enable = true;
         theme = theme.current.sddm;
-        extraPackages = with pkgs.libsForQt5; [
-          qt5.qtgraphicaleffects
-          layer-shell-qt
+        extraPackages = with pkgs; [
+          # libsForQt5.qt5.qtgraphicaleffects
+          kdePackages.layer-shell-qt
         ];
       };
       defaultSession = "niri";
@@ -55,7 +55,7 @@
   # Private git-repo
   hardware.asahi.peripheralFirmwareDirectory = asahi-firmware;
   hardware.asahi.enable = true;
-  hardware.asahi.useExperimentalGPUDriver = true;
+  # hardware.asahi.useExperimentalGPUDriver = true;
   hardware.asahi.setupAsahiSound = true;
   hardware.bluetooth.enable = true;
 

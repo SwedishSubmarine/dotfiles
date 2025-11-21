@@ -119,11 +119,11 @@ in
       };
       "Mod+Shift+4" = {
         hotkey-overlay.title = "Screenshot region";
-        action = screenshot;
+        action.screenshot = [];
       };
       "Mod+Shift+5" = {
         hotkey-overlay.title = "Screenshot window";
-        action = screenshot-window { write-to-disk = false; };
+        action.screenshot-window = { write-to-disk = false; };
       };
 
       # Window and column size
