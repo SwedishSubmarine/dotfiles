@@ -163,7 +163,7 @@ in
         hotkey-overlay.title = "Maximize Column";
         action = maximize-column;
       };
-      "Mod+Alt+Shift+F" = {
+      "Mod+Alt+F" = {
         hotkey-overlay.title = "Fullscreen";
         action = fullscreen-window;
       };
@@ -323,17 +323,17 @@ in
       };
 
       # Niri switcher
-      "Alt+Tab" = { 
-        hotkey-overlay.title = "Niriswitcher";
-        repeat = false; 
-        action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application";
-      };
-
-      "Alt+Shift+Tab" = {
-        repeat = false;
-        action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application"; 
-      };
-
+      # "Alt+Tab" = { 
+      #   hotkey-overlay.title = "Niriswitcher";
+      #   repeat = false; 
+      #   action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application";
+      # };
+      #
+      # "Alt+Shift+Tab" = {
+      #   repeat = false;
+      #   action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application"; 
+      # };
+      #
       # Function row
       "XF86MonBrightnessDown".action.spawn = [ "brightnessctl" "s" "10%-"]; 
       "XF86MonBrightnessUp".action.spawn = [ "brightnessctl" "s" "10%+" ];
