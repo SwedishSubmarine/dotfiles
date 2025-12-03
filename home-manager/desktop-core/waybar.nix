@@ -4,11 +4,16 @@ let
     #!/bin/sh
 
     statefile="${config.home.homeDirectory}/.cache/dnd_state"
+    default=$(makoctl mode | grep dnd)
 
     if [[ -f "${config.home.homeDirectory}/.cache/dnd_state" ]] ; then
       state=$(cat "$statefile")
     else 
-      state="unmuted"
+      if [ -n "$default" ] ; then
+        state="muted"
+      else
+        state="unmuted"
+      fi
     fi
 
     if [[ "$state" == "unmuted" ]] ; then
