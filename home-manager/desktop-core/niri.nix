@@ -341,8 +341,8 @@ in
       "XF86LaunchA".action = toggle-overview;
       
       "XF86Search" = {
-        hotkey-overlay.title = "Open calendar";
-        action = spawn "sh" "${calendar}";
+        hotkey-overlay.title = "Do not disturb";
+        action = spawn "sh" "${./dnd.sh}";
       };
 
       "XF86AudioMicMute" = {

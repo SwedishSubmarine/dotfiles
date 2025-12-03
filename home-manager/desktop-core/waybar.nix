@@ -1,4 +1,25 @@
-{ pkgs, theme, ... }: 
+{ pkgs, theme, config, ... }: 
+let  
+  poll-dnd = pkgs.writeScript "poll-dnd" ''
+    #!/bin/sh
+
+    statefile="${config.home.homeDirectory}/.cache/dnd_state"
+
+    if [[ -f "${config.home.homeDirectory}/.cache/dnd_state" ]] ; then
+      state=$(cat "$statefile")
+    else 
+      state="unmuted"
+    fi
+
+    if [[ "$state" == "unmuted" ]] ; then
+      icon="󰂚"
+    else
+      icon="󰂛"
+    fi
+
+    printf '{"text": "%s ", "tooltip": "Do not disturb"}' $icon
+  '';
+in 
 {
   systemd.user.services.nm-applet = {
     Unit = {
@@ -34,6 +55,7 @@
         "network"
         "bluetooth"
         "power-profiles-daemon"
+        "custom/dnd"
         "clock"
       ];
       "group/left" = {
@@ -76,7 +98,7 @@
           balanced = " ";
           power-saver = " ";
         };
-        tooltip = false;
+        tooltip = "Power profile";
       };
       backlight = {
         format = "󰛨 ";
@@ -106,11 +128,12 @@
             ethernet = ["󰛳"];
         };
         on-click = "pkill alacritty || alacritty -e nmtui";
-        tooltip = false;
+        tooltip = "Nmtui wi-fi";
       };
       bluetooth = {
         on-click = "pkill blueberry || blueberry";
         format = "";
+        tooltip = "Blueberry";
       };
       clock = {
         format = "{:%a %d %b %H:%M}";
@@ -135,6 +158,13 @@
         format = "⏻ ";
         tooltip = false;
         on-click = "rofi -show power-menu -show-icons -modi power-menu:${./rofi/rofi-power-menu}";
+      };
+      "custom/dnd" = {
+        format = "{}";
+        exec = "${poll-dnd}";
+        interval = 1;
+        return-type = "json";
+        on-click = "${./dnd.sh}";
       };
       mpris = {
         title-len = 30;
@@ -361,6 +391,7 @@
           padding-right: 0px;
       }
 
+
       #network {
           padding-left: 20px;
           padding-right: 10px;
@@ -377,6 +408,12 @@
           padding-left: 10px;
           padding-right: 10px;
           color: #${theme.current.text1};
+      }
+
+      #custom-dnd {
+          color:    #${theme.current.light-yellow};
+          padding-left: 10px; 
+          padding-right: 0px;
       }
 
       #power-profiles-daemon {
