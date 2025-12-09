@@ -103,7 +103,7 @@ in
           balanced = " ";
           power-saver = " ";
         };
-        tooltip = "Power profile";
+        tooltip = false;
       };
       backlight = {
         format = "󰛨 ";
@@ -133,12 +133,12 @@ in
             ethernet = ["󰛳"];
         };
         on-click = "pkill alacritty || alacritty -e nmtui";
-        tooltip = "Nmtui wi-fi";
+        tooltip = false;
       };
       bluetooth = {
         on-click = "pkill blueberry || blueberry";
         format = "";
-        tooltip = "Blueberry";
+        tooltip = false;
       };
       clock = {
         format = "{:%a %d %b %H:%M}";
