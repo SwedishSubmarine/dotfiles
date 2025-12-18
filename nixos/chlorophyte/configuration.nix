@@ -12,12 +12,39 @@
     efi.canTouchEfiVariables = true;
     efi.efiSysMountPoint = "/boot";
   };
-  
+ 
+  hardware.i2c.enable = true;
+  environment.variables.LIBVA_DRIVER_NAME = "nvidia";
+  services.xserver.videoDrivers = [ "nvidia" ]; 
+  hardware = {
+    graphics.enable = true;
+    nvidia = {
+      modesetting.enable = true;
+      open = false;
+    };
+  };
   fileSystems = {
-    "/mnt/sdc" = {
-      device = "/dev/sdc2";
+    "/mnt/data4TB" = {
+      device = "/dev/disk/by-uuid/DC3A-2C1A";
       fsType = "exfat";
       # options = [ "users" "nofail" ];
+    };
+    "/mnt/data3TB" = {
+      device = "/dev/disk/by-uuid/25c17c84-0b18-429b-8040-c16720d61c45";
+      fsType = "ext4";
+    };
+  };
+
+  services.jellyfin = {
+    enable = true;
+    user = "emily";
+    openFirewall = true;
+  };
+
+  services.hardware = {
+    openrgb = {
+      enable = true;
+      motherboard = "amd";
     };
   };
 
@@ -61,6 +88,8 @@
     description = "emily";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [];
+    shell = pkgs.zsh;
+    ignoreShellProgramCheck = true;
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIARypcjzq0rpw1YRa8IJ91SsC4jrXgbB0SaYHfSlb9T4 et@MacBook-Air-2.local"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHPSV2IFijYoSfeYkUENWbZZM9yLR2xl5tpJ6xlK/11h Emily@et"
@@ -82,6 +111,9 @@
 	  neovim
 	  git
     git-crypt
+    pkgs.jellyfin
+    pkgs.jellyfin-web
+    pkgs.jellyfin-ffmpeg
   ];
 
   # networking.firewall.allowedTCPPorts = [ ... ];
