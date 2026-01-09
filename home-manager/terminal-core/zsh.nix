@@ -16,7 +16,8 @@
       lsl = "${pkgs.eza}/bin/eza --icons --color -Al --git-repos --git";
       lst = "${pkgs.eza}/bin/eza --icons --color -A --tree --level=3";
       carfetch = "${pkgs.fastfetch}/bin/fastfetch --logo ~/car.webp --logo-type iterm --logo-width 42";
-    } // (if settings.asahi then {steam = "${pkgs.distrobox}/bin/distrobox enter steam -- steam"; } else {});
+    };
+    # // (if settings.asahi then {steam = "${pkgs.distrobox}/bin/distrobox enter steam -- steam"; } else {});
 
     # Previously plugins (PP 🐈)
     syntaxHighlighting.enable = true;

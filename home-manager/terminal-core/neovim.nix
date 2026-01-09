@@ -94,7 +94,7 @@
       vim.keymap.set('n', '<leader>h', ':Pick help <CR>', {desc = "Pick help"})
 
       -- LSP
-      vim.lsp.enable({ "lua_ls", "tinymist" })
+      vim.lsp.enable({ "lua_ls", "tinymist", "nixd", "cssls"})
       vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, {desc = "LSP Code code action"})
       vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition, {desc = "LSP Code definition"})
       vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, {desc = "LSP Code rename"})
@@ -110,8 +110,14 @@
       vim.keymap.set('n', '<leader>t', ':pop <CR>', {desc = "Pop tag stack"})
       vim.keymap.set('i', '<C-n>', vim.lsp.omnifunc, opts)
 
-      local nvim_lsp = require("lspconfig")
-      nvim_lsp.nixd.setup({
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+      vim.lsp.config('cssls', {
+        capabilities = capabilities,
+      })
+
+      vim.lsp.config('nixd', {
         cmd = { "nixd" },
         settings = {
           nixd = {
@@ -386,6 +392,7 @@
       nixd
       lua-language-server
       tinymist
+      vscode-langservers-extracted
     ];
   };
 }

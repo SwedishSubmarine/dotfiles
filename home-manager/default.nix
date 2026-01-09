@@ -31,6 +31,7 @@
           matplotlib
           numpy
           scipy
+          psycopg2
         ]))
 
         # Graphical applications
@@ -90,6 +91,7 @@
         #Languages and frameworks
         elixir
         ghc
+        go
         cargo
         gcc
         mdbook
