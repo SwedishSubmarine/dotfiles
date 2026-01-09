@@ -37,18 +37,26 @@
     };
     postgresql = {
       enable = true;
+      enableTCPIP = true;
       authentication = pkgs.lib.mkOverride 10 ''
-        #type database  DBuser  auth-method
-        local all       all     trust
+        #type database  DBuser  origin-address  auth-method
+        local all       all                     trust
+        host  all       all     127.0.0.1/8     trust
+        host  all       all     ::1/128         trust 
       '';
+    };
+    mullvad-vpn = {
+      enable = true;
+      package = pkgs.mullvad-vpn;
     };
   };
   environment.pathsToLink = [ "/share/zsh" ];
   environment.systemPackages = with pkgs; [
-    git
-    git-crypt
     binutils
     coreutils
+    docker-compose
+    git
+    git-crypt
     (where-is-my-sddm-theme.override {
       themeConfig.General = {
         background = "${../../gruvbox-wallpapers/gruvbox_astro.jpg}";
@@ -74,13 +82,6 @@
   hardware.asahi.enable = true;
   hardware.asahi.setupAsahiSound = true;
   hardware.bluetooth.enable = true;
-  hardware.graphics.package = 
-    assert pkgs.mesa.version == "25.3.0";
-    (import (fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/c5ae371f1a6a7fd27823bc500d9390b38c05fa55.tar.gz";
-    sha256 = "sha256-4PqRErxfe+2toFJFgcRKZ0UI9NSIOJa+7RXVtBhy4KE=";
-  }) { localSystem = pkgs.stdenv.hostPlatform; }).mesa;
-
 
   services.libinput.enable = true;
 

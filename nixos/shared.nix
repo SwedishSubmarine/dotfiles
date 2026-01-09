@@ -1,7 +1,11 @@
 { pkgs, settings, ... }:
 {
   networking = {
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
+
     wireless.iwd = {
       enable = true;
       settings.General.EnableNetworkConfiguration = true;
