@@ -1,4 +1,4 @@
-{ pkgs, unstable, settings, ... }:
+{ pkgs, unstable, stable, settings, ... }:
 {
   home = {
     stateVersion = "25.05";
@@ -48,7 +48,6 @@
         wl-clipboard
         alacritty
         wezterm
-        vesktop
         darktable
         signal-desktop
         poppler
@@ -62,6 +61,7 @@
         freecad-wayland
         distrobox
         libreoffice
+        easyeffects
 
         # Fonts
         fontconfig
@@ -102,7 +102,7 @@
       # x86 only :(
       ++ (if !settings.asahi then
       [
-        tidal-hifi
+        stable.tidal-hifi
       ] else [])
       ++ (if settings.osu then 
       [ 
@@ -118,9 +118,6 @@
         gamemode
         mangohud
         protonup-ng
-        protontricks
-        winetricks
-        wine
         steam-run
       ] else []);
   };
