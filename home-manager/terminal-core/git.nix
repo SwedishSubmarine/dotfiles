@@ -11,7 +11,7 @@
       merge.autostash = true;
       user.Email = "emily.jo.tiberg@gmail.com";
       user.Name = "Emily Tiberg";
-      aliases = {
+      alias = {
         s = "status";
         lg = ''log --oneline --graph --decorate --pretty=format:"%C(cyan)%h\ %ad%Cred%d \%Creset%s%Cblue" --date=short'';
     };

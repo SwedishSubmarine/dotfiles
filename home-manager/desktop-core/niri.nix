@@ -37,11 +37,11 @@ in
     };
     input = {
       keyboard = {
-        xkb = {
-          layout = "se";
-          variant = "nodeadkeys";
-          options = "caps:swapescape";
-        };
+      xkb = {
+        layout = "se,us(euro)";
+        variant = "nodeadkeys,";
+        options = "grp:alts_toggle,caps:swapescape";
+      };
         repeat-rate = 50;
       };
       touchpad = {
