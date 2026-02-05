@@ -20,7 +20,8 @@ in
 {
   imports = [
     ./rofi/rofi.nix
-    ./mako.nix
+    # ./mako.nix
+    ./swaync.nix
     ./waybar.nix
     ./xdg.nix
   ];
