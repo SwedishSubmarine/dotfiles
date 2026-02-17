@@ -160,7 +160,7 @@
       for key, dir in pairs({ h = 'Left', j = 'Down', k = 'Up', l = 'Right' }) do
         table.insert(keys, {
           key = key,
-          mods = 'CTRL',
+          mods = 'SHIFT|CTRL',
           action = act.AdjustPaneSize { dir, 1 },
         })
         table.insert(keys, {

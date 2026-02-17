@@ -40,7 +40,7 @@ in
       xkb = {
         layout = "se,us(euro)";
         variant = "nodeadkeys,";
-        options = "grp:alts_toggle,caps:swapescape";
+        options = "grp:alt_space_toggle,caps:swapescape";
       };
         repeat-rate = 50;
       };

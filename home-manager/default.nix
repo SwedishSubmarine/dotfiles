@@ -6,6 +6,7 @@
       with pkgs;
       [
         # Terminal applications
+        file
         wget
         yt-dlp
         ffmpeg

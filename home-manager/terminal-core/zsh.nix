@@ -79,7 +79,7 @@
           uris+=("file://$real_path")
         done
 
-        printf '%s\n' "$(uris[@])" | ${pkgs.wl-clipboard}/bin/wl-copy --type text/uri-list
+        printf '%s\n' "''${uris[@]}" | ${pkgs.wl-clipboard}/bin/wl-copy --type text/uri-list
       }
 
       # Completion stuff

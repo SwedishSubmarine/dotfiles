@@ -48,9 +48,10 @@
           ["Search"] = { fg = "#${theme.gruvbox.cyan}"},
           ["CurSearch"] = { fg = "#${theme.gruvbox.teal}"},
           ["markdownBold"] = { fg = "#${theme.gruvbox.accent}"},
-          ["markdownBoldItalic"] = { fg = "#${theme.gruvbox.pink}"},
+          ["markdownBoldItalic"] = { fg = "#${theme.gruvbox.pink}"}
         }
       })
+
       -------------------------------------------------------------------------
       '' + theme.current.nvim + "\n" + '' 
       require("transparent").setup({
@@ -114,6 +115,7 @@
       render-markdown-nvim
       nvim-colorizer-lua
       which-key-nvim
+      telescope-nvim
       switch-vim
     ];
 
@@ -123,6 +125,7 @@
       tinymist
       vscode-langservers-extracted
       haskell-language-server
+      java-language-server
     ];
   };
 }
