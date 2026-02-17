@@ -73,7 +73,13 @@
       build() { nix-subcommand "build" "$@" }
 
       function fcp() {
-        ${pkgs.wl-clipboard}/bin/wl-copy < "$@"
+        local uris=()
+        for file in "$@"; do
+          local abs_path="$(realpath "$file")"
+          uris+=("file://$real_path")
+        done
+
+        printf '%s\n' "$(uris[@])" | ${pkgs.wl-clipboard}/bin/wl-copy --type text/uri-list
       }
 
       # Completion stuff

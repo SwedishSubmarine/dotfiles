@@ -13,6 +13,7 @@ rec {
     # maroon      = "ee99a0";
     orange       = "f5a97f"; # Peach
     yellow       = "eed49f"; # Yellow
+    light-yellow = "eed49f"; # Yellow
     green        = "a6da95"; # Green
     teal         = "8bd5ca"; # Teal
     light-blue   = "91d7e3"; # Sky
