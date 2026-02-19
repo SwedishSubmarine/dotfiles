@@ -151,7 +151,6 @@
     '';
 
     plugins = [
-    # zsh-git-prompt
       {
         name = "zsh-vim-mode";
         file = "zsh-vim-mode.plugin.zsh";
@@ -171,6 +170,16 @@
           rev = "0193adeb09fbc51fac738081a4718a3cf8427ff8";
           sha256 = "sha256-Q7Dp6Xgt5gvkWZL+htDmGYk9RTglOWrrbl6Wf6q/qjY=";
         };
+      }
+      {
+        name = "git-auto-fetch";
+        file = "git-auto-fetch.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "ohmyzsh";
+          repo = "ohmyzsh";
+          rev = "cc9259d6ad6b1d3cab488cc02f705be1c840c785";
+          sha256 = "sha256-t3yCFQKwBmOO9xPO2qFZd5eWelzRQ9bap+eU5S4dIN8=";
+        } + "/plugins/git-auto-fetch";
       }
     ];
   };
