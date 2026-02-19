@@ -1,4 +1,8 @@
-{ pkgs, unstable, stable, settings, ... }:
+{ pkgs, unstable, stable, settings, lib, ... }:
+let 
+  opt = lib.optional;
+  opts = lib.optionals;
+in
 {
   home = {
     stateVersion = "25.05";
@@ -16,7 +20,7 @@
         cowsay
         ## Everything below will not be installed on a server
       ]
-      ++ ( if !settings.server then
+      ++ opts ( !settings.server)
       [
         resvg
         imagemagick
@@ -99,20 +103,17 @@
         nixfmt-rfc-style
         typst
         postgresql
-      ] else [])
+      ]
       # x86 only :(
-      ++ (if !settings.asahi then
-      [
-        stable.tidal-hifi
-      ] else [])
-      ++ (if settings.osu then 
+      ++ opt (!settings.asahi) stable.tidal-hifi
+      ++ opts (settings.osu)
       [ 
         opentabletdriver
         zenity
         wget
         wootility
-      ] else [])
-      ++ (if settings.steam then 
+      ]
+      ++ opts (settings.steam) 
       [
         #Mostly utilities
         gamescope
@@ -120,19 +121,12 @@
         mangohud
         protonup-ng
         steam-run
-      ] else []);
+      ]; 
   };
 
-  imports =
-    [
+  imports = [
       ./terminal-core/terminal.nix
-    ]
-    ++ ( if !settings.server then
-        [ ./programs ]
-      else []) ++ (
-      if settings.niri then
-        [ ./desktop-core/niri.nix ]
-      else if settings.kde then
-        [ ./desktop-core/plasma.nix ]
-      else []);
+      opt (!settings.server) ./programs
+      opt (settings.niri) ./desktop-core/niri.nix
+    ];
 }
