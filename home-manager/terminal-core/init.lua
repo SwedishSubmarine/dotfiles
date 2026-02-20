@@ -63,9 +63,9 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
-vim.keymap.set('n', '<C-n>', ':new <CR>', {desc = "New horizontal window"})
-vim.keymap.set('n', '<S-n>', ':vnew <CR>', {desc = "New vertical window"})
-vim.keymap.set('n', '<C-w>', ':q <CR>', {desc = "lazy close split"})
+vim.keymap.set('n', '<leader>ns', ':new <CR>', {desc = "New horizontal window"})
+vim.keymap.set('n', '<leader>nd', ':vnew <CR>', {desc = "New vertical window"})
+vim.keymap.set('n', '<C-w>w', ':q <CR>', {desc = "lazy close split"})
 
 -- Folds
 vim.keymap.set('n', 'zs', ':mkview <CR>', {desc = "Save folds"})

@@ -116,6 +116,8 @@
       nvim-colorizer-lua
       which-key-nvim
       telescope-nvim
+      popup-nvim
+      telescope-media-files-nvim
       switch-vim
     ];
 
