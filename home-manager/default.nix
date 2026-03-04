@@ -124,9 +124,9 @@ in
       ]; 
   };
 
-  imports = [
-      ./terminal-core/terminal.nix
-      opt (!settings.server) ./programs
-      opt (settings.niri) ./desktop-core/niri.nix
-    ];
+  imports = (
+    [./terminal-core/terminal.nix]
+    ++ opt (!settings.server) ./programs
+    ++ opt (settings.niri) ./desktop-core/niri.nix
+  );
 }

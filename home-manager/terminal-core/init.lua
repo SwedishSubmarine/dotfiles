@@ -44,7 +44,7 @@ local builtin = require('telescope.builtin')
 local themes = require('telescope.themes')
 
 -- Improvements
-vim.keymap.set('n', 'x', '"_x') -- Make x send to blackhole and not act as cut
+-- vim.keymap.set('n', 'x', '"_x') -- Make x send to blackhole and not act as cut
 vim.keymap.set('n', '<C-d>', '<C-d>zz') -- Center after half page down
 vim.keymap.set('n', '<C-u>', '<C-u>zz') -- Center after half page up 
 

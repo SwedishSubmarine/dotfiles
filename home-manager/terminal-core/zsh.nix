@@ -1,4 +1,20 @@
 { pkgs, settings, config, ... }:
+let
+  file-copy = pkgs.writeScript "file-copy" ''
+  #!/bin/sh
+  fcp() {
+    local uris=()
+    for file in "$@"; do
+      if [[ -e "$file" ]]; then
+        local abs_path="$(realpath "$file")"
+        uris+=("file://$abs_path")
+      fi
+    done
+
+    printf '%s\n' "''${uris[@]}" | wl-copy --type text/uri-list
+  }
+  ''; # 😡
+in
 {
   programs.zsh = {
     enable = true;
@@ -17,7 +33,6 @@
       lst = "${pkgs.eza}/bin/eza --icons --color -A --tree --level=3";
       carfetch = "${pkgs.fastfetch}/bin/fastfetch --logo ~/car.webp --logo-type iterm --logo-width 42";
     };
-    # // (if settings.asahi then {steam = "${pkgs.distrobox}/bin/distrobox enter steam -- steam"; } else {});
 
     # Previously plugins (PP 🐈)
     syntaxHighlighting.enable = true;
@@ -72,16 +87,7 @@
       run()   { nix-subcommand "run" "$@"   }
       build() { nix-subcommand "build" "$@" }
 
-      function fcp() {
-        local uris=()
-        for file in "$@"; do
-          local abs_path="$(realpath "$file")"
-          uris+=("file://$real_path")
-        done
-
-        printf '%s\n' "''${uris[@]}" | ${pkgs.wl-clipboard}/bin/wl-copy --type text/uri-list
-      }
-
+      source ${file-copy}
       # Completion stuff
       zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
       zstyle ':completion:*' completions 1
