@@ -17,6 +17,12 @@
     ];
   };
 
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 16384;
+    }
+  ];
   nixpkgs.overlays = [ inputs.niri.overlays.niri inputs.yazi.overlays.default ];
   programs.niri.enable = true;
   programs.niri.package = pkgs.niri-unstable;
