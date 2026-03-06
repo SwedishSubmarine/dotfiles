@@ -128,6 +128,7 @@
       vscode-langservers-extracted
       haskell-language-server
       java-language-server
+      gopls
     ];
   };
 }

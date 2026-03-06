@@ -63,7 +63,6 @@ in
         way-displays
         nautilus
         qbittorrent
-        freecad-wayland
         distrobox
         libreoffice
         easyeffects
