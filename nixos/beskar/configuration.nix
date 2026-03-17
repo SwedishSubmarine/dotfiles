@@ -53,17 +53,13 @@
       enable = true;
       package = pkgs.mullvad-vpn;
     };
-    jellyfin = {
-      enable = true;
-      user = "emily";
-      openFirewall = true;
-    };
     sunshine = {
       enable = true;
       capSysAdmin = true;
       autoStart = true;
       openFirewall = true;
     };
+    flatpak.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -74,18 +70,20 @@
     ignoreShellProgramCheck = true;
   };
 
+  hardware.graphics.enable32Bit = true;
   programs.steam = {
     enable = true;
-    protontricks.enable = true;
   };
 
   environment.localBinInPath = true;
   environment.systemPackages = with pkgs; [
     neovim 
     git
+    git-crypt
     kdePackages.sddm-kcm
     kdePackages.kcalc
     wayland-utils
+    wineWowPackages.stable
     pkgs.jellyfin
     pkgs.jellyfin-web
     pkgs.jellyfin-ffmpeg

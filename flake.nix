@@ -70,19 +70,23 @@
         inherit inputs;
         inherit settings;
         inherit theme;
+        stable = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
         unstable = import nixpkgs-unstable {
           inherit system;
           config.allowUnfree = true;
         };
       } // (if settings.asahi then { inherit asahi-firmware; } else {});
 
-      home-module = { settings, unstable, ... }: let common = rec {
+      home-module = { settings, unstable, stable, ... }: let common = rec {
         username = settings.user;
         homedir = "/home/${username}";
       }; in {
         home-manager = {
           backupFileExtension = "backup";
-          extraSpecialArgs = { inherit theme settings unstable common; };
+          extraSpecialArgs = { inherit theme settings unstable stable common; };
           useGlobalPkgs = true;
           useUserPackages = true;
           users.${settings.user} = { imports = [ ./home-manager catppuccin.homeModules.catppuccin ]; };
@@ -101,12 +105,13 @@
         system = system;
         specialArgs = args system settings;
         modules = graphical base settings
-          # Could conceptually want both niri and kde
           ++ (if settings.niri  then [niri.nixosModules.niri] else [])
-          # ++ (if settings.kde   then [ plasma-manager.homeModules.plasma-manager ] else [])
           # These are by nature mutually exclusive
-          ++ (if settings.asahi then [ nixos-apple-silicon.nixosModules.apple-silicon-support ] else
-              if settings.t2    then [ nixos-hardware.nixosModules.apple-t2 ] else []);
+          ++ (if settings.asahi then 
+                [ nixos-apple-silicon.nixosModules.apple-silicon-support ] 
+              else if settings.t2 then 
+                [ nixos-hardware.nixosModules.apple-t2 ] 
+              else []);
       };
     in
   {
@@ -119,7 +124,7 @@
       kde = false;
       server = false;
       steam = false;
-      unstable = false;
+      unstable = true;
       osu = false;
     };
     # Desktop

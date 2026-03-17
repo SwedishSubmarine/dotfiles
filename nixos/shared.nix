@@ -1,11 +1,14 @@
 { pkgs, settings, ... }:
 {
   networking = {
-    networkmanager.enable = true;
-    wireless.iwd = {
+    networkmanager = {
       enable = true;
-      settings.General.EnableNetworkConfiguration = true;
     };
+
+    # wireless.iwd = {
+    #   enable = true;
+    #   settings.General.EnableNetworkConfiguration = true;
+    # };
   };
 
   time.timeZone = "Europe/Stockholm";

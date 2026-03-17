@@ -34,6 +34,7 @@
         "network"
         "bluetooth"
         "power-profiles-daemon"
+        "custom/notification"
         "clock"
       ];
       "group/left" = {
@@ -111,6 +112,7 @@
       bluetooth = {
         on-click = "pkill blueberry || blueberry";
         format = "";
+        tooltip = false;
       };
       clock = {
         format = "{:%a %d %b %H:%M}";
@@ -135,6 +137,26 @@
         format = "⏻ ";
         tooltip = false;
         on-click = "rofi -show power-menu -show-icons -modi power-menu:${./rofi/rofi-power-menu}";
+      };
+      "custom/notification" = {
+        tooltip = true;
+        format = "<span size='16pt'>{icon}</span>";
+        format-icons = {
+          notification = "󱅫 ";
+          none = "󰂜 ";
+          dnd-notification = "󰂠 ";
+          dnd-none = "󰪓 ";
+          inhibited-notification = "󰂛 ";
+          inhibited-none = "󰪑 ";
+          dnd-inhibited-notification = "󰂛 ";
+          dnd-inhibited-none = "󰪑 ";
+        };
+        return-type = "json";
+        exec-if = "which swaync-client";
+        exec = "swaync-client -swb";
+        on-click = "swaync-client -t -sw";
+        on-click-right = "swaync-client -d -sw";
+        escape = true;
       };
       mpris = {
         title-len = 30;
@@ -233,6 +255,12 @@
           background: alpha(#${theme.current.base2},.7);
           box-shadow: 0px 0px 2px rgba(0, 0, 0, .6);
           border: 3px solid #${theme.current.accent};
+      }
+
+      #custom-notification {
+          color:    #${theme.current.light-yellow};
+          padding-left: 10px;
+          padding-right: 0px;
       }
 
       #pulseaudio {
@@ -336,11 +364,14 @@
 
       #tray {
           padding-left:   5px;
-          padding-right:  10px;
+          padding-right:  5px;
+          background:     alpha(#${theme.current.text1},.6);
+          border-radius:  20px;
+          margin:         3px;
       }
 
       #battery {
-          padding-left:   0px;
+          padding-left:   5px;
           padding-right:  10px;
       }
 
@@ -357,6 +388,7 @@
           padding-left: 0px;
           padding-right: 0px;
       }
+
 
       #network {
           padding-left: 20px;
@@ -375,6 +407,7 @@
           padding-right: 10px;
           color: #${theme.current.text1};
       }
+
 
       #power-profiles-daemon {
           padding-left: 10px;

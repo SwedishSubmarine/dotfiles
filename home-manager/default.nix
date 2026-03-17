@@ -1,12 +1,16 @@
-{ pkgs, unstable, settings, ... }:
+{ pkgs, unstable, stable, settings, lib, ... }:
+let 
+  opt = lib.optional;
+  opts = lib.optionals;
+in
 {
   home = {
     stateVersion = "25.05";
-
     packages =
       with pkgs;
       [
         # Terminal applications
+        file
         wget
         yt-dlp
         ffmpeg
@@ -16,7 +20,7 @@
         cowsay
         ## Everything below will not be installed on a server
       ]
-      ++ ( if !settings.server then
+      ++ opts ( !settings.server)
       [
         resvg
         imagemagick
@@ -32,9 +36,11 @@
           matplotlib
           numpy
           scipy
+          psycopg2
         ]))
 
         # Graphical applications
+        vimiv-qt
         texliveMedium
         latexrun
         zathura
@@ -47,7 +53,6 @@
         wl-clipboard
         alacritty
         wezterm
-        vesktop
         darktable
         signal-desktop
         poppler
@@ -61,15 +66,20 @@
         freecad-wayland
         distrobox
         libreoffice
+        easyeffects
 
         # Fonts
         fontconfig
         papirus-icon-theme
+        times-newer-roman
         nerd-fonts.monaspace
         nerd-fonts.hack
         nerd-fonts.fira-code
         nerd-fonts.roboto-mono
         libertine
+        roboto
+        source-sans-pro
+        font-awesome
 
         # Gnome
         gnome-keyring
@@ -86,49 +96,37 @@
         #Languages and frameworks
         elixir
         ghc
+        go
         cargo
         gcc
         mdbook
         nixfmt-rfc-style
         typst
         postgresql
-      ] else [])
+      ]
       # x86 only :(
-      ++ (if !settings.asahi then
-      [
-        tidal-hifi
-      ] else [])
-      ++ (if settings.osu then 
+      ++ opt (!settings.asahi) stable.tidal-hifi
+      ++ opts (settings.osu)
       [ 
         opentabletdriver
         zenity
         wget
         wootility
-      ] else [])
-      ++ (if settings.steam then 
+      ]
+      ++ opts (settings.steam) 
       [
         #Mostly utilities
         gamescope
         gamemode
         mangohud
         protonup-ng
-        protontricks
-        winetricks
-        wine
         steam-run
-      ] else []);
+      ]; 
   };
 
-  imports =
-    [
-      ./terminal-core/terminal.nix
-    ]
-    ++ ( if !settings.server then
-        [ ./programs ]
-      else []) ++ (
-      if settings.niri then
-        [ ./desktop-core/niri.nix ]
-      else if settings.kde then
-        [ ./desktop-core/plasma.nix ]
-      else []);
+  imports = (
+    [./terminal-core/terminal.nix]
+    ++ opt (!settings.server) ./programs
+    ++ opt (settings.niri) ./desktop-core/niri.nix
+  );
 }

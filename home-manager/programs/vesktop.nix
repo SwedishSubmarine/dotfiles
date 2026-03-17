@@ -1,7 +1,8 @@
-{ theme, ... }:
+{ stable, theme, ... }:
 { 
   programs.vesktop = {
     enable = true;
+    package = stable.vesktop;
     vencord = {
       themes = {
         cur = theme.current.discordcss;
@@ -57,6 +58,9 @@
             enabled = true;
           };
           YoutubeAdblock = {
+            enabled = true;
+          };
+          VolumeBooster = {
             enabled = true;
           };
         };

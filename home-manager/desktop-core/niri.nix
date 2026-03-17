@@ -20,7 +20,8 @@ in
 {
   imports = [
     ./rofi/rofi.nix
-    ./mako.nix
+    # ./mako.nix
+    ./swaync.nix
     ./waybar.nix
     ./xdg.nix
   ];
@@ -36,11 +37,11 @@ in
     };
     input = {
       keyboard = {
-        xkb = {
-          layout = "se";
-          variant = "nodeadkeys";
-          options = "caps:swapescape";
-        };
+      xkb = {
+        layout = "se,us(euro)";
+        variant = "nodeadkeys,";
+        options = "grp:alt_space_toggle,caps:swapescape";
+      };
         repeat-rate = 50;
       };
       touchpad = {
@@ -88,7 +89,7 @@ in
         hotkey-overlay.title = "Web search";
         action = spawn "sh" "${./rofi/web-search.sh}";
       };
-      "Mod+C" = {
+      "Mod+P" = {
         hotkey-overlay.title = "Bluetooth connect";
         action = spawn "sh" "${./rofi/bluetooth.sh}";
       };
@@ -119,11 +120,11 @@ in
       };
       "Mod+Shift+4" = {
         hotkey-overlay.title = "Screenshot region";
-        action = screenshot;
+        action.screenshot = [];
       };
       "Mod+Shift+5" = {
         hotkey-overlay.title = "Screenshot window";
-        action = screenshot-window { write-to-disk = false; };
+        action.screenshot-window = { write-to-disk = false; };
       };
 
       # Window and column size
@@ -163,7 +164,7 @@ in
         hotkey-overlay.title = "Maximize Column";
         action = maximize-column;
       };
-      "Mod+Alt+Shift+F" = {
+      "Mod+Alt+F" = {
         hotkey-overlay.title = "Fullscreen";
         action = fullscreen-window;
       };
@@ -323,17 +324,17 @@ in
       };
 
       # Niri switcher
-      "Alt+Tab" = { 
-        hotkey-overlay.title = "Niriswitcher";
-        repeat = false; 
-        action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application";
-      };
-
-      "Alt+Shift+Tab" = {
-        repeat = false;
-        action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application"; 
-      };
-
+      # "Alt+Tab" = { 
+      #   hotkey-overlay.title = "Niriswitcher";
+      #   repeat = false; 
+      #   action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application";
+      # };
+      #
+      # "Alt+Shift+Tab" = {
+      #   repeat = false;
+      #   action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application"; 
+      # };
+      #
       # Function row
       "XF86MonBrightnessDown".action.spawn = [ "brightnessctl" "s" "10%-"]; 
       "XF86MonBrightnessUp".action.spawn = [ "brightnessctl" "s" "10%+" ];
@@ -341,8 +342,8 @@ in
       "XF86LaunchA".action = toggle-overview;
       
       "XF86Search" = {
-        hotkey-overlay.title = "Open calendar";
-        action = spawn "sh" "${calendar}";
+        hotkey-overlay.title = "Do not disturb";
+        action = spawn "sh" "${./dnd.sh}";
       };
 
       "XF86AudioMicMute" = {

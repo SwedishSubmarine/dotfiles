@@ -1,9 +1,25 @@
-{ pkgs, settings, ... }:
+{ pkgs, settings, config, ... }:
+let
+  file-copy = pkgs.writeScript "file-copy" ''
+  #!/bin/sh
+  fcp() {
+    local uris=()
+    for file in "$@"; do
+      if [[ -e "$file" ]]; then
+        local abs_path="$(realpath "$file")"
+        uris+=("file://$abs_path")
+      fi
+    done
+
+    printf '%s\n' "''${uris[@]}" | wl-copy --type text/uri-list
+  }
+  ''; # 😡
+in
 {
   programs.zsh = {
     enable = true;
     package = pkgs.zsh;
-    dotDir = "dotfiles/home-manager/terminal-core/zsh";
+    dotDir = "${config.home.homeDirectory}/dotfiles/home-manager/terminal-core/zsh";
     history = {
       path = "$ZDOTDIR/.zsh_history";
       save = 100000000000;
@@ -16,7 +32,7 @@
       lsl = "${pkgs.eza}/bin/eza --icons --color -Al --git-repos --git";
       lst = "${pkgs.eza}/bin/eza --icons --color -A --tree --level=3";
       carfetch = "${pkgs.fastfetch}/bin/fastfetch --logo ~/car.webp --logo-type iterm --logo-width 42";
-    } // (if settings.asahi then {steam = "${pkgs.distrobox}/bin/distrobox enter steam -- steam"; } else {});
+    };
 
     # Previously plugins (PP 🐈)
     syntaxHighlighting.enable = true;
@@ -71,10 +87,7 @@
       run()   { nix-subcommand "run" "$@"   }
       build() { nix-subcommand "build" "$@" }
 
-      function fcp() {
-        ${pkgs.wl-clipboard}/bin/wl-copy < "$@"
-      }
-
+      source ${file-copy}
       # Completion stuff
       zstyle ':completion:*' completer _expand _complete _ignored _correct _approximate
       zstyle ':completion:*' completions 1
@@ -150,7 +163,6 @@
     '');
 
     plugins = [
-    # zsh-git-prompt
       {
         name = "zsh-vim-mode";
         file = "zsh-vim-mode.plugin.zsh";
@@ -170,6 +182,16 @@
           rev = "0193adeb09fbc51fac738081a4718a3cf8427ff8";
           sha256 = "sha256-Q7Dp6Xgt5gvkWZL+htDmGYk9RTglOWrrbl6Wf6q/qjY=";
         };
+      }
+      {
+        name = "git-auto-fetch";
+        file = "git-auto-fetch.plugin.zsh";
+        src = pkgs.fetchFromGitHub {
+          owner = "ohmyzsh";
+          repo = "ohmyzsh";
+          rev = "cc9259d6ad6b1d3cab488cc02f705be1c840c785";
+          sha256 = "sha256-t3yCFQKwBmOO9xPO2qFZd5eWelzRQ9bap+eU5S4dIN8=";
+        } + "/plugins/git-auto-fetch";
       }
     ];
   };
