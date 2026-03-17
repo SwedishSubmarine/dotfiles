@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   imports =
     [ 
@@ -14,14 +13,15 @@
   };
  
   hardware.i2c.enable = true;
-  environment.variables.LIBVA_DRIVER_NAME = "nvidia";
-  services.xserver.videoDrivers = [ "nvidia" ]; 
-  hardware = {
-    graphics.enable = true;
-    nvidia = {
-      modesetting.enable = true;
-      open = false;
-    };
+  environment.sessionVariables.LIBVA_DRIVER_NAME = "iHD";
+  services.xserver.videoDrivers = [ "modesetting" ]; 
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-compute-runtime
+      vpl-gpu-rt
+    ];
   };
   fileSystems = {
     "/mnt/data4TB" = {
@@ -34,7 +34,7 @@
       fsType = "ext4";
     };
   };
-
+  
   services.jellyfin = {
     enable = true;
     user = "emily";
@@ -90,15 +90,6 @@
     packages = with pkgs; [];
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIARypcjzq0rpw1YRa8IJ91SsC4jrXgbB0SaYHfSlb9T4 et@MacBook-Air-2.local"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHPSV2IFijYoSfeYkUENWbZZM9yLR2xl5tpJ6xlK/11h Emily@et"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIARypcjzq0rpw1YRa8IJ91SsC4jrXgbB0SaYHfSlb9T4"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHPSV2IFijYoSfeYkUENWbZZM9yLR2xl5tpJ6xlK/11h"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPf88TE70rqAHBMs0dNbS/2sjkN6pZRA5LFt404HjUJF"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDIAhV0pza7k9wLkgBdXT00lbC+5QAZBUKQQxBnzAt90"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIwDFb6rrgC+bMEcOtVpjKBlMp7XdLP0dZGBeZvI/B1h emily@Beskar"
-    ];
   };
 
   nixpkgs.config.allowUnfree = true;
