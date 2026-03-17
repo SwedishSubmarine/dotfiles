@@ -53,12 +53,6 @@
       enable = true;
       package = pkgs.mullvad-vpn;
     };
-    sunshine = {
-      enable = true;
-      capSysAdmin = true;
-      autoStart = true;
-      openFirewall = true;
-    };
     flatpak.enable = true;
   };
 
@@ -83,7 +77,6 @@
     kdePackages.sddm-kcm
     kdePackages.kcalc
     wayland-utils
-    wineWowPackages.stable
     pkgs.jellyfin
     pkgs.jellyfin-web
     pkgs.jellyfin-ffmpeg
