@@ -2,7 +2,6 @@
 { 
   programs.vesktop = {
     enable = true;
-    package = stable.vesktop;
     vencord = {
       themes = {
         cur = theme.current.discordcss;
