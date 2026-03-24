@@ -453,16 +453,16 @@ in
           y = 10.0;
         };
       }
-      {
-        matches = [ { app-id = "blueberry.py"; } ];
-        open-floating = true;
-        default-window-height.proportion = 0.4;
-        default-floating-position = {
-          relative-to = "top-right";
-          x = 20.0;
-          y = 10.0;
-        };
-      }
+      # {
+      #   matches = [ { app-id = "blueberry.py"; } ];
+      #   open-floating = true;
+      #   default-window-height.proportion = 0.4;
+      #   default-floating-position = {
+      #     relative-to = "top-right";
+      #     x = 20.0;
+      #     y = 10.0;
+      #   };
+      # }
       {
         # Sorry alacritty nerds but i dont use this terminal
         matches = [ { app-id = "Alacritty"; } ];

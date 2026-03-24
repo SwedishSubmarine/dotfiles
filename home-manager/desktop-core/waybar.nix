@@ -32,7 +32,7 @@
         "backlight/slider"
         "pulseaudio" "pulseaudio/slider"
         "network"
-        "bluetooth"
+        # "bluetooth"
         "power-profiles-daemon"
         "custom/notification"
         "clock"
@@ -109,11 +109,11 @@
         on-click = "pkill alacritty || alacritty -e nmtui";
         tooltip = false;
       };
-      bluetooth = {
-        on-click = "pkill blueberry || blueberry";
-        format = "";
-        tooltip = false;
-      };
+      # bluetooth = {
+      #   on-click = "pkill blueberry || blueberry";
+      #   format = "";
+      #   tooltip = false;
+      # };
       clock = {
         format = "{:%a %d %b %H:%M}";
         tooltip = false;
@@ -396,11 +396,13 @@
           color: #${theme.current.light-blue};
       }
 
+      /*
       #bluetooth {
           padding-left: 10px;
           padding-right: 10px;
           color: #${theme.current.blue};
       }
+      */
 
       #clock {
           padding-left: 10px;
