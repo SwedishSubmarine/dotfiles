@@ -56,7 +56,7 @@ in
         darktable
         signal-desktop
         poppler
-        bitwarden-desktop
+        stable.bitwarden-desktop
         unstable.niriswitcher
         rofi-rbw-wayland
         lyra-cursors
@@ -90,7 +90,6 @@ in
         pavucontrol
         brightnessctl
         playerctl
-        blueberry
 
         #Languages and frameworks
         elixir
