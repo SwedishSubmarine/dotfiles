@@ -15,6 +15,9 @@
     enable = true;
     allowedTCPPorts = [
     ];
+    allowedUDPPorts = [
+      51820
+    ];
   };
 
   swapDevices = [
