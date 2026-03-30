@@ -38,7 +38,7 @@ in
     input = {
       keyboard = {
       xkb = {
-        layout = "se,us(euro)";
+        layout = "se,se,us(euro)";
         variant = "nodeadkeys,";
         options = "grp:alt_space_toggle,caps:swapescape";
       };
