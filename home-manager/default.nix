@@ -29,6 +29,7 @@ in
         nomad
         rbw
         wtype
+        stable.greed
         mesa-demos
         unstable.minefair
         unstable.widevine-cdm
@@ -44,8 +45,10 @@ in
         texliveMedium
         latexrun
         zathura
+        kdePackages.gwenview
         swww
         wl-color-picker
+        melonds
         pinentry-all
         prismlauncher
         firefox

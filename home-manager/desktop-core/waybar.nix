@@ -1,4 +1,30 @@
-{ pkgs, theme, ... }: 
+{ pkgs, theme, config, ... }: 
+let
+  poll-dnd = pkgs.writeScript "poll-dnd" ''
+    #!/bin/sh
+
+    statefile="${config.home.homeDirectory}/.cache/dnd_state"
+    default=$(makoctl mode | grep dnd)
+
+    if [[ -f "${config.home.homeDirectory}/.cache/dnd_state" ]] ; then
+      state=$(cat "$statefile")
+    else
+      if [ -n "$default" ] ; then
+        state="muted"
+      else
+        state="unmuted"
+      fi
+    fi
+
+    if [[ "$state" == "unmuted" ]] ; then
+      icon="󰂚 "
+    else
+      icon="󰂛 "
+    fi
+
+    printf '{"text": "%s ", "tooltip": "Do not disturb"}' $icon
+  '';
+in
 {
   systemd.user.services.nm-applet = {
     Unit = {
@@ -34,7 +60,8 @@
         "network"
         # "bluetooth"
         "power-profiles-daemon"
-        "custom/notification"
+        "custom/dnd"
+        "niri/language"
         "clock"
       ];
       "group/left" = {
@@ -62,6 +89,10 @@
           "(.* TIDAL)" = " $1 ";
           " " = "";
         };
+      };
+      "niri/language" = {
+        format = "{short}";
+        format-alt = "{short} {variant}";
       };
       "niri/workspaces" = {
         format = "{icon}";
@@ -138,25 +169,12 @@
         tooltip = false;
         on-click = "rofi -show power-menu -show-icons -modi power-menu:${./rofi/rofi-power-menu}";
       };
-      "custom/notification" = {
-        tooltip = true;
-        format = "<span size='16pt'>{icon}</span>";
-        format-icons = {
-          notification = "󱅫 ";
-          none = "󰂜 ";
-          dnd-notification = "󰂠 ";
-          dnd-none = "󰪓 ";
-          inhibited-notification = "󰂛 ";
-          inhibited-none = "󰪑 ";
-          dnd-inhibited-notification = "󰂛 ";
-          dnd-inhibited-none = "󰪑 ";
-        };
+      "custom/dnd" = {
+        format = "{}";
+        exec = "${poll-dnd}";
+        interval = 1;
         return-type = "json";
-        exec-if = "which swaync-client";
-        exec = "swaync-client -swb";
-        on-click = "swaync-client -t -sw";
-        on-click-right = "swaync-client -d -sw";
-        escape = true;
+        on-click ="${./dnd.sh}";
       };
       mpris = {
         title-len = 30;
@@ -259,6 +277,17 @@
 
       #custom-notification {
           color:    #${theme.current.light-yellow};
+          padding-left: 10px;
+          padding-right: 0px;
+      }
+
+      #custom-dnd {
+          color:    #${theme.current.light-yellow};
+          padding-left: 10px;
+          padding-right: 0px;
+      }
+
+      #language {
           padding-left: 10px;
           padding-right: 0px;
       }

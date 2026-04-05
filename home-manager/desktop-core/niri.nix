@@ -16,12 +16,22 @@ let
 
     xdg-open "https://calendar.google.com"
   '';
+
+  switch-keyboard-layout = pkgs.writeScript "keyboard-layout" ''
+    #!/usr/bin/env bash
+
+    NEXT=$((($(niri msg keyboard-layouts | grep -e '\*' | awk '{print $2}')+1) % 3))
+    niri msg action switch-layout $NEXT
+    NEW=$(niri msg keyboard-layouts | grep -e '\*' | awk '{$1="";  $2=""; print $0}')
+    notify-send -t 3500 "Keyboard layout switched to:
+    $NEW"
+  '';
 in
 {
   imports = [
     ./rofi/rofi.nix
-    # ./mako.nix
-    ./swaync.nix
+    ./mako.nix
+    # ./swaync.nix
     ./waybar.nix
     ./xdg.nix
   ];
@@ -40,7 +50,7 @@ in
       xkb = {
         layout = "se,se,us(euro)";
         variant = "nodeadkeys,";
-        options = "grp:alt_space_toggle,caps:swapescape";
+        options = "caps:swapescape";
       };
         repeat-rate = 50;
       };
@@ -80,6 +90,9 @@ in
       "Mod+Space" = {
         hotkey-overlay.title = "rofi launcher";
         action = spawn "rofi" "-modes" "drun" "-show" "drun" "-icon-theme" ''"Papirus"'' "-show-icons";
+      };
+      "Alt+Space" = {
+        action = spawn "sh" "${switch-keyboard-layout}";
       };
       "Mod+G" = {
         hotkey-overlay.title = "Open Google...";
