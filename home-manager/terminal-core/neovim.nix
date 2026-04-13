@@ -129,6 +129,7 @@
       haskell-language-server
       java-language-server
       gopls
+      pyright
     ];
   };
 }

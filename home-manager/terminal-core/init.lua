@@ -87,7 +87,7 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, {desc = "Telescope live gre
 vim.keymap.set('n', '<leader>fc', builtin.highlights , {desc = "Telescope highlights"})
 
 -- LSP
-vim.lsp.enable({ "lua_ls", "tinymist", "nixd", "cssls", "hls", "gopls"})
+vim.lsp.enable({ "lua_ls", "tinymist", "nixd", "cssls", "hls", "gopls", "pyright"})
 vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, {desc = "LSP Code code action"})
 vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition, {desc = "LSP Code definition"})
 vim.keymap.set('n', '<leader>r', vim.lsp.buf.rename, {desc = "LSP Code rename"})

@@ -34,12 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    plasma-manager = {
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
     catppuccin = {
       url = "github:catppuccin/nix";
     };
@@ -50,17 +44,16 @@
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, nixos-apple-silicon,
-              niri, catppuccin, nixos-hardware, plasma-manager, ... }@inputs:
-  let
-    theme = import ./colors.nix;
-
-    asahi-firmware = builtins.fetchGit {
-      url = "git@githug.xyz:Emilerr/asahi-firmware.git";
-      ref = "main";
-      rev = "0948f98ed9093839a233e859960cad7235518fc3";
-  };
-  in
+              niri, catppuccin, nixos-hardware, ... }@inputs:
     let
+      theme = import ./colors.nix;
+
+      asahi-firmware = fetchGit {
+        url = "git@githug.xyz:Emilerr/asahi-firmware.git";
+        ref = "main";
+        rev = "0948f98ed9093839a233e859960cad7235518fc3";
+      };
+
       nix-config-module = { settings, ... }: {
         nix.registry.unstable.flake = nixpkgs-unstable;
         system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
@@ -105,10 +98,7 @@
         system = system;
         specialArgs = args system settings;
         modules = graphical base settings
-          # Could conceptually want both niri and kde
           ++ (if settings.niri  then [niri.nixosModules.niri] else [])
-          # ++ (if settings.kde   then [ plasma-manager.homeModules.plasma-manager ] else [])
-          # These are by nature mutually exclusive
           ++ (if settings.asahi then [ nixos-apple-silicon.nixosModules.apple-silicon-support ] else
               if settings.t2    then [ nixos-hardware.nixosModules.apple-t2 ] else []);
       };

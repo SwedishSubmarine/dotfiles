@@ -10,14 +10,16 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
-  networking.hostName = "Adamantite"; 
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [
-    ];
-    allowedUDPPorts = [
-      51820
-    ];
+  networking = {
+    hostName = "Adamantite"; 
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+      ];
+      allowedUDPPorts = [
+        51820
+      ];
+    };
   };
 
   swapDevices = [
@@ -26,9 +28,12 @@
       size = 16384;
     }
   ];
+
   nixpkgs.overlays = [ inputs.niri.overlays.niri inputs.yazi.overlays.default ];
-  programs.niri.enable = true;
-  programs.niri.package = pkgs.niri-unstable;
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri-unstable;
+  };
 
   services.power-profiles-daemon.enable = true;
   services = {
@@ -59,6 +64,7 @@
       package = pkgs.mullvad-vpn;
     };
   };
+
   environment.pathsToLink = [ "/share/zsh" ];
   environment.systemPackages = with pkgs; [
     binutils
@@ -87,10 +93,12 @@
 
   # Specify path to peripheral firmware files.
   # Private git-repo
-  hardware.asahi.peripheralFirmwareDirectory = asahi-firmware;
-  hardware.asahi.enable = true;
-  hardware.asahi.setupAsahiSound = true;
   hardware.bluetooth.enable = true;
+  hardware.asahi = {
+    peripheralFirmwareDirectory = asahi-firmware;
+    enable = true;
+    setupAsahiSound = true;
+  };
 
   services.libinput.enable = true;
 

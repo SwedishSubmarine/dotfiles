@@ -3,7 +3,9 @@ let
   XWAYLAND_DISPLAY = ":3";
   random-wallpaper = pkgs.writeScript "random-wallpaper" ''
     #!/bin/sh
-    swww img "$(find ${theme.current.wallpapers} -type f,l \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1)" --transition-type any --transition-fps 60
+    IMAGE="$(find ${theme.current.wallpapers} -type l \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1)"
+    echo "$IMAGE" # For debugging
+    swww img "$IMAGE" --transition-type any --transition-fps 60
   '';
   calendar = pkgs.writeScript "calendar" ''
     # Stolen from Xenia again :3

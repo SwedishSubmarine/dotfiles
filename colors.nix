@@ -33,7 +33,7 @@ rec {
     base2        = "1e2030"; # Mantle
     base3        = "181926"; # Crust
 
-    wallpapers   = "${./catppuccin-wallpapers}";
+    wallpapers   = "${./.}/catppuccin-wallpapers/";
     discordcss   = "${./resources/vesktop/macchiatto.css}";
     yazi         = "${./resources/yazi/macchiato}";
     wezterm      = ''config.color_scheme = "Catppuccin Macchiato"'';
@@ -72,7 +72,7 @@ rec {
     base2        = "1d2021"; # bg0_h #1d2021
     base3        = base2; # bg0_h
 
-    wallpapers   = "${./gruvbox-wallpapers}";
+    wallpapers   = "${./.}/gruvbox-wallpapers";
     discordcss   = "${./resources/vesktop/gruvbox-dark.theme.css}";
     yazi         = "${./resources/yazi/gruvbox}";
     wezterm      = ''config.color_scheme = "Gruvbox Dark (Gogh)"'';
