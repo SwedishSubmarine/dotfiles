@@ -42,12 +42,29 @@ in
       device = "/dev/disk/by-uuid/25c17c84-0b18-429b-8040-c16720d61c45";
       fsType = "ext4";
     };
+    "/export/data4TB" = {
+      device = "/mnt/data4TB/";
+      options = [ "bind" "nfsvers=4.2"];
+    };
+    "/export/data3TB" = {
+      device = "/mnt/data3TB/";
+      options = [ "bind" "nfsvers=4.2"];
+    };
   };
   
   services.jellyfin = {
     enable = true;
     user = "emily";
     openFirewall = true;
+  };
+
+  services.nfs.server = {
+    enable = true;
+    exports = ''
+      /export         192.168.1.0/24(rw,fsid=0,no_subtree_check)
+      /export/data3TB 192.168.1.0/24(rw,nohide,insecure,no_subtree_check)
+      /export/data4TB 192.168.1.0/24(rw,nohide,insecure,no_subtree_check)
+    '';
   };
 
   services.hardware = {
