@@ -119,6 +119,7 @@
       popup-nvim
       telescope-media-files-nvim
       switch-vim
+      typst-vim
     ];
 
     extraPackages = with pkgs; [

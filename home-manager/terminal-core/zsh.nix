@@ -31,6 +31,7 @@ in
       ls  = "${pkgs.eza}/bin/eza --icons --color -A";
       lsl = "${pkgs.eza}/bin/eza --icons --color -Al --git-repos --git";
       lst = "${pkgs.eza}/bin/eza --icons --color -A --tree --level=3";
+      twatch ="${pkgs.typst}/bin/typst watch --open zathura \${1:-main.typ}";
       carfetch = "${pkgs.fastfetch}/bin/fastfetch --logo ~/car.webp --logo-type iterm --logo-width 42";
     };
 
@@ -62,6 +63,15 @@ in
         if (( columns >= min_columns && lines >= min_lines )); then
           command -v fastfetch &> /dev/null && fastfetch
         fi
+      }
+
+      function mkmeeting(){
+        set -e 
+        cd ~/chalmoid/kommitte/drust/meetings
+        DATE=''${1:-$(date '+%Y-%m-%d')}
+        ${pkgs.typst}/bin/typst init @local/meeting $DATE
+        cd $DATE
+        ${pkgs.neovim}/bin/nvim main.typ
       }
 
       startup_fetch

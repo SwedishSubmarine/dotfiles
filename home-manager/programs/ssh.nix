@@ -17,14 +17,9 @@
         user = "hacke";
         port = 222;
       };
-      uru = {
-        hostname = "qwdcraft.60.nu";
-        port = 2222;
-        user = "emily";
-      };
       chlorophyte = {
-        # Temp until domain has been bought :)
-        hostname = "192.168.0.140";
+        hostname = "bozo.life";
+        port = 2222;
         user = "emily";
       };
       "*" = {
