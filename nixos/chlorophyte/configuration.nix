@@ -3,6 +3,7 @@
   imports =
     [ 
       ./hardware-configuration.nix
+      ./minecraft-server/minecraft-server.nix
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
