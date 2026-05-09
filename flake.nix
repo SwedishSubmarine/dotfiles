@@ -34,15 +34,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-<<<<<<< Updated upstream
-    catppuccin = {
-      url = "github:catppuccin/nix";
-=======
     plasma-manager = {
       url = "github:nix-community/plasma-manager";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
->>>>>>> Stashed changes
     };
 
     yazi = {
@@ -50,21 +45,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, nixos-apple-silicon,
-<<<<<<< Updated upstream
-              niri, catppuccin, nixos-hardware, ... }@inputs:
-=======
-              niri, nixos-hardware, plasma-manager, ... }@inputs:
-  let
-    theme = import ./colors.nix;
-
-    asahi-firmware = builtins.fetchGit {
-      url = "git@githug.xyz:Emilerr/asahi-firmware.git";
-      ref = "main";
-      rev = "0948f98ed9093839a233e859960cad7235518fc3";
-  };
-  in
->>>>>>> Stashed changes
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, nixos-apple-silicon, niri, nixos-hardware, plasma-manager, ... }@inputs:
     let
       theme = import ./colors.nix;
 
