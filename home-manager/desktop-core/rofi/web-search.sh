@@ -5,7 +5,7 @@ URLS=(
   ["duckduckgo"]="https://www.duckduckgo.com/?q="
   ["nixpkgs"]="https://search.nixos.org/packages?query="
   ["nixopts"]="https://search.nixos.org/options?query="
-  ["home-manager"]="https://home-manager-options.extranix.com/?query="
+  ["home-manager"]="https://search.nixos.org/options?channel=unstable&source=home_manager&query="
 )
 list() {
     for i in "${!URLS[@]}"
