@@ -10,6 +10,4 @@
       };
     };
   };
-
-  catppuccin.bottom.enable = true;
 }
