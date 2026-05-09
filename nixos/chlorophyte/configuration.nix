@@ -1,4 +1,12 @@
 { pkgs, ... }:
+let
+    rgb-off = pkgs.writeScript "rgb-off" ''
+    #!/usr/bin/env bash
+    for i in {0..3}; do 
+      openrgb -d $i -m Off; 
+    done
+    '';
+in
 {
   imports =
     [ 
@@ -108,7 +116,16 @@
     pkgs.jellyfin-ffmpeg
   ];
 
-  # networking.firewall.allowedTCPPorts = [ ... ];
+  systemd.user.services.rgb = {
+    unitConfig = {
+      Description = "Disables RGB for memory on boot";
+    };
+    serviceConfig = {
+      type = "oneshot";
+      ExecStart = "${rgb-off}";
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
 
   system.stateVersion = "25.05"; # Did you read the comment?
 }
