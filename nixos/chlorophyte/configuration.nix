@@ -67,6 +67,23 @@ in
     '';
   };
 
+  services.caddy = {
+    enable = true;
+    virtualHosts = {
+      "bozo.life" = {
+        serverAliases = [ "www.bozo.life" ];
+        extraConfig = ''
+        '';
+      };
+      "watching.bozo.life" = {
+        serverAliases = [ "www.watching.bozo.life" ];
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:8096
+        '';
+      };
+    };
+  };
+
   services.hardware = {
     openrgb = {
       enable = true;
@@ -133,6 +150,7 @@ in
     pkgs.jellyfin-ffmpeg
   ];
 
+  networking.firewall.allowedTCPPorts = [ 80 443 2049 25565 ];
   systemd.user.services.rgb = {
     unitConfig = {
       Description = "Disables RGB for memory on boot";
