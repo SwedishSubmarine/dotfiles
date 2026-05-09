@@ -20,7 +20,7 @@ in
         cowsay
         ## Everything below will not be installed on a server
       ]
-      ++ opts ( !settings.server)
+      ++ opts (!settings.server)
       [
         resvg
         imagemagick
@@ -106,7 +106,7 @@ in
         postgresql
       ]
       # x86 only :(
-      ++ opt (!settings.asahi) stable.tidal-hifi
+      ++ opt (!settings.asahi && !settings.server) stable.tidal-hifi
       ++ opts (settings.osu)
       [ 
         opentabletdriver
