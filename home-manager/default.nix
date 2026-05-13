@@ -10,115 +10,118 @@ in
       with pkgs;
       [
         # Terminal applications
-        file
-        wget
-        yt-dlp
-        ffmpeg
         _7zz
+        cowsay
+        ffmpeg
+        file
         ripgrep
         unzip
-        cowsay
+        wget
+        yt-dlp
         ## Everything below will not be installed on a server
       ]
       ++ opts (!settings.server)
       [
-        resvg
-        imagemagick
         cava
-        wev
+        imagemagick
+        mesa-demos
+        mesa-demos
         nomad
         rbw
-        wtype
+        resvg
         stable.greed
-        mesa-demos
         unstable.minefair
         unstable.widevine-cdm
+        wev
+        wtype
+        wtype
         (python3.withPackages ( ps: with ps; [
           matplotlib
           numpy
-          scipy
           psycopg2
+          scipy
         ]))
 
         # Graphical applications
-        vimiv-qt
-        texliveMedium
-        latexrun
-        zathura
-        kdePackages.gwenview
-        swww
-        wl-color-picker
-        melonds
-        pinentry-all
-        prismlauncher
-        firefox
-        thunderbird
-        wl-clipboard
         alacritty
-        wezterm
         darktable
-        signal-desktop
-        poppler
-        stable.bitwarden-desktop
-        unstable.niriswitcher
-        rofi-rbw-wayland
-        lyra-cursors
-        way-displays
-        nautilus
-        qbittorrent
         distrobox
-        libreoffice
         easyeffects
+        firefox
+        gimp
+        kdePackages.gwenview
+        latexrun
+        libreoffice
+        lyra-cursors
+        melonds
+        nautilus
+        pinentry-all
+        poppler
+        prismlauncher
+        qbittorrent
+        rofi-rbw-wayland
+        signal-desktop
+        stable.bitwarden-desktop
+        swww
+        texliveMedium
+        thunderbird
+        unstable.niriswitcher
+        vimiv-qt
+        way-displays
+        wezterm
+        wl-clipboard
+        wl-color-picker
+        zathura
 
         # Fonts
+        font-awesome
         fontconfig
-        papirus-icon-theme
-        times-newer-roman
-        nerd-fonts.monaspace
-        nerd-fonts.hack
-        nerd-fonts.fira-code
-        nerd-fonts.roboto-mono
         libertine
+        nerd-fonts.fira-code
+        nerd-fonts.hack
+        nerd-fonts.monaspace
+        nerd-fonts.roboto-mono
+        papirus-icon-theme
         roboto
         source-sans-pro
-        font-awesome
+        times-newer-roman
 
         # Gnome
         gnome-keyring
 
         # Utilities (Mainly for waybar)
-        xwayland-satellite
+        brightnessctl
         libnotify
         networkmanagerapplet
         pavucontrol
-        brightnessctl
         playerctl
+        xwayland-satellite
 
         #Languages and frameworks
+        cargo
         elixir
+        gcc
         ghc
         go
-        cargo
-        gcc
         mdbook
         nixfmt-rfc-style
-        typst
         postgresql
+        typst
       ]
       # x86 only :(
       ++ opt (!settings.asahi && !settings.server) stable.tidal-hifi
       ++ opts (settings.osu)
       [ 
         opentabletdriver
-        zenity
         wget
         wootility
+        zenity
       ]
       ++ opts (settings.steam) 
       [
         #Mostly utilities
-        gamescope
         gamemode
+        gamescope
         mangohud
         protonup-ng
         steam-run
