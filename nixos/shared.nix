@@ -11,6 +11,13 @@
     # };
   };
 
+  fileSystems."/home/${settings.user}/chlorophyte" = {
+    device = "192.168.1.140:/data3TB";    
+    fsType = "nfs";
+    options = [ "nfsvers=4.2" "noauto" "x-systemd.idle-timeout=60" ];
+  }
+  ;
+
   time.timeZone = "Europe/Stockholm";
 
   i18n = {
