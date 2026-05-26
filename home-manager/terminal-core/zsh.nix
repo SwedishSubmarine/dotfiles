@@ -71,7 +71,8 @@ in
         DATE=''${1:-$(date '+%Y-%m-%d')}
         ${pkgs.typst}/bin/typst init @local/meeting $DATE
         cd $DATE
-        ${pkgs.neovim}/bin/nvim main.typ
+        mv main.typ $DATE.typ
+        ${pkgs.neovim}/bin/nvim $DATE.typ
       }
 
       startup_fetch
@@ -158,15 +159,22 @@ in
 
       eval "$(zoxide init --cmd cd zsh)"
 
+      NIXSHELL=$(tr ':' '\n' <<< $PATH | sed -n -e 's/^\/nix\/store\/[a-z0-9]\+-//' -e 's/-[0-9]\+.*//p' | uniq | xargs -d'\n')
       #Prompt
       VIM_MODE_INITIAL_KEYMAP=viins
     '' + (if settings.server then ''
-      PROMPT='%B%F{14}Emjauly%b@%m%f → %F{9}%8~%f'
+      PROMPT='%B%F{14}n%b@%m%f → %F{9}%8~%f'
+      if [ "$NIXSHELL" ]; then
+        PROMPT+=" → %F{9}$NIXSHELL%f"
+      fi
       PROMPT+='
       $(gitprompt)'
       PROMPT+='%B%#%b '
     '' else ''
-      PROMPT='%B%F{13}Emjauly%b@%m%f → %F{14}%8~%f'
+      PROMPT='%B%F{13}%n%b@%m%f → %F{14}%8~%f'
+      if [ "$NIXSHELL" ]; then
+        PROMPT+=" → %F{9}$NIXSHELL%f"
+      fi
       PROMPT+='
       $(gitprompt)'
       PROMPT+='%B%#%b '
