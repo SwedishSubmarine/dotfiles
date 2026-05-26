@@ -62,7 +62,7 @@ in
         rofi-rbw-wayland
         signal-desktop
         stable.bitwarden-desktop
-        swww
+        awww 
         texliveMedium
         thunderbird
         unstable.niriswitcher

@@ -5,7 +5,7 @@ let
     #!/bin/sh
     IMAGE="$(find ${theme.current.wallpapers} -type l \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1)"
     echo "$IMAGE" # For debugging
-    swww img "$IMAGE" --transition-type any --transition-fps 60
+    awww img "$IMAGE" --transition-type any --transition-fps 60
   '';
   calendar = pkgs.writeScript "calendar" ''
     # Stolen from Xenia again :3
@@ -39,6 +39,7 @@ in
   ];
 
   # Window manager
+
   programs.niri.settings = {
     debug.render-drm-device = "/dev/dri/renderD128";
     debug.deactivate-unfocused-windows = [];
@@ -387,7 +388,7 @@ in
       # { command = [ "${x-wayland-clipboard-daemon}" ]; }
       { command = [ "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; } # needed for screen-sharing to work
       { command = [ "systemctl" "--user" "start" "background" "nm-applet" ]; }
-      { command = [ "swww-daemon" ]; }
+      { command = [ "awww-daemon" ]; }
       { command = [ "niriswitcher"]; }
 
       { command = [ "vesktop" "--ozone-platform-hint=wayland" ]; }
@@ -412,7 +413,7 @@ in
 
     layer-rules = [
       {
-        matches = [ { namespace = ''^swww-daemon$''; } ];
+        matches = [ { namespace = ''^awww-daemon$''; } ];
         place-within-backdrop = true;
       }
       {
