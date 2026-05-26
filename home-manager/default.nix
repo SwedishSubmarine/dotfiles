@@ -77,6 +77,7 @@ in
         font-awesome
         fontconfig
         libertine
+        lmodern
         nerd-fonts.fira-code
         nerd-fonts.hack
         nerd-fonts.monaspace

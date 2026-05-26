@@ -1,10 +1,5 @@
 { ... }:
 {
-  catppuccin = {
-    flavor = "macchiato";
-    accent = "mauve";
-  };
-
   imports = [
     ./bat.nix
     ./bottom.nix

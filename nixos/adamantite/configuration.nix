@@ -35,6 +35,11 @@
     package = pkgs.niri-unstable;
   };
 
+  programs.localsend = {
+    enable = true;
+    openFirewall = true;
+  };
+
   services.power-profiles-daemon.enable = true;
   services = {
     displayManager = {
@@ -62,6 +67,9 @@
     mullvad-vpn = {
       enable = true;
       package = pkgs.mullvad-vpn;
+    };
+    blueman = {
+      enable = true;
     };
   };
 
