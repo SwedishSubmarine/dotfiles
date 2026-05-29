@@ -79,7 +79,19 @@ in
         serverAliases = [ "www.watching.bozo.life" ];
         extraConfig = ''
           reverse_proxy 127.0.0.1:8096
-        '';
+      '';
+      };
+      "blocky.bozo.life" = {
+        serverAliases = [ "www.blocky.bozo.life" ];
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:8101
+      '';
+      };
+      "fuck.my.bozo.life" = {
+        serverAliases = [ "www.fuck.my.bozo.life" ];
+        extraConfig = ''
+          reverse_proxy 127.0.0.1:8100
+      '';
       };
     };
   };
@@ -129,7 +141,7 @@ in
   users.users.emily = {
     isNormalUser = true;
     description = "emily";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "minecraft" ];
     packages = with pkgs; [];
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
@@ -150,13 +162,13 @@ in
     pkgs.jellyfin-ffmpeg
   ];
 
-  networking.firewall.allowedTCPPorts = [ 80 443 2049 25565 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 2049 25565 42069 ];
   systemd.user.services.rgb = {
     unitConfig = {
       Description = "Disables RGB for memory on boot";
     };
     serviceConfig = {
-      type = "oneshot";
+      Type = "oneshot";
       ExecStart = "${rgb-off}";
     };
     wantedBy = [ "multi-user.target" ];
