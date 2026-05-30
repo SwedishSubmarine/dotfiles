@@ -50,6 +50,7 @@ in
         firefox
         gimp
         kdePackages.gwenview
+        kdePackages.kdenlive
         latexrun
         libreoffice
         lyra-cursors

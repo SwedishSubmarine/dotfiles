@@ -6,6 +6,12 @@
       logo = {
         color."1" = "#${theme.current.accent2}";
         color."2" = "#${theme.current.accent}";
+        color."3" = "#${theme.current.accent2}";
+        color."4" = "#${theme.current.accent}";
+        color."5" = "#${theme.current.accent2}";
+        color."6" = "#${theme.current.accent}";
+        color."7" = "#${theme.current.accent2}";
+        color."8" = "#${theme.current.accent}";
         type = "auto";
         source = "nixos";
       };
