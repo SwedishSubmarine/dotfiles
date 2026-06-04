@@ -162,7 +162,10 @@ in
     pkgs.jellyfin-ffmpeg
   ];
 
-  networking.firewall.allowedTCPPorts = [ 80 443 2049 25565 42069 ];
+  networking.firewall = {
+    allowedTCPPorts = [ 80 443 2049 25565 42069 ];
+    allowPing = false;
+  };
   systemd.user.services.rgb = {
     unitConfig = {
       Description = "Disables RGB for memory on boot";

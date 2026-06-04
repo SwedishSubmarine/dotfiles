@@ -1,9 +1,9 @@
 { pkgs, inputs, ... }:
 let 
-  makeWarningScript = time : pkgs.writeScript "warning" ''
-    echo '/tellraw @a ["",{"text":"["},{"text":"Gooncraft ","color":"yellow"},{"text":"will be closing in"},{"text":" ","color":"yellow"},{"text":"${time}","bold":true,"underlined":true,"color":"red"},{"text":"]"}]' > /run/minecraft/gooncraft.stdin
+  makeWarningScript = pkgs.writeScript "warning" ''
+    echo '/tellraw @a ["",{"text":"["},{"text":"Gooncraft ","color":"yellow"},{"text":"will be closing in"},{"text":" ","color":"yellow"},{"text":"'"$1"'","bold":true,"underlined":true,"color":"red"},{"text":"]"}]' > /run/minecraft/gooncraft.stdin
   '';
-  makeWarning = minute: hour: time: "${minute} ${hour} * * * root ${makeWarningScript time}";
+  makeWarning = minute: hour: time: day: ''${minute} ${hour} * * ${day} root ${makeWarningScript} "${time}"'';
 
   makeMods = inp: pkgs.linkFarmFromDrvs "mods" (builtins.attrValues inp);
   mods = {
@@ -118,12 +118,21 @@ in
   services.cron = {
     enable = true;
     systemCronJobs = [
-      "0  18 * * * root systemctl start minecraft-server-gooncraft >/dev/null 2>&1"
-      "0  0  * * * root systemctl stop  minecraft-server-gooncraft >/dev/null 2>&1"
-      (makeWarning "0" "23" "1 hour")
-      (makeWarning "30" "23" "30 minutes")
-      (makeWarning "45" "23" "15 minutes")
-      (makeWarning "55" "23" "5 minutes!!")
+      # Tuesday
+      "0  19 * * 2 root systemctl start minecraft-server-gooncraft >/dev/null 2>&1"
+      "0  23  * * 2 root systemctl stop  minecraft-server-gooncraft >/dev/null 2>&1"
+      (makeWarning "0" "22" "1 hour" "2")
+      (makeWarning "30" "22" "30 minutes" "2")
+      (makeWarning "45" "22" "15 minutes" "2")
+      (makeWarning "55" "22" "5 minutes!!" "2")
+      # Saturday
+      "0  19 * * 6 root systemctl start minecraft-server-gooncraft >/dev/null 2>&1"
+      # Sunday
+      "0  2  * * 0 root systemctl stop  minecraft-server-gooncraft >/dev/null 2>&1"
+      (makeWarning "0" "1" "1 hour" "0")
+      (makeWarning "30" "1" "30 minutes" "0")
+      (makeWarning "45" "1" "15 minutes" "0")
+      (makeWarning "55" "1" "5 minutes!!" "0")
     ];
   };
 }

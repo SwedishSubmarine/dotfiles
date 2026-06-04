@@ -163,22 +163,17 @@ in
       #Prompt
       VIM_MODE_INITIAL_KEYMAP=viins
     '' + (if settings.server then ''
-      PROMPT='%B%F{14}n%b@%m%f → %F{9}%8~%f'
-      if [ "$NIXSHELL" ]; then
-        PROMPT+=" → %F{9}$NIXSHELL%f"
-      fi
-      PROMPT+='
-      $(gitprompt)'
-      PROMPT+='%B%#%b '
-    '' else ''
+      PROMPT='%B%F{14}%n%b@%m%f → %F{9}%8~%f'
+    '' else '' 
       PROMPT='%B%F{13}%n%b@%m%f → %F{14}%8~%f'
+    '') + ''
       if [ "$NIXSHELL" ]; then
         PROMPT+=" → %F{9}$NIXSHELL%f"
       fi
       PROMPT+='
       $(gitprompt)'
       PROMPT+='%B%#%b '
-    '');
+    '';
 
     plugins = [
       {
