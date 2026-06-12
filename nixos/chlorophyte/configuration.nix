@@ -164,6 +164,7 @@ in
 
   networking.firewall = {
     allowedTCPPorts = [ 80 443 2049 25565 42069 ];
+    allowedUDPPorts = [ 24454 ];
     allowPing = false;
   };
   systemd.user.services.rgb = {

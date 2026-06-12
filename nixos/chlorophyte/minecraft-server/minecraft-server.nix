@@ -111,6 +111,7 @@ in
           spawn-protection = 0;
           op-permission-level = 4;
           server-port = 42069;
+          level-seed = 8500081009970950196;
         };
       };
     };
