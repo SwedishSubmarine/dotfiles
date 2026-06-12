@@ -18,6 +18,7 @@ in
         unzip
         wget
         yt-dlp
+        python3
         ## Everything below will not be installed on a server
       ]
       ++ opts (!settings.server)

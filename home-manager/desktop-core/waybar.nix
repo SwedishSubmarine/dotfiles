@@ -147,6 +147,9 @@ in
       # };
       clock = {
         format = "{:%a %d %b %H:%M}";
+        format-alt = "{:%a %d %b %H:%M:%S}";
+        format-alt-click = "click-right";
+        interval = 1;
         tooltip = false;
       };
       battery = {
