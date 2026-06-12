@@ -113,6 +113,33 @@ in
           server-port = 42069;
         };
       };
+      timer = {
+        enable = true;
+        autoStart = false;
+        restart = "always";
+        package =  pkgs.fabricServers.fabric-26_1_2.override { jre_headless = pkgs.openjdk25_headless; };
+        jvmOpts = "-Xms512M -Xmx512M -XX:+UseG1GC";
+        symlinks = { 
+          properties-fixer = {
+            name = "properties-fixer.sh";
+            value = "${./properties-fixer.sh}";
+          };
+          open-time = {
+            name = "open-time.py";
+            value = "${./open-time.py}";
+          };
+        };
+        serverProperties = {
+          view-distance = 1;
+          max-players = 1;
+          white-list = true;
+          enforce-whitelist = true;
+          motd = "";
+          server-port = 42069;
+        };
+        white-list = {
+        };
+      };
     };
   };
   services.cron = {
