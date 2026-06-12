@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 from datetime import datetime, timedelta
+import argparse
 
 MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY = range(7)
 now = datetime.now()
@@ -34,11 +35,11 @@ def seconds_until():
     return delta.total_seconds()
 
 def opening_time():
-    print(target.strftime('The server will open again on %A %d %B, %H:%M')) 
+    print(target.strftime('%A %B %d, %H:%M')) 
 
 
 # allow for more manageable numbers
-total_minutes = int(seconds_until() // 60)
+total_minutes = int(seconds_until() // 60 + 1)
 days, remainder = divmod(total_minutes, 1440)
 hours, minutes = divmod(remainder, 60)
 
@@ -50,8 +51,15 @@ def time_until():
         parts.append(f"{hours} {'hour' if hours == 1 else 'hours'}")
     if minutes:
         parts.append(f"{minutes} {'minute' if minutes == 1 else 'minutes'}")
-    return(print("Time until server opens:\n",  ", ".join(parts), sep='',))
+    return(print(", ".join(parts), sep='',))
 # print(target_weekday())
 # print(now)
 # print(past_cutoff())
-time_until()
+parser = argparse.ArgumentParser()
+parser.add_argument("type", type=str, help="time or until")
+args = parser.parse_args()
+
+if args.type == "time":
+    opening_time()
+elif args.type == "until":
+    time_until()

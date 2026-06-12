@@ -5,6 +5,18 @@ let
   '';
   makeWarning = minute: hour: time: day: ''${minute} ${hour} * * ${day} root ${makeWarningScript} "${time}"'';
 
+  motd-updater = pkgs.writeScript "motd-updater.sh" ''
+    #!/usr/bin/env bash
+    countdown=$(${pkgs.python3}/bin/python3 /srv/minecraft/timer/open-time.py until)
+    sed -i "s/\(line2=\).*/\1\"$countdown\"/" /srv/minecraft/timer/config/MiniMOTD/main.conf
+    echo "minimotd reload" > /run/minecraft/timer.stdin
+  '';
+  whitelist-update = pkgs.writeScript "whitelist-update" ''
+    #!/usr/bin/env bash
+    openingTime=$(${pkgs.python3}/bin/python3 ${./open-time.py} time)
+    sed -i "s/\(Gooncraft .* on\).*/\1 $openingTime\"/" /srv/minecraft/timer/config/servermessages/config.json
+  '';
+
   makeMods = inp: pkgs.linkFarmFromDrvs "mods" (builtins.attrValues inp);
   mods = {
     FabricAPI = pkgs.fetchurl { 
@@ -116,17 +128,40 @@ in
       timer = {
         enable = true;
         autoStart = false;
-        restart = "always";
+        restart = "no";
         package =  pkgs.fabricServers.fabric-26_1_2.override { jre_headless = pkgs.openjdk25_headless; };
         jvmOpts = "-Xms512M -Xmx512M -XX:+UseG1GC";
         symlinks = { 
-          properties-fixer = {
-            name = "properties-fixer.sh";
-            value = "${./properties-fixer.sh}";
-          };
-          open-time = {
-            name = "open-time.py";
-            value = "${./open-time.py}";
+          # Long so don't want it in this file. 
+          "open-time.py" = "${./open-time.py}";
+          # Symlinking these so they're runnable somewhere don't hate the player
+          "motd-updater.sh" = "${motd-updater}";
+          "whitelist-update.sh" = "${whitelist-update}";
+          mods = makeMods {
+            FabricAPI = pkgs.fetchurl { 
+              url = "https://cdn.modrinth.com/data/P7dR8mSH/versions/dZsorAUN/fabric-api-0.147.0%2B26.1.2.jar"; 
+              sha256 = "sha256-q3h3qPfI5HVw0+txBLL7LzoyT21lU1b+c5Z/LTKQurg=";
+            };
+            minimotd = pkgs.fetchurl {
+              url = "https://cdn.modrinth.com/data/16vhQOQN/versions/o5VUklNM/minimotd-fabric-mc26.1.2-2.2.3.jar";
+              sha256 = "sha256-d30WEvEbEi2gta94uUoOT5twSdfWCYyHJaoeY5o/DQQ=";
+            };
+            miniplaceholders = pkgs.fetchurl {
+              url = "https://cdn.modrinth.com/data/HQyibRsN/versions/77nYBVqe/MiniPlaceholders-Fabric-3.2.0.jar";
+              sha256 = "sha256-h8BFjNgPDt0LDq2jsmAG8TU1eyjXCsj30seqxSQ3a2E=";
+            };
+            adventure-platform = pkgs.fetchurl {
+              url = "https://cdn.modrinth.com/data/O5VsIpQY/versions/Rvd03EvD/adventure-platform-fabric-6.9.0.jar";
+              sha256 = "sha256-jn7Wts63HG8Pjdefk5RgXV6hunQXEyOAPvljYR9r6Yo=";
+            };
+            custom-server-messages = pkgs.fetchurl {
+              url = "https://cdn.modrinth.com/data/37SQy46F/versions/8jJkTdbw/servermessages-1.1.1-26.1.jar";
+              sha256 = "sha256-UjrekHFr/PLG7eJmLY5rOG443oz89zOPnnQdquXK5Vg=";
+            };
+            text-placeholder-api = pkgs.fetchurl {
+              url = "https://cdn.modrinth.com/data/eXts2L7r/versions/b3IPAHgB/placeholder-api-3.0.0%2B26.1.jar";
+              sha256 = "sha256-fEiTGVq0vsVtBaX9RSG9m8hhnvEaoKXIOkJqmdIZEGI=";
+            };
           };
         };
         serverProperties = {
@@ -137,29 +172,44 @@ in
           motd = "";
           server-port = 42069;
         };
-        white-list = {
-        };
       };
     };
   };
   services.cron = {
     enable = true;
     systemCronJobs = [
+      #############################################################################################
+      # Time-gated server management
       # Tuesday
-      "0  19 * * 2 root systemctl start minecraft-server-gooncraft >/dev/null 2>&1"
-      "0  23  * * 2 root systemctl stop  minecraft-server-gooncraft >/dev/null 2>&1"
+      "0 19 * * 2 root systemctl start minecraft-server-gooncraft >/dev/null 2>&1"
+      "0 23 * * 2 root systemctl stop  minecraft-server-gooncraft >/dev/null 2>&1"
       (makeWarning "0" "22" "1 hour" "2")
       (makeWarning "30" "22" "30 minutes" "2")
       (makeWarning "45" "22" "15 minutes" "2")
       (makeWarning "55" "22" "5 minutes!!" "2")
       # Saturday
-      "0  19 * * 6 root systemctl start minecraft-server-gooncraft >/dev/null 2>&1"
+      "0 19 * * 6 root systemctl start minecraft-server-gooncraft >/dev/null 2>&1"
       # Sunday
-      "0  2  * * 0 root systemctl stop  minecraft-server-gooncraft >/dev/null 2>&1"
+      "0 2  * * 0 root systemctl stop  minecraft-server-gooncraft >/dev/null 2>&1"
       (makeWarning "0" "1" "1 hour" "0")
       (makeWarning "30" "1" "30 minutes" "0")
       (makeWarning "45" "1" "15 minutes" "0")
       (makeWarning "55" "1" "5 minutes!!" "0")
+
+      #############################################################################################
+      # Timer management
+      # Stopping 5 minutes before server opens
+      "55 18 * * 2 root systemctl stop minecraft-server-timer >/dev/null 2>&1"
+      "55 18 * * 6 root systemctl stop minecraft-server-timer >/dev/null 2>&1"
+      # Starting 5 minutes after server closes
+      "5 23 * * 2 root systemctl start minecraft-server-timer >/dev/null 2>&1"
+      "5  2 * * 0 root systemctl start minecraft-server-timer >/dev/null 2>&1"
+      # Run motd updater every minute
+      # Needs to be run while the server is on so might as well use the one there
+      "*  * * * * emily /srv/minecraft/timer/motd-updater.sh >/dev/null 2>&1"
+      # These can run without the server being on
+      "0 23 * * 2 root ${whitelist-update} >/dev/null 2>&1"
+      "0 2  * * 0 root ${whitelist-update} >/dev/null 2>&1"
     ];
   };
 }
