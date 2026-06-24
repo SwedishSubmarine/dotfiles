@@ -29,6 +29,7 @@
 
   # Use latest kernel.
   time.timeZone = "Europe/Stockholm";
+  time.hardwareClockInLocalTime = true;
   networking.hostName = "Beskar"; # Define your hostname.
   networking.firewall = {
     enable = true;

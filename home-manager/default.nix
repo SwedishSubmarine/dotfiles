@@ -110,6 +110,7 @@ in
         nixfmt-rfc-style
         postgresql
         typst
+        openjdk21
       ]
       # x86 only :(
       ++ opt (!settings.asahi && !settings.server) stable.tidal-hifi
