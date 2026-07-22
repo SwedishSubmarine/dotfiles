@@ -299,7 +299,7 @@ in
         action = focus-workspace 9;
       };
 
-      # Monitor movement 
+      # Monitor movement
       "Mod+Alt+H" = {
         hotkey-overlay.title = "Focus left monitor";
         action = focus-monitor-left;
@@ -340,23 +340,23 @@ in
       };
 
       # Niri switcher
-      # "Alt+Tab" = { 
+      # "Alt+Tab" = {
       #   hotkey-overlay.title = "Niriswitcher";
-      #   repeat = false; 
+      #   repeat = false;
       #   action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application";
       # };
       #
       # "Alt+Shift+Tab" = {
       #   repeat = false;
-      #   action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application"; 
+      #   action = spawn "${pkgs.glib}/bin/gdbus" "call" "--session" "--dest" "io.github.isaksamsten.Niriswitcher" "--object-path" "/io/github/isaksamsten/Niriswitcher" "--method" "io.github.isaksamsten.Niriswitcher.application";
       # };
       #
       # Function row
-      "XF86MonBrightnessDown".action.spawn = [ "brightnessctl" "s" "10%-"]; 
+      "XF86MonBrightnessDown".action.spawn = [ "brightnessctl" "s" "10%-"];
       "XF86MonBrightnessUp".action.spawn = [ "brightnessctl" "s" "10%+" ];
 
       "XF86LaunchA".action = toggle-overview;
-      
+
       "XF86Search" = {
         hotkey-overlay.title = "Do not disturb";
         action = spawn "sh" "${./dnd.sh}";
@@ -456,7 +456,7 @@ in
           inactive.color = "#7d0d2d80";
         };
         shadow = {
-          color = "#7d0d2d70"; 
+          color = "#7d0d2d70";
         };
       }
       {
@@ -496,31 +496,9 @@ in
         };
       }
       {
-        matches = [ { app-id = "thunderbird"; } ];
+        matches = [ { app-id = "app.liten.Gram"; } ];
         default-window-height.proportion = 1.0;
         default-column-width.proportion = 1.0;
-      }
-      {
-        matches = [
-          {
-            app-id = "thunderbird";
-            title = "Edit Item";
-          }
-        ];
-        open-floating = true;
-        default-window-height.proportion = 0.5;
-        default-column-width.proportion = 0.3;
-      }
-      {
-        matches = [
-          {
-            app-id = "thunderbird";
-            title = "Write.*";
-          }
-        ];
-        open-floating = true;
-        default-window-height.proportion = 0.9;
-        default-column-width.proportion = 0.9;
       }
       {
         matches = [ { app-id = "org.wezfurlong.wezterm"; } ];
@@ -612,7 +590,7 @@ in
       };
     };
   } // (if settings.steam then {
-    workspaces."4".name = "steam"; 
+    workspaces."4".name = "steam";
     window-rules = [
       {
         matches = [ { app-id = "gamescope"; } ];
@@ -624,7 +602,7 @@ in
   } else {} );
 
   xdg.configFile."niriswitcher/config.toml".text = ''
-    separate_workspaces = false 
+    separate_workspaces = false
   '';
   xdg.configFile."niriswitcher/style.css".text = ''
     .application-title {

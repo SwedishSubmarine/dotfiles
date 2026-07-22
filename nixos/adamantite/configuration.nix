@@ -1,42 +1,54 @@
 { theme, pkgs, inputs, asahi-firmware, ... }:
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-      ../shared.nix
-    ];
-
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = false;
-
-  networking = {
-    hostName = "Adamantite"; 
-    firewall = {
-      enable = true;
-      allowedTCPPorts = [
-      ];
-      allowedUDPPorts = [
-        51820
-      ];
-    };
-  };
-
-  swapDevices = [
-    {
-      device = "/var/swapfile";
-      size = 16384;
-    }
+imports =
+  [ 
+    ./hardware-configuration.nix
+    ../shared.nix
   ];
 
-  nixpkgs.overlays = [ inputs.niri.overlays.niri inputs.yazi.overlays.default ];
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri-unstable;
-  };
+# Use the systemd-boot EFI boot loader.
+boot.loader.systemd-boot.enable = true;
+boot.loader.efi.canTouchEfiVariables = false;
 
-  programs.localsend = {
+networking = {
+  hostName = "Adamantite"; 
+  firewall = {
     enable = true;
+    allowedTCPPorts = [
+    ];
+    allowedUDPPorts = [
+      51820
+    ];
+  };
+};
+
+swapDevices = [
+  {
+    device = "/var/swapfile";
+    size = 16384;
+  }
+];
+
+nixpkgs.overlays = [ 
+  inputs.niri.overlays.niri 
+  inputs.yazi.overlays.default 
+  ( final: prev: {
+    bitwarden-desktop = prev.bitwarden-desktop.override {
+      electron_39 = final.electron_39-bin;
+    };
+  })
+];
+nixpkgs.config.permittedInsecurePackages = [
+  "electron-39.8.10"
+];
+
+programs.niri = {
+  enable = true;
+  package = pkgs.niri-unstable;
+};
+
+programs.localsend = {
+  enable = true;
     openFirewall = true;
   };
 
