@@ -18,7 +18,12 @@ in
         unzip
         wget
         yt-dlp
-        python3
+        (python3.withPackages ( ps: with ps; [
+          matplotlib
+          numpy
+          psycopg2
+          scipy
+        ]))
         ## Everything below will not be installed on a server
       ]
       ++ opts (!settings.server)
@@ -36,12 +41,6 @@ in
         wev
         wtype
         wtype
-        (python3.withPackages ( ps: with ps; [
-          matplotlib
-          numpy
-          psycopg2
-          scipy
-        ]))
 
         # Graphical applications
         alacritty
@@ -57,6 +56,7 @@ in
         lyra-cursors
         melonds
         nautilus
+        obsidian
         pinentry-all
         poppler
         prismlauncher
@@ -113,7 +113,11 @@ in
         openjdk21
       ]
       # x86 only :(
-      ++ opt (!settings.asahi && !settings.server) stable.tidal-hifi
+      ++ opts (!settings.asahi && !settings.server) 
+      [
+        stable.tidal-hifi
+        melonloader-installer
+      ]
       ++ opts (settings.osu)
       [ 
         opentabletdriver

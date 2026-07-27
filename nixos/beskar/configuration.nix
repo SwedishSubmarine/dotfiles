@@ -19,6 +19,7 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   hardware.bluetooth.enable = true;
+
   hardware.wooting.enable = true;
   hardware.opentabletdriver = {
     enable = true;
@@ -66,6 +67,7 @@
   };
 
   hardware.graphics.enable32Bit = true;
+  programs.nix-ld.enable = true;
   programs.steam = {
     enable = true;
   };
