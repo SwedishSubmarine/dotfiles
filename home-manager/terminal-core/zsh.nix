@@ -75,6 +75,17 @@ in
         ${pkgs.neovim}/bin/nvim $DATE.typ
       }
 
+      function gita() {
+        set -e
+        git add .
+        if [[ -n "$1" ]]; then
+          git commit -m "$1"
+        else
+          git commit
+        fi
+        git push
+      }
+
       startup_fetch
 
       # Prompt
