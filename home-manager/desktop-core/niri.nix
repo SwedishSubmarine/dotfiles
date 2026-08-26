@@ -46,7 +46,7 @@ in
 
     # Input
     cursor = {
-      size = 36;
+      size = 48;
     };
     input = {
       keyboard = {
