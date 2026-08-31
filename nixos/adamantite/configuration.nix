@@ -1,4 +1,4 @@
-{ theme, pkgs, inputs, asahi-firmware, ... }:
+{ theme, pkgs, inputs, asahi-firmware, unstable, ... }:
 {
 imports =
   [ 
@@ -30,7 +30,6 @@ swapDevices = [
 ];
 
 nixpkgs.overlays = [ 
-  inputs.niri.overlays.niri 
   inputs.yazi.overlays.default 
   ( final: prev: {
     bitwarden-desktop = prev.bitwarden-desktop.override {
@@ -42,11 +41,8 @@ nixpkgs.config.permittedInsecurePackages = [
   "electron-39.8.10"
 ];
 
-programs.niri = {
-  enable = true;
-  package = pkgs.niri-unstable;
-};
-
+programs.niri.enable = true;
+programs.niri.package = unstable.niri;
 programs.localsend = {
   enable = true;
     openFirewall = true;
@@ -78,7 +74,7 @@ programs.localsend = {
     };
     mullvad-vpn = {
       enable = true;
-      package = pkgs.mullvad-vpn;
+      gui.enable = true;
     };
     blueman = {
       enable = true;
