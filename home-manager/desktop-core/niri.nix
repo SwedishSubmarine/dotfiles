@@ -11,7 +11,7 @@ let
     # Stolen from Xenia again :3
     #!/bin/sh
     ID=$(niri msg -j windows | jq '[.[] | select(.app_id=="firefox") | .id] | last')
-    if [ "$ID" != "null" ] ; then
+    if [ "$ID" != ""null"" ] ; then
         # firefox is open, switch to it
         niri msg action focus-window --id "$ID"
     fi
@@ -45,7 +45,7 @@ in
 
     # Input
     cursor = {
-      size = 48;
+      xcursor-size = 48;
     };
     input = {
       keyboard = {
@@ -57,15 +57,9 @@ in
         repeat-rate = 50;
       };
       touchpad = {
-        tap = false;
         click-method = "clickfinger";
-        natural-scroll = false;
-        dwt = true;
+        dwt = {};
       };
-    };
-
-    outputs."eDP-1" = {
-      scale = 1.5;
     };
 
     hotkey-overlay.hide-not-bound = true;
@@ -135,32 +129,32 @@ in
       };
       "Mod+Shift+4" = {
         _props.hotkey-overlay-title = "Screenshot region";
-        action.screenshot = [];
+        screenshot = [];
       };
       "Mod+Shift+5" = {
         _props.hotkey-overlay-title = "Screenshot window";
-        action.screenshot-window = { write-to-disk = false; };
+        screenshot-window._props = { write-to-disk = false; };
       };
 
       # Window and column size
       "Mod+TouchpadScrollRight" = {
         # _props.hotkey-overlay-title = "Expand window";
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         set-window-width = "+10";
       };
       "Mod+TouchpadScrollLeft" = {
         # _props.hotkey-overlay-title = "Shrink window";
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         set-window-width = "-10";
       };
       "Mod+TouchpadScrollUp" = {
         # _props.hotkey-overlay-title = "Expand window";
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         set-window-height = "+10";
       };
       "Mod+TouchpadScrollDown" = {
         # _props.hotkey-overlay-title = "Shrink window";
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         set-window-height = "-10";
       };
       "Mod+R" = {
@@ -190,11 +184,11 @@ in
         toggle-column-tabbed-display = {};
       };
       "Mod+Down" = {
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         focus-window-down = {};
       };
       "Mod+Up" = {
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         focus-window-up = {};
       };
 
@@ -208,7 +202,7 @@ in
         focus-column-left = {};
       };
       "Mod+L" = {
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         focus-column-right = {};
       };
       "Mod+Ctrl+H" = {
@@ -216,7 +210,7 @@ in
         move-column-left = {};
       };
       "Mod+Ctrl+L" = {
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         move-column-right = {};
       };
       "Mod+V" = {
@@ -232,17 +226,17 @@ in
         consume-or-expel-window-left = {};
       };
       "Mod+Shift+L" = {
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         consume-or-expel-window-right = {};
       };
 
       # Workspaces
       "Mod+J" = {
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         focus-window-or-workspace-down = {};
       };
       "Mod+K" = {
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         focus-window-or-workspace-up = {};
       };
       "Mod+Shift+J" = {
@@ -250,7 +244,7 @@ in
         focus-workspace-down = {};
       };
       "Mod+Shift+K" = {
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         focus-workspace-up = {};
       };
       "Mod+Ctrl+J" = {
@@ -259,7 +253,7 @@ in
       };
       "Mod+Ctrl+K" = {
         # _props.hotkey-overlay-title = "Move window or workspace up";
-        hotkey-overlay.hidden = true;
+        _props.hotkey-overlay-title = "null";
         move-window-up-or-to-workspace-up = {};
       };
       "Mod+O" = {
@@ -370,23 +364,27 @@ in
       };
     };
 
-    spawn-at-startup = [
-      { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" XWAYLAND_DISPLAY ]; }
-      # { command = [ "${x-wayland-clipboard-daemon}" ]; }
-      { command = [ "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; } # needed for screen-sharing to work
-      { command = [ "systemctl" "--user" "start" "background" "nm-applet" ]; }
-      { command = [ "awww-daemon" ]; }
-      { command = [ "niriswitcher"]; }
-
-      { command = [ "vesktop" "--ozone-platform-hint=wayland" ]; }
-      { command = [ "wezterm" ]; }
-      { command = [ "firefox" ]; }
-    ];
     environment.DISPLAY = XWAYLAND_DISPLAY;
 
     prefer-no-csd = true;
 
     _children = [
+      { 
+        output = { _args = ["eDP-1"]; scale = 1.5; };
+      } 
+
+      # Spawn at startup
+      { spawn-at-startup._args = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" XWAYLAND_DISPLAY ]; }
+      # { command = [ "${x-wayland-clipboard-daemon}" ]; }
+      { spawn-at-startup._args = [ "${pkgs.dbus}/bin/dbus-update-activation-environment" "--systemd" "WAYLAND_DISPLAY" "XDG_CURRENT_DESKTOP" ]; } # needed for screen-sharing to work
+      { spawn-at-startup._args = [ "systemctl" "--user" "start" "background" "nm-applet" ]; }
+      { spawn-at-startup._args = [ "awww-daemon" ]; }
+      { spawn-at-startup._args = [ "niriswitcher"]; }
+
+      { spawn-at-startup._args = [ "vesktop" "--ozone-platform-hint=wayland" ]; }
+      { spawn-at-startup._args = [ "wezterm" ]; }
+      { spawn-at-startup._args = [ "firefox" ]; }
+
       # Workspaces!! 
       { workspace._args = [ "firefox" ]; }
       { workspace._args = [ "wezterm" ]; }
@@ -409,25 +407,38 @@ in
           }
         ]; 
       }
-      # Window rules!!
       {
-        window-rule._children = [
+        layer-rule._children = [
           {
-            default-column-width.proportion = 0.5;
-            draw-border-with-background = false;
-            geometry-corner-radius._args = 
-            let
-              rad = 10.0;
-            in 
-              [
-                  rad
-                  rad
-                  rad
-                  rad
-              ];
-            clip-to-geometry = true;
+            _children = [
+              { 
+                match._props = {
+                  layer = "overlay"; 
+                };
+              } 
+            ];
+            background-effect = { blur = true; };
+            geometry-corner-radius = 24;
           }
         ];
+      }
+      # Window rules!!
+      {
+        window-rule._children = [ {
+          default-column-width.proportion = 0.5;
+          draw-border-with-background = false;
+          geometry-corner-radius._args = 
+          let
+            rad = 10.0;
+          in 
+            [
+                rad
+                rad
+                rad
+                rad
+            ];
+          clip-to-geometry = true;
+        } ];
       }
       {
         window-rule._children = [
@@ -443,143 +454,145 @@ in
         ];
       }
       {
-        window-rule._children = [
-          {
-            match._props = { is-window-cast-target = true; };
-            focus-ring = {
-              active-color = "#f38ba8";
-              inactive-color = "#7d0d2d";
-            };
-            border = {
-              on = {};
-              width = 1;
-              inactive-color = "#7d0d2d80";
-            };
-            shadow = {
-              color = "#7d0d2d70";
-            };
-          }
-        ];
-      }
-      {
-        window-rule._children = [
-          {
-            match._props = { app-id = "org.pulseaudio.pavucontrol"; };
-            open-floating = true;
-            default-window-height.proportion = 0.4;
-            default-floating-position._props = {
-              relative-to = "top-right";
-              x = 20.0;
-              y = 10.0;
-            };
-          }
-        ];
-      }
-      {
-        window-rule._children = [
-          {
-            # Sorry alacritty nerds but i dont use this terminal
-            match._props = { app-id = "Alacritty"; };
-            open-floating = true;
-            default-window-height.proportion = 0.3;
-            default-column-width.proportion = 0.4;
-            focus-ring = {
-              width = 2;
-              active.color = "#${theme.current.accent2}";
-            };
-            default-floating-position._props = {
-              relative-to = "top-right";
-              x = 20.0;
-              y = 10.0;
-            };
-          }
-        ];
-      }
-      {
-        window-rule._children = [
-          {
-            match._props = { app-id = "app.liten.Gram"; };
-            default-window-height.proportion = 1.0;
-            default-column-width.proportion = 1.0;
-          }
-        ];
-      }
-      {
-        window-rule._children = [
-          {
-            match._props = { app-id = "org.wezfurlong.wezterm"; };
-            default-window-height.proportion = 1.0;
-          }
-        ];
-      }
-      {
-        window-rule._children = [
-          {
-            match._props = { app-id = "Bitwarden"; };
-            open-floating = true;
-            default-window-height.proportion = 0.8;
-            default-column-width.proportion = 0.5;
-          }
-        ];
-      }
-      {
-        window-rule._children = [
-          {
-            matches = { at-startup = true; app-id = "firefox"; };
-            open-on-workspace = "firefox";
-            default-column-width.proportion = 1.0;
-          }
-        ];
-      }
-      {
-        window-rule._children = [
-          {
-            match._props = { at-startup = true; app-id = "org.wezfurlong.wezterm"; };
-            open-on-workspace = "wezterm";
-            default-column-width.proportion = 1.0;
-          }
-        ];
+        window-rule._children = [ {
+          match._props = { is-window-cast-target = true; };
+          focus-ring = {
+            active-color = "#f38ba8";
+            inactive-color = "#7d0d2d";
+          };
+          border = {
+            on = {};
+            width = 1;
+            inactive-color = "#7d0d2d80";
+          };
+          shadow = {
+            color = "#7d0d2d70";
+          };
+        } ];
       }
       {
         window-rule._children = [ {
-            matches = { at-startup = true; app-id = "vesktop"; };
-            open-on-workspace = "vesktop";
-            default-column-width.proportion = 1.0;
+          match._props = { app-id = "org.pulseaudio.pavucontrol"; };
+          open-floating = true;
+          default-window-height.proportion = 0.4;
+          default-floating-position._props = {
+            relative-to = "top-right";
+            x = 20.0;
+            y = 10.0;
+          };
         } ];
+      }
+      {
+        window-rule._children = [ {
+          # Sorry alacritty nerds but i dont use this terminal
+          match._props = { app-id = "Alacritty"; };
+          open-floating = true;
+          default-window-height.proportion = 0.3;
+          default-column-width.proportion = 0.4;
+          focus-ring = {
+            width = 2;
+            active-color = "#${theme.current.accent2}";
+          };
+          default-floating-position._props = {
+            relative-to = "top-right";
+            x = 20.0;
+            y = 10.0;
+          };
+        } ];
+      }
+      {
+        window-rule._children = [ {
+          match._props = { app-id = "app.liten.Gram"; };
+          default-window-height.proportion = 1.0;
+          default-column-width.proportion = 1.0;
+          background-effect = { blur = true; };
+        } ];
+      }
+      {
+        window-rule._children = [ {
+          match._props = { app-id = "org.wezfurlong.wezterm"; };
+          default-window-height.proportion = 1.0;
+        } ];
+      }
+      {
+        window-rule._children = [ {
+          match._props = { app-id = "Bitwarden"; };
+          open-floating = true;
+          default-window-height.proportion = 0.8;
+          default-column-width.proportion = 0.5;
+        } ];
+      }
+      {
+        window-rule._children = [ {
+          match._props = { at-startup = true; app-id = "firefox"; };
+          open-on-workspace = "firefox";
+          default-column-width.proportion = 1.0;
+        } ];
+      }
+      {
+        window-rule._children = [ {
+          match._props = { at-startup = true; app-id = "org.wezfurlong.wezterm"; };
+          open-on-workspace = "wezterm";
+          default-column-width.proportion = 1.0;
+        } ];
+      }
+      {
+        window-rule._children = [ {
+          match._props = { at-startup = true; app-id = "vesktop"; };
+          open-on-workspace = "vesktop";
+          default-column-width.proportion = 1.0;
+        } ];
+      }
+      {
+        window-rule._children = [ {
+        match._props = { app-id="^rofi$"; };
+        draw-border-with-background = false;
+        background-effect = {
+            blur = true;
+        };
+      }
+      ];
       }
     ];
 
     overview = {
-      workspace-shadow.enable = false;
+      workspace-shadow = {};
       zoom = 0.5;
     };
 
     layout = {
       background-color = "transparent";
+      gaps = 16;
+      struts = {
+        left = 0;
+        right = 0;
+        top = 0;
+        bottom = 0;
+      };
       focus-ring = {
-        enable = true;
+        on = {};
         width = 3;
-        active.gradient = {
+        active-gradient._props = {
           from = "#${theme.current.accent2}";
           to = "#${theme.current.accent}";
           angle = 0;
-          "in'" = "srgb";
+          "in" = "srgb";
           relative-to = "workspace-view";
         };
-        inactive.gradient = {
+        inactive-gradient._props = {
           from = "#${theme.current.accent2}60";
           to = "#${theme.current.accent}60";
           angle = 0;
-          "in'" = "srgb";
+          "in" = "srgb";
           relative-to = "workspace-view";
         };
       };
       shadow = {
-        enable = true;
+        on = {};
         color = "#00000071";
       };
       tab-indicator = {
-        enable = true;
+        on = {};
         width = 5.0;
         gap = 4.0;
       };
