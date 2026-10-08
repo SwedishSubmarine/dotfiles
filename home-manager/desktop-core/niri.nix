@@ -3,7 +3,7 @@ let
   XWAYLAND_DISPLAY = ":3";
   random-wallpaper = pkgs.writeScript "random-wallpaper" ''
     #!/bin/sh
-    IMAGE="$(find ${theme.current.wallpapers} -type l \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1)"
+    IMAGE="$(find ${theme.current.wallpapers} -type f,l \( -name '*.png' -o -name '*.jpg' \) | shuf -n 1)"
     echo "$IMAGE" # For debugging
     awww img "$IMAGE" --transition-type any --transition-fps 60
   '';
@@ -139,22 +139,18 @@ in
       # Window and column size
       "Mod+TouchpadScrollRight" = {
         # _props.hotkey-overlay-title = "Expand window";
-        _props.hotkey-overlay-title = "null";
         set-window-width = "+10";
       };
       "Mod+TouchpadScrollLeft" = {
         # _props.hotkey-overlay-title = "Shrink window";
-        _props.hotkey-overlay-title = "null";
         set-window-width = "-10";
       };
       "Mod+TouchpadScrollUp" = {
         # _props.hotkey-overlay-title = "Expand window";
-        _props.hotkey-overlay-title = "null";
         set-window-height = "+10";
       };
       "Mod+TouchpadScrollDown" = {
         # _props.hotkey-overlay-title = "Shrink window";
-        _props.hotkey-overlay-title = "null";
         set-window-height = "-10";
       };
       "Mod+R" = {
