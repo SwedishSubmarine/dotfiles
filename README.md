@@ -1,9 +1,11 @@
 # Notes
-NixOS configuration currently managing 
+NixOS configuration currently managing
 * **Adamantite**, My M2 MacBook Air, running NixOS under asahi
 * **Beskar**, My Desktop using nixpkgs-unstable for everything
 * **Eridium**, My 2018 MacBook Pro, with a T2 security chip.
 * **Uru**, My temporary server, an old Mac Mini, with a T2 security chip.
+* **Chlorophyte**, My permanent server, old desktop, not currently fully
+  configured because I'm lazy
 
 ## Structure
 - `colors.nix`: Colorscheme configuration
@@ -13,10 +15,10 @@ NixOS configuration currently managing
 - `secrets`: Git-crypt encrypted secrets
 - `wallpapers`: All the wallpapers that I use, used for `sddm` and `swww`
 
-## Colors 
+## Colors
 I use colors.nix and inherit a theme to change colors. Call a certain color
 with `${theme.current.<color>}`. I will try to stick with these colors to make
-changing theme easier: 
+changing theme easier:
 * `accent` (main accent)
     * For gruvbox I use light yellow and for catppuccin I use mauve.
 * `accent2` (secondary accent)
@@ -31,7 +33,7 @@ changing theme easier:
 * `overlay1` (brighter overlay color)
 
 These colors are also used on occasion. Primarily for decoration elements like
-waybar and swaylock. 
+waybar and swaylock.
 * `base3` (tertiary background color, much darker, using for swaylock)
 * `surface1` (brighter surface color)
 * `surface2` (brightest surface color)
@@ -39,7 +41,7 @@ waybar and swaylock.
 * `red` (using for swaylock mainly)
 * `orange` (using for swaylock)
 * `cyan` (using for swaylock)
-* `blue` (using for swaylock and waybar) 
+* `blue` (using for swaylock and waybar)
 * `sky` (using for waybar)
 * `teal` (using for waybar)
 * `light-blue` (using for waybar)
@@ -56,28 +58,26 @@ maybe fix it another time.
 Most of my scripts are baked into certain configuration files.
 This includes my `random-wallpaper` script which uses swww and runs as a systemd
 service to randomize my wallpaper once per hour and my small calendar opening
-script because xdg-open is mean to niri. 
-I also have a few rofi scripts inside of `home-manager/desktop-core/rofi`. 
+script because xdg-open is mean to niri.
+I also have a few rofi scripts inside of `home-manager/desktop-core/rofi`.
 - `web-search.sh` Search things on ddg and for nix options and packages. You
   can add more URLs quite easily.
 - `google.sh` Used to quickly open my calendar, drive and mail. Thunderbird just
   isn't very good in my experience.
-- `rofi-power-menu` Small script to give me power options. Credit goes to 
+- `rofi-power-menu` Small script to give me power options. Credit goes to
 [jluttine](https://github.com/jluttine/rofi-power-menu)
 Thank god for this one because I could not have done it myself!
 - `niri-action.sh` Used to run niri msg actions that I don't have easy keyboard
-  access to. 
+  access to.
 
 ## Credits
 Many of the catppuccin wallpapers are from Simon Stålenhag, his website can be [found
 here](https://www.simonstalenhag.se/new/other.html), and from two git repos:
-[zhichaohs
-catppuccin-wallpapers](https://github.com/zhichaoh/catppuccin-wallpapers/tree/main)
-repo forked from `vipinVIP/wallpapers` and [notAxons
-wallpapers](https://github.com/notAxon/wallpapers/tree/main) repo.
+[zhichaohs catppuccin-wallpapers](https://github.com/zhichaoh/catppuccin-wallpapers/tree/main)
+repo forked from `vipinVIP/wallpapers` and [notAxons wallpapers](https://github.com/notAxon/wallpapers/tree/main) repo.
 The remainder are my own photographs.
 
-For gruvbox I am also using may Simon Stålenhag wallpapers, but also a lot of
+For gruvbox I am also using many Simon Stålenhag wallpapers, but also a lot of
 wallpapers found on [this website](https://gruvbox-wallpapers.pages.dev/).
 
 The niri msg rofi menu is taken from my friend Xenia 🥺
@@ -95,13 +95,13 @@ all my theming. Thank god for my awesome girlfriend telling me I shuold just
 handle theme stuff like this instead of having a bunch of long if statements
 like I did originally. Those were gross and bad and this is cool and awesome.
 Anyways it should be pretty extensible as long as you're a bit liberal with
-color schemes to fit into this scheme. 
+color schemes to fit into this scheme.
 
 ### Neovim
 I use both vim config and lua config under `program.neovim` to set options. This
 is because I'm stupid and now I find it too funny to change back so it stays. I
 also handle autocmd stuff for markdown in vimscript because i just don't know
-how to do it in lua sorgy ^^. 
+how to do it in lua sorgy ^^.
 
 I'm like 90% sure the way I handle transparency in neovim is just like way too
 overcomplicated but it works so I'm rolling with it.
@@ -111,9 +111,9 @@ for emojis and am considering getting rid of the rest again because I just don't
 use them very much.
 
 I use `programs.neovim.extraPackages` for language servers. I think this is
-awesome and cool 🐈 
+awesome and cool 🐈
 
-### Scripts 
+### Scripts
 My `google.sh` script sort of depends on you having a work and personal google
 account and signing into your personal one first. I would not hardcode this if I
-could but I thought this would be neat to have so I surrendered to it. 
+could but I thought this would be neat to have so I surrendered to it.
