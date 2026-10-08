@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports =
-    [ 
+    [
       ./hardware-configuration.nix
       ./services/minecraft-server/minecraft-server.nix
     ];
@@ -15,7 +15,7 @@
   services.openssh.settings.PermitRootLogin= "no";
   services.openssh.passwordAuthentication = false;
   services.fail2ban = {
-    enable = true;	
+    enable = true;
     ignoreIP = [
       "nixos.wiki" "192.168.0.0/16"
     ];
@@ -54,7 +54,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    neovim 
+    neovim
     wget
     git
     tmux
@@ -72,6 +72,6 @@
     allowedTCPPorts = [ 25565 8123];
   };
 
-  system.stateVersion = "25.05"; 
+  system.stateVersion = "25.05";
 }
 
