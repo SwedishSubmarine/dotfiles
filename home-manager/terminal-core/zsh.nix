@@ -31,7 +31,7 @@ in
       ls  = "${pkgs.eza}/bin/eza --icons --color -A";
       lsl = "${pkgs.eza}/bin/eza --icons --color -Al --git-repos --git";
       lst = "${pkgs.eza}/bin/eza --icons --color -A --tree --level=3";
-      twatch ="${pkgs.typst}/bin/typst watch --open zathura \${1:-main.typ}";
+      twatch ="${pkgs.typst}/bin/typst watch --open okular \${1:-main.typ}";
       carfetch = "${pkgs.fastfetch}/bin/fastfetch --logo ~/car.webp --logo-type iterm --logo-width 42";
     };
 

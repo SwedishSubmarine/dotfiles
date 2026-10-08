@@ -88,6 +88,8 @@ programs.localsend = {
     docker-compose
     git
     git-crypt
+    sshfs
+    chromium
     (where-is-my-sddm-theme.override {
       themeConfig.General = {
         background = "${../../gruvbox-wallpapers/gruvbox_astro.jpg}";
@@ -118,6 +120,7 @@ programs.localsend = {
 
   services.libinput.enable = true;
 
+  virtualisation.waydroid.enable = true;
   virtualisation.docker.enable = true;
   users.users.emily = {
     isNormalUser = true;

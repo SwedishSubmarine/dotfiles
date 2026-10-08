@@ -5,7 +5,7 @@ vim.opt.clipboard = 'unnamedplus'  -- system clipboard
 vim.opt.cot = {'menu', 'noselect'} -- might remove, complete menu
 vim.o.swapfile = false
 vim.g.mapleader = " "
-vim.g.typst_pdf_viewer = 'zathura'
+vim.g.typst_pdf_viewer = 'okular'
 
 -- Tab configuration
 vim.o.expandtab = true -- make tabs spaces

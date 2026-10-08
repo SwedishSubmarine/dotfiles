@@ -35,22 +35,25 @@ in
         nomad
         rbw
         resvg
+        teamtype
         stable.greed
         unstable.minefair
-        unstable.widevine-cdm
         wev
         wtype
         wtype
 
         # Graphical applications
         alacritty
+        awww 
         darktable
         distrobox
         easyeffects
         firefox
         gimp
+        gram
         kdePackages.gwenview
         kdePackages.kdenlive
+        kdePackages.okular
         latexrun
         libreoffice
         lyra-cursors
@@ -64,7 +67,6 @@ in
         rofi-rbw-wayland
         signal-desktop
         stable.bitwarden-desktop
-        awww 
         texliveMedium
         thunderbird
         unstable.niriswitcher
