@@ -1,51 +1,63 @@
 { theme, pkgs, inputs, asahi-firmware, unstable, ... }:
+let
+  chromiumOverlay = final: prev: {
+    chromium = prev.chromium.override {
+      enableWideVine = true;
+        widevine-cdm = final.runCommand "widevine-cdm-from-chrome" {} ''
+          mkdir -p $out/share/google/chrome/WidevineCdm
+          cp -r ${final.google-chrome}/share/google/chrome/WidevineCdm/. $out/share/google/chrome/WidevineCdm/
+        '';
+    };
+  };
+in
 {
-imports =
-  [ 
-    ./hardware-configuration.nix
-    ../shared.nix
-  ];
+  imports =
+    [
+      ./hardware-configuration.nix
+      ../shared.nix
+    ];
 
 # Use the systemd-boot EFI boot loader.
-boot.loader.systemd-boot.enable = true;
-boot.loader.efi.canTouchEfiVariables = false;
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = false;
 
-networking = {
-  hostName = "Adamantite"; 
-  firewall = {
-    enable = true;
-    allowedTCPPorts = [
-    ];
-    allowedUDPPorts = [
-      51820
-    ];
-  };
-};
-
-swapDevices = [
-  {
-    device = "/var/swapfile";
-    size = 16384;
-  }
-];
-
-nixpkgs.overlays = [ 
-  inputs.yazi.overlays.default 
-  ( final: prev: {
-    bitwarden-desktop = prev.bitwarden-desktop.override {
-      electron_39 = final.electron_39-bin;
+  networking = {
+    hostName = "Adamantite";
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [
+      ];
+      allowedUDPPorts = [
+        51820
+      ];
     };
-  })
-];
-nixpkgs.config.permittedInsecurePackages = [
-  "electron-39.8.10"
-];
+  };
 
-programs.niri.enable = true;
-programs.niri.package = unstable.niri;
-programs.localsend = {
-  enable = true;
-    openFirewall = true;
+  swapDevices = [
+    {
+      device = "/var/swapfile";
+      size = 16384;
+    }
+  ];
+
+  nixpkgs.overlays = [
+    inputs.yazi.overlays.default
+    ( final: prev: {
+      bitwarden-desktop = prev.bitwarden-desktop.override {
+        electron_39 = final.electron_39-bin;
+      };
+    })
+    chromiumOverlay
+  ];
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-39.8.10"
+  ];
+
+  programs.niri.enable = true;
+  programs.niri.package = unstable.niri;
+  programs.localsend = {
+    enable = true;
+      openFirewall = true;
   };
 
   services.power-profiles-daemon.enable = true;
@@ -69,7 +81,7 @@ programs.localsend = {
         #type database  DBuser  origin-address  auth-method
         local all       all                     trust
         host  all       all     127.0.0.1/8     trust
-        host  all       all     ::1/128         trust 
+        host  all       all     ::1/128         trust
       '';
     };
     mullvad-vpn = {
@@ -78,6 +90,9 @@ programs.localsend = {
     };
     blueman = {
       enable = true;
+    };
+    openssh = {
+      allowSFTP = true;
     };
   };
 
