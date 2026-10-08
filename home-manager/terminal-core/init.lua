@@ -260,6 +260,7 @@ vim.lsp.config('nixd', {
   -----------------------------------------------------------------------
   require('nvim-surround').setup()
   require('mini.icons').setup()
+  require('mini.trailspace').setup()
   require('which-key').setup()
   require('mini.pick').setup()
   -----------------------------------------------------------------------

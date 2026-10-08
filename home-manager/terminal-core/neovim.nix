@@ -93,34 +93,35 @@
     '';
     plugins = with pkgs.vimPlugins; [
       catppuccin-nvim
-      gruvbox-nvim
-      lualine-nvim
-      nvim-web-devicons
-      mini-icons
-      indent-blankline-nvim
-      luasnip
-      lspkind-nvim
-      nvim-cmp
+      cmp-buffer
+      cmp-cmdline
       cmp-emoji
       cmp-nvim-lsp
       cmp-path
-      cmp-cmdline
-      cmp-buffer
-      numb-nvim
-      nvim-lspconfig
+      gruvbox-nvim
+      indent-blankline-nvim
+      lspkind-nvim
+      lualine-nvim
+      luasnip
+      mini-icons
       mini-pick
-      nvim-surround
-      vimtex
-      transparent-nvim
-      render-markdown-nvim
+      mini-trailspace
+      numb-nvim
+      nvim-cmp
       nvim-colorizer-lua
-      which-key-nvim
-      telescope-nvim
+      nvim-lspconfig
+      nvim-surround
+      nvim-web-devicons
       popup-nvim
-      telescope-media-files-nvim
+      render-markdown-nvim
       switch-vim
-      typst-vim
       teamtype
+      telescope-media-files-nvim
+      telescope-nvim
+      transparent-nvim
+      typst-vim
+      vimtex
+      which-key-nvim
     ];
 
     extraPackages = with pkgs; [
