@@ -43,6 +43,7 @@
     yazi = {
       url = "github:sxyazi/yazi";
     };
+
   };
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, home-manager-unstable, nixos-apple-silicon, niri, nixos-hardware, plasma-manager, ... }@inputs:
@@ -99,8 +100,7 @@
         specialArgs = args system settings;
         modules = graphical base settings
           ++ (if settings.niri  then [niri.nixosModules.niri] else [])
-          ++ (if settings.asahi then [ nixos-apple-silicon.nixosModules.apple-silicon-support ] else
-              if settings.t2    then [ nixos-hardware.nixosModules.apple-t2 ] else []);
+          ++ (if settings.asahi then [ nixos-apple-silicon.nixosModules.apple-silicon-support ] else []);
       };
     in
   {

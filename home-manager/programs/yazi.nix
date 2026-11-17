@@ -1,5 +1,5 @@
 { pkgs, theme, settings, ... }:
-let 
+let
   yazi-plugins = pkgs.fetchFromGitHub {
 		owner = "yazi-rs";
 		repo = "plugins";
@@ -18,7 +18,7 @@ in
     };
     theme = {
       flavor = {
-        dark = "currentTheme"; 
+        dark = "currentTheme";
       };
     };
     settings = {
@@ -91,7 +91,7 @@ in
           on = "M";
           run = "plugin mount";
         }
-        { 
+        {
           on = "f";
           run = "plugin fzf";
         }

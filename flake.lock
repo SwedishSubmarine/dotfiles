@@ -171,6 +171,26 @@
         "type": "github"
       }
     },
+    "nix-x86-on-aarch64": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790210091,
+        "narHash": "sha256-ZM9kDVJNjFHVHR1Osx+6SdG2Lufnfx2Ek0Wcxc3KX00=",
+        "owner": "rowanG077",
+        "repo": "nix-x86-on-aarch64",
+        "rev": "5d69793a1c8b31d724fccd9b6acaa33587c923b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rowanG077",
+        "repo": "nix-x86-on-aarch64",
+        "type": "github"
+      }
+    },
     "nixos-apple-silicon": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -301,6 +321,7 @@
         "home-manager-unstable": "home-manager-unstable",
         "niri": "niri",
         "nix-minecraft": "nix-minecraft",
+        "nix-x86-on-aarch64": "nix-x86-on-aarch64",
         "nixos-apple-silicon": "nixos-apple-silicon",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",

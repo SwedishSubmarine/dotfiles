@@ -94,17 +94,19 @@ in
     openssh = {
       allowSFTP = true;
     };
+    gnome.gnome-remote-desktop.enable = true;
   };
 
   environment.pathsToLink = [ "/share/zsh" ];
   environment.systemPackages = with pkgs; [
     binutils
+    chromium
     coreutils
     docker-compose
     git
     git-crypt
+    gnome-connections
     sshfs
-    chromium
     (where-is-my-sddm-theme.override {
       themeConfig.General = {
         background = "${../../gruvbox-wallpapers/gruvbox_astro.jpg}";
